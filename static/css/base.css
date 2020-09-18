@@ -1,0 +1,30 @@
+/* GENERAL */
+.vh100 {
+    height: 100vh;
+}
+
+/* COLOURS */
+.text-blue {
+    color: #4B72B7 !important;
+}
+
+/* BUTTONS */
+.btn-grad {
+    background: rgb(102,75,183);
+    background: linear-gradient(330deg, rgba(102,75,183,0.6) 0%, rgba(192,61,47,0.6) 100%); 
+    color: #fefefe !important;
+}
+.btn-grad:hover {
+    background: rgb(102,75,183);
+    background: linear-gradient(330deg, rgba(102,75,183,0.8) 0%, rgba(192,61,47,0.8) 100%);
+}
+
+/* BASE ELEMENTS */
+.navbar-right {
+        float: right!important;
+}
+
+#landing-jumbo {
+    background: rgb(75,114,183);
+    background: linear-gradient(330deg, rgba(75,114,183,1) 0%, rgba(47,186,192,1) 55%);
+}
