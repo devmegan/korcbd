@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_title %} BLOG {% endblock %}
+{% block content %}
+<style>
+.bg-kor-blue-white-grad {
+    background-color: #fc5296;
+    background-image: linear-gradient(315deg, #646464 70%, #4B72B7 0%); 
+}
+
+.bg-charcoal {
+    background-color: #646464;
+}
+</style>
+<section class="min-vh-100 bg-kor-blue-grad">
+    <!-- Top Banner-->
+    <div class="py-2 bg-kor-blue-white-grad d-flex justify-content-between px-3">
+        <h1 class="text-white">About</h1>
+    </div>
+    <!-- Blog Posts -->
+    <div class="container">
+        <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+            <div class="rounded text-white bg-dark p-3 p-md-5 my-5">
+                <div class="mb-5">
+                    <p class="font-weight-bold lead">What is KOR?</p>
+                    <p class="lead"><small>KOR started as a company to provide medicinal CBD products to martial
+                    artists with the simple aim - <b>K</b>eep <b>O</b>n <b>R</b>olling.</small></p>
+                    <p class="lead"><small>We know that martial arts can take a serious strain on your body. Our CBD products
+                    have been designed to get martial artists back on the mats as soon as possible.</small></p>
+                </div>
+                <div class="mb-5">
+                    <p class="font-weight-bold lead">Do CBD products really work?</p>
+                <p class="lead"><small>Yes! There is significal scientific evidence showing how cbd products decrease recovery time and
+                increase muscle repair. </small></p>
+               </div>
+               <div class="">
+                    <p class="font-weight-bold lead">Are CBD products legal?</p>
+                    <p class="lead"><small>Absolutely. CBD products have no psychoactive elements in them (THC). All
+                    our CBD products have 3rd party certification that they do not contain illegal or controlled substances. </small></p>
+               </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
