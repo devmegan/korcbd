@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_title %} BLOG {% endblock %}
+{% block content %}
+<style>
+.bg-kor-blue-white-grad {
+    background-color: #fc5296;
+    background-image: linear-gradient(315deg, #646464 70%, #4B72B7 0%); 
+}
+
+.bg-charcoal {
+    background-color: #646464;
+}
+</style>
+<section class="min-vh-100 bg-kor-blue-grad">
+{% with object_list as posts %}
+    <!--Admin Alert -->
+    {% if not user %}
+    <div class="alert alert-info alert-dismissible fade show mb-0 px-3 d-flex justify-content-between" role="alert">
+        <a href="{% url 'add_post' %}" class="alert-link my-auto">Admin Access: Add a blog post </a>
+        <a href="{% url 'add_post' %}" class="btn btn-outline-info">Add Post</a>
+    </div>
+    {% endif %}
+    <!-- Top Banner-->
+    <div class="py-2 bg-kor-blue-white-grad d-flex justify-content-between px-3">
+            <h1 class="text-white">Blog</h1>
+            <form method="GET" action="{% url 'search' %}" class="form-inline">
+                <div class="form-group">
+                    <input class="form-control mr-sm-2 rounded-0" name="blog_q" type="search" placeholder="Search Blog" aria-label="Search">
+                    <button class="btn btn-outline-info my-2 my-sm-0 " type="submit">Search</button>
+                </div>
+            </form>
+    </div>
+    <!-- Search / Tags -->
+    <div class="px-3 py-2 bg-charcoal display-none">
+    {% if query_term and posts %}
+        <a class="bg-white rounded text-success ml-0 py-1 px-2" href="{% url 'blog' %}"><i class="fas fa-arrow-left fa-sm"></i> Back to all Posts</a>
+        <h6 class="lead text-white mb-3 mt-3 d-inline-block">Viewing posts related to "{{ query_term }}" | {{ posts|length }} post{{ posts|pluralize }} found</h6>           
+    {% elif tag and posts %}
+        <a class="bg-white rounded text-success ml-0 py-1 px-2" href="{% url 'blog' %}"><i class="fas fa-arrow-left fa-sm"></i> Back to all Posts</a>
+        <h6 class="lead text-white mb-3 mt-3 d-inline-block">Viewing posts tagged "{{ tag }}" | {{ posts|length }} post{{ tagged_posts|pluralize }} found</h6>    
+    {% elif tag and not posts %}
+        <h6 class="lead text-white mb-3"> Sorry, we couldn't find any posts tagged "{{ tag }}" - Here's our recent posts instead </h6>
+    {% elif query_term and not query_posts %}
+        <h6 class="lead text-white mb-3"> Sorry, we couldn't find any posts related to "{{ query_term }}" - Here's our recent posts instead </h6>
+    {% else %}
+        <h6 class="lead text-white mb-3">Viewing all posts | {{posts|length }} post{{ posts|pluralize }}</h6>
+    {% endif %}
+    {% for tag, cnt in counter %}
+        <span><a href="{% url 'tag' tag|slugify %}" class="bg-white text-muted rounded pl-2 pr-3 py-1 mb-2 blog-tag"><i class="fas fa-tag px-1 fa-xs"></i>{{ tag }}</a></span>
+    {% endfor %}
+    </div>
+    <!-- Blog Posts -->
+    <div class="container">
+        {% for post in posts %}
+            <!-- feature first post -->
+            {% if forloop.first %}
+                <div class="jumbotron p-3 p-md-5 mt-5 text-white rounded bg-dark">
+                    <div class="col-md-6 px-0">
+                        <h1 class="display-4 font-italic"><a href="{% url 'blog_post' post.pk %}" class="text-white">{{ post.title }}</a></h1>
+                        <p class="lead"><small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date }}</small></p>
+                        <p class="lead my-3">{{ post.body|slice:":200"|safe }}...</p>
+                        <p class="lead mb-0"><a href="{% url 'blog_post' post.pk %}" class="text-white font-weight-bold">Continue reading...</a></p>
+                        <a href="{% url 'tag' post.tag_1|slugify %}" class="text-white bg-green rounded pl-2 pr-3 py-1 mr-2 mb-2 blog-tag"><i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_1 }} </a>
+                        <a href="{% url 'tag' post.tag_2|slugify %}" class="text-white bg-green rounded pl-2 pr-3 py-1 mr-2 mb-2 blog-tag"> <i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_2 }} </a>
+                        <a href="{% url 'tag' post.tag_3|slugify %}" class="text-white bg-green rounded pl-2 pr-3 py-1 mr-2 mb-2 blog-tag"> <i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_3 }} </a> 
+                    </div>
+                </div>
+            {% elif forloop.counter == 2 or forloop.counter == 3 %}
+                <!--2nd/3rd posts -->
+                {% if forloop.counter == 2 %}
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-5">
+                        <div class="card bg-dark text-white">
+                            <img src="{{post.image_url }}" class="card-img-top" alt="..." style="max-height: 35vh;">
+                            <div class="card-body">
+                                <h5 class="card-title font-italic"><a href="{% url 'blog_post' post.pk %}" class="text-white"> {{ post.title }}</a></h5>
+                                <div class="mb-1"><small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date }}</small></div>
+                                <p class="card-text">{{ post.body|slice:":100"|safe }}...</p>
+                                <a href="{% url 'blog_post' post.pk %}" class="text-white"><u>Continue reading...</u></a>
+                            </div>
+                        </div>
+                    </div>
+                {% elif forloop.counter == 3 %}
+                    <div class="col-12 col-md-6">
+                        <div class="card bg-dark text-white">
+                            <img src="{{post.image_url }}" class="card-img-top" alt="..." style="max-height: 35vh;">
+                            <div class="card-body">
+                                <h5 class="card-title font-italic"><a href="{% url 'blog_post' post.pk %}" class="text-white"> {{ post.title }}</a></h5>
+                                <div class="mb-1"><small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date }}</small></div>
+                                <p class="card-text">{{ post.body|slice:":100"|safe }}...</p>
+                                <a href="{% url 'blog_post' post.pk %}" class="text-white"><u>Continue reading...</u></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                <!--remaining posts -->
+                {% if forloop.counter < 10 %}
+                <div class="col-12 col-md-4 mt-1 mb-4 card-col" id="{{ forloop.counter }}">
+                {% else %}
+                <div class="col-12 col-md-4 mt-1 mb-4 display-none card-col" id="{{ forloop.counter }}">
+                {% endif %}
+                    <div class="card bg-dark">
+                        <img src="{{post.image_url }}" class="card-img-top" alt="..." style="max-height: 25vh">
+                        <div class="card-body">
+                            <h5 class="card-title font-italic"><a href="{% url 'blog_post' post.pk %}" class="text-white"> {{ post.title }}</a></h5>
+                            <p class="mb-1 text-white"><small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date }}</small></p>
+                            <p class="card-text text-white">{{ post.body|slice:":100"|safe }}...</p>
+                            <a href="{% url 'blog_post' post.pk %}" class="text-white"><u>Continue reading...</u></a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <!-- close the open row at the end of posts-->
+            {% if forloop.last and forloop.counter > 1 %}
+            </div>
+            {% endif %}
+
+        {% endfor %}
+    </div>
+    <div class="text-center pb-3">
+        <button id="load-more-btn" class="btn btn-outline-warning">Load More</button>
+    </div>
+{% endwith %}
+</section>
+{% endblock %}
+{% block extrajs %}
+<script>
+// handle loading more posts
+$("#load-more-btn").click(function(e){
+    e.preventDefault();
+    $(".card-col:hidden").slice(0, 3).show("slow");
+    if ($(".card-col:hidden").length == 0){ 
+        $("#load-more-btn").addClass("disabled").text("END OF POSTS")
+    }
+})
+
+</script>
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid pb-3 post-pt-20 bg-green-animated">
+    <div class="container pb-3 mt-20 bg-white rounded">
+        <div class="row">
+            <div class="col-8 offset-2 rounded mt-neg-15 blog-post-img" style="height: 40vh; background-image: url({{ post.image_url }});">
+            </div>
+            <div class="col-12 pt-2 px-3 text-center">
+                <h1 class="text-success display-4 py-3">{{ post.title }}</h1>
+                 <p class="text-muted lead mb-2"><strong>{{ post.author.first_name }} {{ post.author.last_name }}</strong></p>
+                 <p class="text-muted mb-4"> {{ post.date }}</p>      
+                <a href="{% url 'tag' post.tag_1|slugify %}" class="text-white bg-green rounded pl-2 pr-3 py-1 mr-2 mb-2 blog-tag"> <i class="fas fa-tag"></i> {{ post.tag_1 }} </a><a href="{% url 'tag' post.tag_2|slugify %}" class="text-white bg-green rounded pl-2 pr-3 py-1 mr-2 mb-2 blog-tag"> <i class="fas fa-tag"></i> {{ post.tag_2 }} </a><a href="{% url 'tag' post.tag_3|slugify %}" class="text-white bg-green rounded pl-2 pr-3 py-1 mr-2 mb-2 blog-tag"> <i class="fas fa-tag"></i> {{ post.tag_3 }} </a>
+            </div>
+            <div class="col-7 col-md-8 pt-2 pl-3 pr-5 d-none text-center">
+                <h1 class="text-success display-4 py-3">{{ post.title }}</h1>
+                 <p class="text-muted lead mb-2"><strong>{{ post.author.first_name }} {{ post.author.last_name }}</strong></p>
+                 <p class="text-muted mb-4"> {{ post.date }}</p>      
+                <a href="{% url 'tag' post.tag_1|slugify %}" class="text-white bg-green rounded pl-2 pr-3 py-1 mr-2 mb-2 blog-tag"> <i class="fas fa-tag"></i> {{ post.tag_1 }} </a><a href="{% url 'tag' post.tag_2|slugify %}" class="text-white bg-green rounded pl-2 pr-3 py-1 mr-2 mb-2 blog-tag"> <i class="fas fa-tag"></i> {{ post.tag_2 }} </a><a href="{% url 'tag' post.tag_3|slugify %}" class="text-white bg-green rounded pl-2 pr-3 py-1 mr-2 mb-2 blog-tag"> <i class="fas fa-tag"></i> {{ post.tag_3 }} </a>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-12">
+                <div class="lead text-justify px-3">
+                    <p>{{ post.body|safe }}</p>
+                </div>  
+                <div class="px-3">
+                    <a class="bg-info text-white rounded py-1 px-2 small" href="{% url 'blog' %}"><i class="fas fa-arrow-left fa-sm"></i> Back to Blog</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr>
+                <div class="d-inline-block">
+                    <form action="{% url 'heart_post' post.pk %}" method="POST" class="d-inline-block">
+                    {% csrf_token %}
+                    {% if user %}
+                    {% if not heart_bool %}
+                    <button class="btn text-muted pr-1 pb-3" type="submit" name="post_id" value="{{ post.id }}"><i class="fas fa-heart fa-lg"></i></button><span class="small text-muted">{{ hearts_number }}</span>
+                    {% else %}
+                    <button class="btn text-danger pr-1 pb-3" type="submit" name="post_id" value="{{ post.id }}"><i class="fas fa-heart fa-lg"></i></button><span class="small text-danger">{{ hearts_number }}</span>
+                    {% endif %}
+                    {% else %}
+                    <a href="#" class="btn disabled pr-1 pb-3" type="submit" name="post_id" value="{{ post.id }}"><i class="fas fa-heart fa-lg"></i></a> | Login to Like
+                    {% endif %}
+                    </form>
+                    <a href="#comments-section" class="btn text-info pr-0 pb-3"><i class="fas fa-comment-alt fa-lg"></i></a> <span class="small text-info">{{ post.comments.all | length }}</span>
+                </div>
+                <div class="d-inline-block text-right float-right">
+                    {% if post.author == user or user.id == 1 %}
+                    <a href="{% url 'edit_post' post.pk %}" class="lead btn text-warning pb-3"> <i class="fas fa-edit fa-lg"></i></a>
+                    <a href="{% url 'delete_post' post.pk %}" class="lead btn text-danger pb-3"> <i class="fas fa-trash fa-lg"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-3 mt-5 pb-3 bg-white rounded" id="comments-section">
+        <h5 class="display-6 text-success pt-3 px-2">Comments <span class="lead">({{ post.comments.all|length }})</span></h5>
+        {% if not post.comments.all %}
+        <p class="lead px-2">No comments yet - <a href="#" class="text-info">Be the first to add one</a></p>
+        {% else %}
+        {% if comment_bool %}
+        <p class="lead px-2"> <a href="#" class="text-info">Add another comment</a></p>
+        <hr>
+        {% else %}
+        <p class="lead px-2"> <a href="#" class="text-info">Add a commment</a></p>
+        <hr>
+        {% endif %}
+        {% endif %}
+        <form action="{% url 'add_comment' post.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="author" id="author" value="{{ user.id }}">
+            <input class="form-control" rows="4" placeholder="Write your post here" id="comment_body" name="comment_body">
+            <button class="btn btn-success mt-2" type="submit" name="post_to_comment_id" value="{{ post.id }}">Post!</button>
+        </form>
+        {% for comment in post.comments.all %}
+        <div class="row mx-4 my-2 border">
+            <div class="col-12 col-sm-2  bg-grey-light">
+            {{ comment.id }}
+                <p class="my-1 lead text-white"><strong>{{ comment.author.first_name }}</strong></p>
+                <p class="small text-white">{{ comment.date }}</p>
+            </div>
+            <div class="col-12 col-sm-8">
+                <div class="mt-4 pt-2 rounded bg-white">
+                    <p class="text-muted">{{ comment.comment_body }}</p>
+                </div>
+            </div>
+            <div class="col-12">
+                {% if post.author == user or user.id == 1 %}
+                <form method="POST" action="{% url 'delete_comment' post.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                    <button class="btn-danger btn-sm" type="submit">delete post</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        <hr>
+        <div class="px-2">
+            <a class="bg-info text-white rounded py-1 px-2 small" href="{% url 'blog' %}"><i class="fas fa-arrow-left fa-sm"></i> Back to Blog</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

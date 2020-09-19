@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid bg-green-animated">
+     <div class="container pb-3 pt-5">
+     <div class="row">
+        <div class="col-10 col-lg-8 offset-1 offset-lg-2">
+            <div class="bg-white mt-5 rounded text-center">
+                <h1 class="display-4 text-success">Edit Post</h1>
+                <p class="lead">You are editing <a href="{% url 'blog_post' post.pk %}" class="text-info">"{{ post.title }}"</a></p>
+                <div class="form-group">
+                    <form method="POST" class="mt-5 px-5">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn-warning mb-5">Update Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+     </div>
+    </div>
+</div>
+{% endblock %}
