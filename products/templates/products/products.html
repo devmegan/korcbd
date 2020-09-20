@@ -7,7 +7,11 @@
     <hr class="my-0 bg-kor-blue-grad">
      <div class="py-1 my-auto px-3" style="background-color: #ffffff;">
             <div class="d-flex justify-content-between">
+                {% if not query_term %}
                 <h6 class="pt-2 text-blue uppercase font-weight-normal">SHOP</h6>
+                {% else %}
+                <h6 class="pt-2 text-blue uppercase font-weight-normal"><a href="{% url 'products' %}" class="text-blue">SHOP</a> / "{{ query_term }}" <small>({{ products | length }} product{{products|pluralize}} found)</small></h6>
+                {% endif %}
                 <form method="GET" action="{% url 'search_products' %}" class="form-inline d-none d-md-block">
                         <div class="form-group pt-1">
                             <input  style="border: 1px solid blue;" class="form-control form-control-sm mr-sm-2 rounded-0" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
