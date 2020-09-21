@@ -13,14 +13,26 @@ def products(request):
     """
     products = Product.objects.all()
     query_term = None
-    categories = None
-
+    category_name = None
+    direction = None
     # handle blog searches by user
     if request.GET:
         if 'category' in request.GET:
+            category_name = request.GET['category']
+            if len(category_name) > 1:
+                category_name = category_name.replace(",", " & ")
+                print(category_name)
             categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
+        elif 'sort' in request.GET:
+            sortkey = request.GET['sort']
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                print(direction)
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+            products = products.order_by(sortkey)
 
         elif 'search_q' in request.GET:
             query_term = request.GET['search_q']
@@ -33,7 +45,8 @@ def products(request):
     context = {
         'products': products,
         'query_term': query_term,
-        'current_categores': categories,
+        'category_name': category_name,
+        'direction': direction,
     }
     return render(request, 'products/products.html', context)
 

@@ -7,12 +7,27 @@
     <hr class="my-0 bg-kor-blue-grad">
      <div class="py-1 my-auto px-3" style="background-color: #ffffff;">
         <div class="d-flex justify-content-between">
-            {% if not query_term %}
-            <h6 class="pt-2 text-blue uppercase font-weight-normal">SHOP</h6>
-            {% else %}
+            {% if query_term %}
             <h6 class="pt-2 text-blue uppercase font-weight-normal"><a href="{% url 'products' %}" class="text-blue">SHOP</a> / "{{ query_term }}" <small>({{ products | length }} product{{products|pluralize}} found)</small></h6>
+            {% elif category_name %}
+            <h6 class="pt-2 text-blue uppercase font-weight-normal"><a href="{% url 'products' %}" class="text-blue">SHOP</a> / "{{ category_name }}" <small>({{ products | length }} product{{products|pluralize}} found)</small></h6>
+            {% else %}
+            <h6 class="pt-2 text-blue uppercase font-weight-normal">SHOP</h6>
             {% endif %}
+            
             <div class="my-1">
+            <div class="btn-group inline-block  mr-3">
+                        {% if direction != 'desc' %}
+                        <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?sort=price&direction=desc" class="btn btn-outline-info rounded-0 btn-sm">
+                        Low <i class="fas fa-caret-right"></i> High 
+                        </a>
+                        {% else %}
+                        <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?sort=price&direction=asc" class="btn btn-outline-info rounded-0 btn-sm">
+                        High <i class="fas fa-caret-right"></i> Low
+                        </a>
+                        {% endif %}
+
+                </div>
                 <div class="btn-group inline-block  mr-3">
                     <button type="button" style="border: 1px solid #4B72B7;" class="btn btn-outline-info dropdown-toggle rounded-0 btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Categories
