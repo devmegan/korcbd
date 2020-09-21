@@ -4,12 +4,54 @@
 Home
 {% endblock %}
 {% block content %}
-<section class="vh-100 pt-5 bg-kor-blue-grad">
-<div class="container">
+<section class="min-vh-100 bg-kor-blue-grad pb-5">
+<!-- Top Banner-->
+    <hr class="my-0 bg-kor-blue-grad">
+     <div class="py-1 my-auto px-3" style="background-color: #ffffff;">
+        <div class="d-flex justify-content-between">
+            <h6 class="pt-2 text-blue uppercase font-weight-normal">Cart</h6>
+            <div class="my-1">
+            <div class="btn-group inline-block">
+                <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}" class="btn btn-outline-info rounded-0 btn-sm mr-3">
+                Keep Shopping
+                </a>
+                {% if cart_items %}
+                <a type="button" style="border: 1px solid #4B72B7;" href="#" class="btn btn-outline-info rounded-0 btn-sm">
+                Checkout
+                </a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="container mt-5">
     <div class="row">
-    <div class="col-12 col-md-10 offset-md-1 bg-white">
+    <div class="col-12 col-md-10 offset-md-1 bg-white pb-3">
     <h5 class="text-blue mt-3 ml-2">Your Cart</h5>
     {% if cart_items %}
+    {% for product in cart_items %}
+    <div class="row">
+    <div class="col-4">
+        <img src="{{ product.product.image_url }}" alt="" style="height: 10vh;">
+    </div>
+        <div class="col-8">
+            <p class="lead mb-0">{{ product.product.name }}</p>
+            <p class="text-muted"><small>{{ product.product.sku }}</small></p>
+            <p class="lead mb-0">£{{ product.product.price }} x {{ product.quantity }}</p>
+            <p class="lead mb-0">Subtotal: £{{ product.subtotal }}</p>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    <div class="text-right">
+    <p class="lead font-weight-normal text-blue">£{{ total }} <small>total</small></p>
+    <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}" class="btn btn-outline-info rounded-0 btn">
+        Keep Shopping
+    </a>
+    <a type="button" style="border: 1px solid #4B72B7;" href="#" class="btn btn-outline-info rounded-0 btn">
+        Checkout
+    </a>
+    </div>
     {% else %}
     <p class="lead text-blue ml-2 mt-3">You haven't added any items to your cart</p>
     <div class="mt-5">
