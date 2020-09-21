@@ -6,26 +6,44 @@
     <!-- Top Banner-->
     <hr class="my-0 bg-kor-blue-grad">
      <div class="py-1 my-auto px-3" style="background-color: #ffffff;">
-            <div class="d-flex justify-content-between">
-                {% if not query_term %}
-                <h6 class="pt-2 text-blue uppercase font-weight-normal">SHOP</h6>
-                {% else %}
-                <h6 class="pt-2 text-blue uppercase font-weight-normal"><a href="{% url 'products' %}" class="text-blue">SHOP</a> / "{{ query_term }}" <small>({{ products | length }} product{{products|pluralize}} found)</small></h6>
-                {% endif %}
-                <form method="GET" action="{% url 'search_products' %}" class="form-inline d-none d-md-block">
-                        <div class="form-group pt-1">
-                            <input  style="border: 1px solid blue;" class="form-control form-control-sm mr-sm-2 rounded-0" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
-                            <button style="border: 1px solid blue;" class="btn btn-sm btn-outline-info my-2 my-sm-0 rounded-0" type="submit">Search</button>
+        <div class="d-flex justify-content-between">
+            {% if not query_term %}
+            <h6 class="pt-2 text-blue uppercase font-weight-normal">SHOP</h6>
+            {% else %}
+            <h6 class="pt-2 text-blue uppercase font-weight-normal"><a href="{% url 'products' %}" class="text-blue">SHOP</a> / "{{ query_term }}" <small>({{ products | length }} product{{products|pluralize}} found)</small></h6>
+            {% endif %}
+            <div class="my-1">
+                <div class="btn-group inline-block  mr-3">
+                    <button type="button" style="border: 1px solid #4B72B7;" class="btn btn-outline-info dropdown-toggle rounded-0 btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{% url 'products' %}?category=Gels" type="button">Gels</a>
+                        <a class="dropdown-item" href="{% url 'products' %}?category=Creams" type="button">Creams</a>
+                        <a class="dropdown-item" href="{% url 'products' %}?category=Sweets" type="button">Sweets</a>
+                        <a class="dropdown-item" href="{% url 'products' %}?category=Capsules" type="button">Capsules</a>
+                        <a class="dropdown-item" href="{% url 'products' %}?category=Oils" type="button">Oils</a>
+                        <a class="dropdown-item" href="{% url 'products' %}?category=Soaps,Bath" type="button">Soaps & Bath</a>
+                    </div>
+                </div>
+                <form method="GET" action="{% url 'products' %}" class="form-inline d-none d-md-inline-block">
+                        <div class="">
+                            <input  style="border: 1px solid #4B72B7;" class="form-control form-control-sm rounded-0" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
+                            <button style="border: 1px solid #4B72B7;" class="btn btn-sm btn-outline-info my-2 my-sm-0 rounded-0" type="submit">Search</button>
                         </div>
                 </form>
             </div>
-            <div class="d-block d-md-none">
-            <form method="GET" action="{% url 'search_products' %}" class="form-inline">
-                <div class="form-group">
-                    <input class="form-control  form-control-sm mr-sm-1 rounded-0 input-sm" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
-                    <button class="btn btn-outline-info rounded-0 my-2 my-sm-0 btn-sm " type="submit">Search</button>
-                </div>
-            </form>
+        </div>
+        <!-- Mobile Search -->
+        <div class="d-block d-md-none">
+        <form method="GET" action="{% url 'products' %}" class="form-inline">
+            <div class="form-group">
+                <input class="form-control  form-control-sm mr-sm-1 rounded-0 input-sm" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
+                <button class="btn btn-outline-info rounded-0 my-2 my-sm-0 btn-sm " type="submit">Search</button>
+            </div>
+        </form>
+        </div>
+        <div>
         </div>
     </div>
     <!-- Productss -->
