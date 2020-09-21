@@ -18,13 +18,25 @@
             <div class="my-1">
             <div class="btn-group inline-block  mr-3">
                         {% if direction != 'desc' %}
-                        <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?sort=price&direction=desc" class="btn btn-outline-info rounded-0 btn-sm">
-                        Low <i class="fas fa-caret-right"></i> High 
-                        </a>
+                            {% if category_name %}
+                            <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?category={{ category_name }}&sort=price&direction=desc" class="btn btn-outline-info rounded-0 btn-sm">
+                            Low <i class="fas fa-caret-right"></i> High 
+                            </a>
+                            {% else %}
+                            <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?sort=price&direction=desc" class="btn btn-outline-info rounded-0 btn-sm">
+                            Low <i class="fas fa-caret-right"></i> High 
+                            </a>
+                            {% endif %}
                         {% else %}
-                        <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?sort=price&direction=asc" class="btn btn-outline-info rounded-0 btn-sm">
-                        High <i class="fas fa-caret-right"></i> Low
-                        </a>
+                        {% if category_name %}
+                            <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?category={{ category_name }}&sort=price&direction=asc" class="btn btn-outline-info rounded-0 btn-sm">
+                            Low <i class="fas fa-caret-right"></i> High 
+                            </a>
+                            {% else %}
+                            <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?sort=price&direction=asc" class="btn btn-outline-info rounded-0 btn-sm">
+                            Low <i class="fas fa-caret-right"></i> High 
+                            </a>
+                            {% endif %}
                         {% endif %}
 
                 </div>

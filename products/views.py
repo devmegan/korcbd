@@ -25,7 +25,18 @@ def products(request):
             categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
-        elif 'sort' in request.GET:
+
+
+
+        if 'search_q' in request.GET:
+            query_term = request.GET['search_q']
+            if not query_term:
+                messages.error(request, "You didn't enter any search terms")
+                return redirect(reverse('products'))
+            queries = Q(name__icontains=query_term) | Q(description__icontains=query_term) | Q(sku__icontains=query_term)
+            products = products.filter(queries)
+
+        if 'sort' in request.GET:
             sortkey = request.GET['sort']
             if 'direction' in request.GET:
                 direction = request.GET['direction']
@@ -34,14 +45,6 @@ def products(request):
                     sortkey = f'-{sortkey}'
             products = products.order_by(sortkey)
 
-        elif 'search_q' in request.GET:
-            query_term = request.GET['search_q']
-            if not query_term:
-                messages.error(request, "You didn't enter any search terms")
-                return redirect(reverse('products'))
-
-            queries = Q(name__icontains=query_term) | Q(description__icontains=query_term) | Q(sku__icontains=query_term)
-            products = products.filter(queries)
     context = {
         'products': products,
         'query_term': query_term,
@@ -54,7 +57,7 @@ def products(request):
 def product_detail(request, pk):
     """
     view returns details product page
-    """
+    """    
 
     product = get_object_or_404(Product, pk=pk)
     context = {

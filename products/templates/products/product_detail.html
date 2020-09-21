@@ -7,10 +7,11 @@
     <hr class="my-0 bg-kor-blue-grad">
      <div class="py-1 my-auto px-3" style="background-color: #ffffff;">
             <div class="d-flex justify-content-between">
-                <h6 class="pt-2 text-blue uppercase font-weight-normal"><a href="{% url 'products' %}" class="text-blue">SHOP</a> / <a href="#" class="text-blue">{{ product.category }}</a> / {{ product.name }}</h6>
-                <form method="GET" action="#" class="form-inline d-none d-md-block">
+                <h6 class="pt-2 text-blue uppercase font-weight-normal"><a href="{% url 'products' %}" class="text-blue">SHOP</a> / <a href="{% url 'products' %}?category={{ product.category }}" class="text-blue">{{ product.category }}</a> / {{ product.name }}</h6>
+                <form method="GET" action="{% url 'products' 
+                %}" class="form-inline d-none d-md-block">
                         <div class="form-group pt-1">
-                            <input  style="border: 1px solid blue;" class="form-control form-control-sm mr-sm-2 rounded-0" name="#" type="search" placeholder="Search Products" aria-label="Search">
+                            <input  style="border: 1px solid blue;" class="form-control form-control-sm mr-sm-2 rounded-0" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
                             <button style="border: 1px solid blue;" class="btn btn-sm btn-outline-info my-2 my-sm-0 rounded-0" type="submit">Search</button>
                         </div>
                 </form>
@@ -18,7 +19,7 @@
             <div class="d-block d-md-none">
             <form method="GET" action="{% url 'search' %}" class="form-inline">
                 <div class="form-group">
-                    <input class="form-control  form-control-sm mr-sm-1 rounded-0 input-sm" name="#" type="search" placeholder="Search Products" aria-label="Search">
+                    <input class="form-control  form-control-sm mr-sm-1 rounded-0 input-sm" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
                     <button class="btn btn-outline-info rounded-0 my-2 my-sm-0 btn-sm " type="submit">Search</button>
                 </div>
             </form>
