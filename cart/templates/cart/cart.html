@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_title %}
+Home
+{% endblock %}
+{% block content %}
+<section class="vh-100 pt-5 bg-kor-blue-grad">
+<div class="container">
+    <div class="row">
+    <div class="col-12 col-md-10 offset-md-1 bg-white">
+    <h5 class="text-blue mt-3 ml-2">Your Cart</h5>
+    {% if cart_items %}
+    {% else %}
+    <p class="lead text-blue ml-2 mt-3">You haven't added any items to your cart</p>
+    <div class="mt-5">
+    <a class="btn btn-info btn-lg px-5 my-5 btn-grad" style="border: 1px solid white">SHOP NOW</a>
+</div>
+    {% endif %}
+    </div>
+    </div>
+</div>
+</section>
+{% endblock %}
