@@ -1,6 +1,18 @@
 /* GENERAL */
-.vh100 {
-    height: 100vh;
+.min-vh-100 {
+    min-height: 100vh;
+}
+.display-none {
+    display: none;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+/* BACKGROUNDS */
+.bg-kor-blue-grad {
+    background: rgb(75,114,183);
+    background: linear-gradient(330deg, rgba(75,114,183,1) 0%, rgba(47,186,192,1) 55%);
 }
 
 /* COLOURS */
@@ -24,7 +36,9 @@
         float: right!important;
 }
 
-#landing-jumbo {
-    background: rgb(75,114,183);
-    background: linear-gradient(330deg, rgba(75,114,183,1) 0%, rgba(47,186,192,1) 55%);
+.message-container {
+    position: fixed;
+    top: 72px;
+    right: 15px;
+    z-index: 99999999999;
 }
