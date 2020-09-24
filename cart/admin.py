@@ -30,10 +30,9 @@ class OrderAdmin(admin.ModelAdmin):
         'dispatched',
     )
     list_display = (
-        'first_name',
+        'order_reference',
         'last_name',
         'date',
-        'order_total',
         'paid',
         'dispatched',
     )

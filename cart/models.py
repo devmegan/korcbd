@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.db.models import Sum
 from django.conf import settings
@@ -6,6 +8,7 @@ from products.models import Product
 
 
 class Order(models.Model):
+    order_reference = models.CharField(max_length=32, null=False, blank=False)
     first_name = models.CharField(max_length=30, null=False, blank=False)
     last_name = models.CharField(max_length=30, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
@@ -21,16 +24,26 @@ class Order(models.Model):
     paid = models.BooleanField(default=False, null=True)
     dispatched = models.BooleanField(default=False, null=True)
 
+    def _generate_order_reference(self, *args, **kwargs):
+        """
+        Generate a random, unique order number using UUID
+        """
+        order_uuid = uuid.uuid4().hex.upper()
+        return f"KOR-{order_uuid}"
+
     def update_total(self):
-        """
-        Update grand total each time a line item is added,
-        accounting for delivery costs.
-        """
+        """ update order total when line item is added """
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum']
         self.save()
 
+    def save(self, *args, **kwargs):
+        """ set order number if it hasn't been set already """
+        if not self.order_reference:
+            self.order_reference = self._generate_order_reference()
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f"KOR-{self.id}-{self.last_name}"
+        return self.order_reference
 
 
 class OrderLineItem(models.Model):
