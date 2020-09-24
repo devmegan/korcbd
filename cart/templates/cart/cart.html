@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block extra_title %}
 Home
 {% endblock %}
@@ -36,7 +37,7 @@ Home
     {% for product in cart_items %}
     <div class="row">
     <div class="col-4">
-        <img src="{{ product.product.image_url }}" alt="" style="height: 10vh;">
+        <a href="{% url 'product_detail' product.product.pk %}"><img src="{{ product.product.image_url }}" alt="" style="height: 10vh;"></a>
     </div>
         <div class="col-8">
             <p class="lead mb-0">{{ product.product.name }}</p>

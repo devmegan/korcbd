@@ -13,7 +13,6 @@ def cart_contents(request):
         product = get_object_or_404(Product, pk=product_id)
         subtotal = quantity * product.price
         total += subtotal
-        print(total)
         product_count += quantity
         cart_items.append({
             'product_id': product_id,
