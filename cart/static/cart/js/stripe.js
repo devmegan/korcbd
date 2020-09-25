@@ -3,9 +3,9 @@
     https://stripe.com/docs/payments/integration-builder --> client.js
 */
 // mount the stripe payment element the element
-var stripe_public_key = $('#id_stripe_public_key').text().slice(1, -1);
-var client_secret = $('#id_client_secret').text().slice(1, -1);
-var stripe = Stripe(stripe_public_key);
+var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+var clientSecret = $('#id_client_secret').text().slice(1, -1);
+var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
 
 // create the style object for the card
@@ -57,6 +57,7 @@ form.addEventListener('submit', function(ev) {
         }
     }).then(function(result) {
         if (result.error) {
+            alert("here")
             // display any payment errors to user
             var errorDiv = document.getElementById('card-errors');
             var html = `
