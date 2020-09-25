@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}
+Home
+{% endblock %}
+{% block content %}
+<section class="min-vh-100 bg-kor-blue-grad pb-5">
+<!-- Top Banner-->
+    <hr class="my-0 bg-kor-blue-grad">
+     <div class="py-1 my-auto px-3" style="background-color: #ffffff;">
+        <div class="d-flex justify-content-between">
+        <h6 class="pt-2 text-blue uppercase font-weight-normal">Checkout</h6>
+        </div>
+    </div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 col-lg-6 order-lg-last">
+            <div class="bg-white m-2 p-3">
+                <h5 class="text-blue mt-3">Order summary</h5>
+                <div class="row">
+                <div class="col-12">
+                     <table class="table">
+                    <thead>
+                        <tr>
+                        <th></th>
+                        <th scope="col" class="font-weight-normal">Item</th>
+                        <th scope="col" class="font-weight-normal">Quantity</th>
+                        <th scope="col" class="font-weight-normal">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in cart_items %}
+                        <tr>
+                        <td>
+                            <img src="{{ product.product.image_url }}" alt="" style="height: 8%;">
+                        </td>
+                        <td class="pt-4">{{ product.product.name }}</td>
+                        <td class="pt-4">{{ product.quantity }}</td>
+                        <td class="pt-4">£{{ product.subtotal }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="bg-white m-2 p-3">
+                <h5 class="text-blue mt-3 ml-2">Checkout</h5>
+            <p class="ml-2">Please fill out the order form below to complete your order</p>
+            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+            {% csrf_token %}
+                <div class="form-group">
+                    {{ order_form.first_name }}
+                    {{ order_form.last_name }}
+                </div>
+                <div class="form-group">
+                {{ order_form.email }}
+                {{ order_form.phone_number }}
+                </div>
+                <div class="form-group">
+                    {{ order_form.street_address1 }}
+                    {{ order_form.street_address2 }}
+                    {{ order_form.town_or_city }}
+                    {{ order_form.county }}
+                    {{ order_form.country }}
+                    {{ order_form.postcode }}
+                </div>
+                {% if user.is_authenticated %}
+                <label for="save-details-check">Save this delivery info to my profile</label>
+                <input id="save-details-check" type="checkbox" name="save-details-check">
+                {% else %}
+                <label for="save-details-check"><a href="{% url 'account_signup' %}">Sign Up</a> or <a href="{% url 'account_login' %}">Log In</a> to save this information </label>
+                {% endif %}
+                <div class="form-group">
+                    <legend>Payment</legend>
+                     <!-- A Stripe card element will go here -->
+                        <div class="mb-3" id="card-element"></div>
+
+                        <!-- Used to display form errors -->
+                        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                </div>
+                <div class="submit-button text-right mt-5 mb-2">                    
+						<a href="{% url 'cart' %}" class="btn btn-outline-info rounded-0">
+							<span class="icon">
+								<i class="fas fa-chevron-left"></i>
+							</span>
+							<span class="font-weight-bold">Adjust cart</span>
+						</a>
+						<button id="submit-button" class="btn btn-info rounded-0">
+							<span class="font-weight-bold">Complete Order</span>
+							<span class="icon">
+								<i class="fas fa-lock"></i>
+							</span>
+						</button>
+						<p class="small text-info my-0">
+							<span class="icon">
+								<i class="fas fa-exclamation-circle"></i>
+							</span>
+							<span>Your card will be charged <strong>£{{ total|floatformat:2 }}</strong></span>
+						</p>
+					</div>
+            </form>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}
+{% block extrajs %}
+{{ block.super }}
+{% include 'products/includes/product_quantity_js.html' %}
+{% endblock %}
