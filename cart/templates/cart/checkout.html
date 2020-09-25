@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cart/css/stripe.css' %}">
+{% endblock %}
 {% block extra_title %}
 Home
 {% endblock %}
@@ -77,7 +79,7 @@ Home
                 {% endif %}
                 <div class="form-group">
                     <legend>Payment</legend>
-                     <!-- A Stripe card element will go here -->
+                        <!-- A Stripe card element will go here -->
                         <div class="mb-3" id="card-element"></div>
 
                         <!-- Used to display form errors -->
@@ -113,6 +115,8 @@ Home
 </section>
 {% endblock %}
 {% block extrajs %}
-{{ block.super }}
-{% include 'products/includes/product_quantity_js.html' %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key"}}
+    {{ stripe_client_secret|json_script:"id_client_secret"}}
+    <script src="{% static 'cart/js/stripe.js' %}"></script>
 {% endblock %}
