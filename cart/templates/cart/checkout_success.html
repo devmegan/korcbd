@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cart/css/stripe.css' %}">
+{% endblock %}
+{% block extra_title %}
+Home
+{% endblock %}
+{% block content %}
+<section class="min-vh-100 bg-kor-blue-grad pb-5">
+<!-- Top Banner-->
+    <hr class="my-0 bg-kor-blue-grad">
+     <div class="py-1 my-auto px-3" style="background-color: #ffffff;">
+        <div class="d-flex justify-content-between">
+        <h6 class="pt-2 text-blue uppercase font-weight-normal">Checkout Success</h6>
+        </div>
+    </div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 col-lg-10 offset-lg-1">
+            <div class="bg-white m-2 p-3 text-center">
+                <div class="bg-white m-2 p-3 text-center">
+                    <h4 class="text-blue mt-3 ml-2 uppercase display-4">Checkout Success</h4>
+                    <p class="lead text-muted"> {{ order.order_reference }}</p>
+                </div>
+                <div>
+                    <p class="lead">
+                        While you're waiting for your order to arrive, why not check out some of the posts on our blog?
+                    </p>
+                    <a href="{% url 'blog' %}" class="btn btn-outline-blue btn-info uppercase">Blog</a>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}
