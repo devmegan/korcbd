@@ -18,11 +18,54 @@ Home
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 col-lg-10 offset-lg-1">
-            <div class="bg-white m-2 p-3 text-center">
+            <div class="bg-white m-2 p-3">
                 <div class="bg-white m-2 p-3 text-center">
-                    <h4 class="text-blue mt-3 ml-2 uppercase display-4">Checkout Success</h4>
+                    <h4 class="text-blue mt-3 ml-2 uppercase display-4">Success</h4>
                     <p class="lead text-muted"> {{ order.order_reference }}</p>
+                     <p>Your order information is below.</p>
+                     <p>A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
                 </div>
+                <div class="p-3 border">
+                    <p class="lead font-weight-normal p-0 m-0">Order Details</p>
+                    <p class="text-muted"><small>Order Reference: {{order.order_reference }}</small></p>
+                    <p><small>Order Date: {{ order.date }}</small></p>
+                    <p class="mb-0"><small>Phone Number: </small></p>
+                    <div class="ml-3">
+                        <p class="mb-0"><small>{{ order.phone_number }}</small></p>
+                    </div>
+                    <p class="mb-0"><small>Address: </small></p>
+                    <div class="ml-3">
+                        <p class="m-0"><small>{{ order.first_name }} {{ order.last_name }}</small></p>
+                        <p class="m-0"><small> {{order.street_address1}} </small></p>
+                        {% if order.street_address2 %}
+                        <p class="m-0"><small> {{order.street_address2}} </small></p>
+                        {% endif %}
+                        <p class="m-0"><small> {{order.town_or_city }} </small></p>
+                        {% if order.county %}
+                        <p class="m-0"><small> {{order.county }} </small></p>
+                        {% endif %}
+                        <p class="m-0"><small> {{order.country }} </small></p>
+                         {% if order.postcode %}
+                        <p class="uppercase mt-0"><small> {{order.postcode }} </small></p>
+                        {% endif %}
+                    </div>
+
+                    {% for item in order.lineitems.all %}
+                    <div class="row my-5">
+                        <div class="col-4">
+                            <img src="{{ item.product.image_url }}" style="height: 10vh;" alt="">
+                        </div>
+                        <div class="col-4">
+                            <p><small>{{ item.product.name }}</small></p>
+                        </div>
+                        <div class="col-4">
+                            <p><small>{{ item.quantity }} x {{ item.product.price }}</small></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <p class="mb-0"><small>Order Total: £{{ order.order_total }}</small></p>
+                </div>
+                        
                 <div>
                     <p class="lead">
                         While you're waiting for your order to arrive, why not check out some of the posts on our blog?
@@ -30,10 +73,8 @@ Home
                     <a href="{% url 'blog' %}" class="btn btn-outline-blue btn-info uppercase">Blog</a>
                 </div>
             </div>
-
-            
-        </div>
-    </div>
 </div>
+                    </div>
+                </div>
 </section>
 {% endblock %}

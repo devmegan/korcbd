@@ -141,7 +141,6 @@ def checkout(request):
 def checkout_success(request, order_reference):
     """ view to display order confirmation to user """
     order = get_object_or_404(Order, order_reference=order_reference)
-    messages.success(request, f'Order successfully processed. Your order reference is {order_reference} \ An order confirmation will be sent to {order.email}')
 
     if 'cart' in request.session:
         del request.session['cart']
