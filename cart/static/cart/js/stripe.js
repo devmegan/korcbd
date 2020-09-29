@@ -50,14 +50,14 @@ form.addEventListener('submit', function(ev) {
     // prevent user resubmitting successful payment while confirmation page loads
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
-
+    // $('#payment-form-container').fadeToggle(100);
+    $('#payment-processing-overlay').fadeToggle(100);
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
         }
     }).then(function(result) {
         if (result.error) {
-            alert("here")
             // display any payment errors to user
             var errorDiv = document.getElementById('card-errors');
             var html = `
@@ -66,6 +66,8 @@ form.addEventListener('submit', function(ev) {
                 </span>
                 <span>${result.error.message}</span>`;
             $(errorDiv).html(html);
+            $('#payment-form-container').fadeToggle(100);
+            $('#payment-processing-overlay').fadeToggle(100);
             // reenable card/submit elements so user can resubmit form
             card.update({ 'disabled': false});
             $('#submit-button').attr('disabled', false);
