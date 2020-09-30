@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
 from products.models import Product
@@ -8,6 +9,7 @@ from .forms import OrderForm
 from cart.contexts import cart_contents
 
 import stripe
+import json
 
 
 def view_cart(request):
@@ -62,6 +64,23 @@ def remove_from_cart(request, product_id):
         print(e)
         messages.error(request, f"Error removing item from cart \ {e}")
         return HttpResponse(status=500)
+
+
+@require_POST
+def cache_checkout_data(request):
+    """ cache client secret from payment intent as pid """
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            'cart': json.dumps(request.session.get('cart', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, 'Sorry, there\'s been a problem processing your payment. Please try again in a few minutes.')
+        return HttpResponse(content=e, status=400)
 
 
 def checkout(request):
