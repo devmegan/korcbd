@@ -12,11 +12,12 @@ class OrderAdmin(admin.ModelAdmin):
     readonly_fields = (
         'date',
         'order_total',
+        'original_cart',
+        'stripe_pid',
     )
     fields = (
         'date',
-        'first_name',
-        'last_name',
+        'full_name',
         'email',
         'phone_number',
         'street_address1',
@@ -31,7 +32,7 @@ class OrderAdmin(admin.ModelAdmin):
     )
     list_display = (
         'order_reference',
-        'last_name',
+        'full_name',
         'date',
         'paid',
         'dispatched',

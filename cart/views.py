@@ -96,12 +96,10 @@ def checkout(request):
     cart = request.session.get('cart', {})
     current_cart = cart_contents(request)
     total = current_cart['total']
-
     if request.method == 'POST':
         form = request.POST
         form_data = {
-            'first_name': form['first_name'],
-            'last_name': form['last_name'],
+            'full_name': form['full_name'],
             'email': form['email'],
             'phone_number': form['phone_number'],
             'country': form['country'],
@@ -115,7 +113,11 @@ def checkout(request):
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid():
-            order = order_form.save()
+            order = order_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
+            order.original_cart = json.dumps(cart)
+            order.save()
             for product_id, quantity in cart.items():
                 try:
                     product = get_object_or_404(Product, pk=product_id)

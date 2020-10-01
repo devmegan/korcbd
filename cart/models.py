@@ -9,8 +9,7 @@ from products.models import Product
 
 class Order(models.Model):
     order_reference = models.CharField(max_length=32, null=False, blank=False)
-    first_name = models.CharField(max_length=30, null=False, blank=False)
-    last_name = models.CharField(max_length=30, null=False, blank=False)
+    full_name = models.CharField(max_length=100, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     country = models.CharField(max_length=40, null=False, blank=False)
@@ -23,6 +22,8 @@ class Order(models.Model):
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     paid = models.BooleanField(default=False, null=True)
     dispatched = models.BooleanField(default=False, null=True)
+    original_cart = models.TextField(null=False, blank=False, default='')
+    stripe_pid = models.TextField(max_length=254, null=False, blank=False, default='')
 
     def _generate_order_reference(self, *args, **kwargs):
         """
