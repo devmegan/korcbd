@@ -1,14 +1,30 @@
 {% extends "account/base.html" %}
-
+{% block extra_title %} Log In {% endblock %}
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block head_title %}{% trans "Log In" %}{% endblock %}
 
-{% block content %}
+{% block allauth_inner_content %}
 
-<h1>{% trans "Sign In" %}</h1>
+<h2 class="text-center text-blue uppercase font-weight-bold">{% trans "Log In" %}</h2>
 
+
+<form class="login text-center mt-4 py-2" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  <div class="form-group mb-4">
+    {{ form.login }}
+  </div>
+  <div class="form-group mb-4">
+    {{ form.password}}
+  </div>
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button class="primaryAction btn kor-btn-hover colour-dark rounded-0 px-5 uppercase mb-2" type="submit">{% trans "Sign In" %}</button>
+  <hr>
+  <a class="button secondaryAction text-muted" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+</form>
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
@@ -29,18 +45,8 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+<p class="text-center">{% blocktrans %} Don't have an account yet?
+<a href="{{ signup_url }}" class="text-muted">Sign Up!</a>{% endblocktrans %}</p>
 {% endif %}
-
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
 
 {% endblock %}
