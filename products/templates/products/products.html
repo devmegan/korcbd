@@ -1,46 +1,53 @@
 {% extends "base.html" %}
 {% load static %}
-{% block extra_title %} SHOP {% endblock %}
-{% block content %}
-<section class="min-vh-100 bg-kor-blue-grad">
-    <!-- Top Banner-->
-    <hr class="my-0 bg-kor-blue-grad">
-     <div class="py-1 my-auto px-3" style="background-color: #ffffff;">
-        <div class="d-flex justify-content-between">
+{% block extra_title %} Shop {% endblock %}
+{% block page_header %}
+    <hr class="my-0 hr-purple p-02">
+    <div class="py-1 my-auto px-3 bg-white mb-5">
+        <h3 class="text-center uppercase mt-1"><a href="{% url 'products' %}" class="text-blue">Shop</a></h3>
+        <!-- info about products being viewed-->
+        <div class="text-center d-none d-md-block">
             {% if query_term %}
-            <h6 class="pt-2 text-blue uppercase font-weight-normal"><a href="{% url 'products' %}" class="text-blue">SHOP</a> / "{{ query_term }}" <small>({{ products | length }} product{{products|pluralize}} found)</small></h6>
+            <h4 class="pt-2 text-blue uppercase font-weight-light lead">"{{ query_term }}"</h4> 
+            <h6><small>({{ products | length }} product{{products|pluralize}} found)</small></h6>
             {% elif category_name %}
-            <h6 class="pt-2 text-blue uppercase font-weight-normal"><a href="{% url 'products' %}" class="text-blue">SHOP</a> / "{{ category_name }}" <small>({{ products | length }} product{{products|pluralize}} found)</small></h6>
+            <h4 class="pt-2 text-blue uppercase font-weight-light lead">"{{ category_name }}"</h4> 
+            <h6><small>({{ products | length }} product{{products|pluralize}} in category)</small></h6>
             {% else %}
-            <h6 class="pt-2 text-blue uppercase font-weight-normal">SHOP</h6>
+            <h4 class="pt-2 text-blue uppercase font-weight-light lead">Viewing All Products</h4> 
+            <h6><small>({{ products | length }} product{{products|pluralize}})</small></h6>
             {% endif %}
-            <div class="my-1">
-            <div class="btn-group inline-block  mr-3">
+        </div>
+        <!-- sort/search fields -->
+        <div class="row d-none d-md-block">
+            <div class="col-12 col-xl-6 offset-xl-3">
+                <div class="btn-group inline-block mr-3 d-flex justify-content-center">
+                <div class="mr-4">
                         {% if direction != 'desc' %}
                             {% if category_name %}
-                            <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?category={{ category_name }}&sort=price&direction=desc" class="btn btn-outline-info rounded-0 btn-sm">
+                            <a type="button" href="{% url 'products' %}?category={{ category_name }}&sort=price&direction=desc" class="btn kor-btn-hover colour-darker rounded-0 btn-sm px-4">
                             Low <i class="fas fa-caret-right"></i> High 
                             </a>
                             {% else %}
-                            <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?sort=price&direction=desc" class="btn btn-outline-info rounded-0 btn-sm">
+                            <a type="button" href="{% url 'products' %}?sort=price&direction=desc" class="btn kor-btn-hover colour-darker rounded-0 btn-sm px-4">
                             Low <i class="fas fa-caret-right"></i> High 
                             </a>
                             {% endif %}
                         {% else %}
                         {% if category_name %}
-                            <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?category={{ category_name }}&sort=price&direction=asc" class="btn btn-outline-info rounded-0 btn-sm">
-                            Low <i class="fas fa-caret-right"></i> High 
+                            <a type="button" href="{% url 'products' %}?category={{ category_name }}&sort=price&direction=asc" class="btn kor-btn-hover colour-darker rounded-0 btn-sm px-4">
+                            <i class="fas fa-caret-right"></i> Low 
                             </a>
                             {% else %}
-                            <a type="button" style="border: 1px solid #4B72B7;" href="{% url 'products' %}?sort=price&direction=asc" class="btn btn-outline-info rounded-0 btn-sm">
-                            Low <i class="fas fa-caret-right"></i> High 
+                            <a type="button" href="{% url 'products' %}?sort=price&direction=asc" class="py-1 btn kor-btn-hover colour-darker rounded-0 btn-sm px-4">
+                            High <i class="fas fa-caret-right"></i> Low
                             </a>
                             {% endif %}
                         {% endif %}
 
                 </div>
-                <div class="btn-group inline-block  mr-3">
-                    <button type="button" style="border: 1px solid #4B72B7;" class="btn btn-outline-info dropdown-toggle rounded-0 btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="btn-group inline-block mr-2">
+                    <button type="button" class="btn kor-btn-hover colour-darker dropdown-toggle rounded-0 btn-sm px-4 mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Categories
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -54,23 +61,26 @@
                 </div>
                 <form method="GET" action="{% url 'products' %}" class="form-inline d-none d-md-inline-block">
                         <div class="">
-                            <input  style="border: 1px solid #4B72B7;" class="form-control form-control-sm rounded-0" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
-                            <button style="border: 1px solid #4B72B7;" class="btn btn-sm btn-outline-info my-2 my-sm-0 rounded-0" type="submit">Search</button>
+                            <input class="form-control form-control-sm rounded-0" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
+                            <button class="btn btn-sm kor-btn-hover colour-darker my-2 my-sm-0 rounded-0" type="submit">Search</button>
                         </div>
                 </form>
+                </div>
             </div>
         </div>
         <!-- Mobile Search -->
-        <div class="d-block d-md-none">
-        <form method="GET" action="{% url 'products' %}" class="form-inline">
-            <div class="form-group">
-                <input class="form-control  form-control-sm mr-sm-1 rounded-0 input-sm" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
-                <button class="btn btn-outline-info rounded-0 my-2 my-sm-0 btn-sm " type="submit">Search</button>
-            </div>
-        </form>
+        <div class="d-block d-md-none mt-3 text-center">
+            <form method="GET" action="{% url 'products' %}" class="form-inline">
+             <input class="form-control form-control-sm rounded-0 input-sm d-inline-block w-100 text-center" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
+             <button class="btn kor-btn-hover colour-darker rounded-0 my-sm-0 mx-0 btn-sm d-inline-block w-100" type="submit">Search</button>
+            </form>
         </div>
     </div>
-    <!-- Productss -->
+    <hr class="mt-0 hr-purple p-02">
+{% endblock %}
+{% block content %}
+<section class="min-vh-100 bg-kor-blue-grad pt-10">
+    <!-- Products -->
     <div class="container">
         <div class="row">
         {% for product in products %}
@@ -79,11 +89,11 @@
                     <a href="{% url 'product_detail' product.pk %}">
                         <img class="card-img-top" src="{{ product.image_url }}" alt="Card image cap" style="max-height: 30vh">
                     </a>
-                    <hr class="my-0 bg-kor-blue-grad"> 
+                    <hr class="my-0 hr-purple"> 
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">£{{ product.price }}</p>
-                        <a href="{% url 'product_detail' product.pk %}" class="btn btn-outline-info rounded-0">View Product</a>
+                        <a href="{% url 'product_detail' product.pk %}" class="btn kor-btn-hover colour-darker rounded-0">View Product</a>
                         {% if request.user.is_superuser %}
                         <hr>
                         <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-warning rounded-0">Edit</a>
