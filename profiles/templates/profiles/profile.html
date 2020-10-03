@@ -4,11 +4,11 @@
 {% block content %}
 <section class="min-vh-100 bg-kor-blue-grad">
     <!-- Profile Detail -->
-    <div class="container">
+    <div class="container pb-5">
         <div class="row">
             <div class="col-10 offset-1 col-lg-6 offset-lg-0 mt-5">
             <div class="bg-white mx-3 py-5">
-                <h2 class="text-blue text-center uppercase mt-3">Profile Details</h2>
+                <h2 class="text-blue text-center uppercase mt-3 mb-5">Profile Details</h2>
                 <div class="row">
                     <div class="col-10 offset-1">
                         <form class="text-center" method="POST" action="{% url 'profile' %}" id="profile-update-form">
@@ -31,10 +31,35 @@
             </div>
             </div>
             <div class="col-10 offset-1 col-lg-6 offset-lg-0 mt-5">
-            <div class="bg-white mx-3 py-5">
-            <h2 class="text-blue text-center uppercase mt-3">Order History</h2>
-            {{ orders }}
-            </div>
+                <div class="bg-white mx-3 py-5">
+                    <h2 class="text-blue text-center uppercase mt-3 mb-5">Order History</h2>
+                    <div class="ml-5 mr-3" id="order-history-container">
+                        <div class="row">
+                {% for order in orders %}
+                            <div class="col-12">
+                                <p><small><a class="text-muted" href="{% url 'order_history' order.order_reference %}">{{ order.order_reference }}</a></small></p>
+                            </div>
+                            <div class="col-3">
+                                <p><small class="font-weight-bold">Date</small></p>
+                                <p><small>{{ order.date }}</small></p>
+                            </div>
+                            <div class="col-5">
+                                <p><small class="font-weight-bold">Items</small></p>
+                                <ul class="list-unstyled">
+                                {% for item in order.lineitems.all %}
+                                    <li><small>{{ item.product.name }}</small></li>
+                                    <li><small>x{{ item.quantity }}</small></li>
+                                {% endfor %}
+                                </li>
+                            </div>
+                            <div class="col-3">
+                                <p><small class="font-weight-bold">Order Total</small></p>
+                                <p><small>£{{ order.order_total }}</small></p>
+                            </div>
+                {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

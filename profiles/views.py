@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from .models import UserProfile
+from cart.models import Order
 from .forms import UserProfileForm
 # Create your views here.
 
@@ -23,3 +24,14 @@ def profile(request):
         'viewing_profile_page': True,
     }
     return render(request, 'profiles/profile.html', context)
+
+
+def order_history(request, order_reference):
+    """ view to return details of previous order to user """
+    order = get_object_or_404(Order, order_reference=order_reference)
+    messages.info(request, ( f'This is a past order confirmation for order {order_reference}'))
+    context = {
+        'order': order,
+        'viewing_order_history': True,
+    }
+    return render(request, 'cart/checkout_success.html', context)
