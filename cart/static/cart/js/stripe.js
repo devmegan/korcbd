@@ -51,10 +51,10 @@ form.addEventListener('submit', function(ev) {
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
     $('#payment-processing-overlay').fadeToggle(100);
-    
+
     
     // save info that can't be saved in payment intent
-    var saveInfo = Boolean($('#save-details-check').attr('checked'));
+    var saveInfo = Boolean($('#id-save-info').attr('checked'));
     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
     var postData = {
         'csrfmiddlewaretoken': csrfToken,

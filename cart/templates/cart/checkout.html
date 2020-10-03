@@ -70,12 +70,17 @@ Home
                         {{ order_form.country }}
                         {{ order_form.postcode }}
                     </div>
-                    {% if user.is_authenticated %}
-                    <label for="save-details-check">Save this delivery info to my profile</label>
-                    <input id="save-details-check" type="checkbox" name="save-details-check">
-                    {% else %}
-                    <label for="save-details-check"><a href="{% url 'account_signup' %}">Sign Up</a> or <a href="{% url 'account_login' %}">Log In</a> to save this information </label>
-                    {% endif %}
+                    <div class="form-check form-check-inline">
+							{% if user.is_authenticated %}
+								<label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+                                <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save_info" checked>
+							{% else %}
+								<label class="form-check-label" for="id-save-info">
+                                    <a class="text-muted" href="{% url 'account_signup' %}">Create an account</a> or 
+                                    <a class="text-muted" href="{% url 'account_login' %}">login</a> to save this information
+                                </label>
+							{% endif %}
+						</div>
                     <div class="form-group">
                         <legend>Payment</legend>
                             <!-- A Stripe card element will go here -->

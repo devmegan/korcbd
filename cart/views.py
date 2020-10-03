@@ -4,7 +4,9 @@ from django.contrib import messages
 from django.conf import settings
 from products.models import Product
 from .models import OrderLineItem, Order
+from profiles.models import UserProfile
 from .forms import OrderForm
+from profiles.forms import UserProfileForm
 
 from cart.contexts import cart_contents
 
@@ -150,7 +152,24 @@ def checkout(request):
             currency=settings.STRIPE_CURRENCY,
         )
 
-        order_form = OrderForm()
+        if request.user.is_authenticated:
+            try:
+                profile=UserProfile.objects.get(user=request.user)
+                order_form = OrderForm(initial={
+                    'full_name': profile.user.first_name + " " + profile.user.last_name,
+                    'email': profile.user.email,
+                    'phone_number': profile.profile_phone_number,
+                    'country': profile.profile_country,
+                    'postcode': profile.profile_postcode,
+                    'town_or_city': profile.profile_town_or_city,
+                    'street_address1': profile.profile_street_address1,
+                    'street_address2': profile.profile_street_address2,
+                    'county': profile.profile_county,
+                })
+            except UserProfile.DoesNotExist:
+                order_form = OrderForm()
+        else:
+            order_form = OrderForm()
         context = {
             'order_form': order_form,
             'stripe_public_key': stripe_public_key,
@@ -162,6 +181,26 @@ def checkout(request):
 def checkout_success(request, order_reference):
     """ view to display order confirmation to user """
     order = get_object_or_404(Order, order_reference=order_reference)
+    save_info = request.session.get('save_info')
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user = request.user)
+        # Link the new order to users profile
+        order.user_profile = profile
+        order.save()
+
+    if save_info:
+        profile_data = {
+            'profile_phone_number': order.phone_number,
+            'profile_country': order.country,
+            'profile_postcode': order.postcode,
+            'profile_town_or_city': order.town_or_city,
+            'profile_street_address1': order.street_address1,
+            'profile_street_address2': order.street_address2,
+            'profile_county': order.county,
+        }
+        user_profile_form = UserProfileForm(profile_data, instance=profile)
+        if user_profile_form.is_valid():
+            user_profile_form.save()
 
     if 'cart' in request.session:
         del request.session['cart']

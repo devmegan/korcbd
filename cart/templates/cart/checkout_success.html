@@ -20,10 +20,14 @@ Home
         <div class="col-12 col-lg-10 offset-lg-1">
             <div class="bg-white m-2 p-3">
                 <div class="bg-white m-2 p-3 text-center">
-                    <h4 class="text-blue mt-3 ml-2 uppercase display-4">Success</h4>
+                    <h1 class="text-blue mt-3 ml-2 uppercase">Order Confirmation</h1>
                     <p class="lead text-muted"> {{ order.order_reference }}</p>
                      <p>Your order information is below.</p>
+                     {% if not viewing_order_history %}
                      <p>A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
+                    {% else %}
+                     <p>A confirmation email for this order was sent to <strong>{{ order.email }}</strong>.</p>
+                    {% endif %}
                 </div>
                 <div class="p-3 border">
                     <p class="lead font-weight-normal p-0 m-0">Order Details</p>
@@ -65,13 +69,18 @@ Home
                     {% endfor %}
                     <p class="mb-0"><small>Order Total: £{{ order.order_total }}</small></p>
                 </div>
-                        
+                {% if not viewing_order_history %}
                 <div>
                     <p class="lead">
                         While you're waiting for your order to arrive, why not check out some of the posts on our blog?
                     </p>
                     <a href="{% url 'blog' %}" class="btn btn-outline-blue btn-info uppercase">Blog</a>
                 </div>
+                {% else %}
+                <div class="text-center mt-2">
+                <a href="{% url 'profile' %}" class="uppercase btn kor-btn-hover colour-dark rounded-0 px-5 mb-2">Back to Profile</a>
+                </div>
+                {% endif %}
             </div>
 </div>
                     </div>
