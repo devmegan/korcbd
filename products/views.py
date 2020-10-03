@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .models import Product, Category
 from .forms import ProductForm
@@ -65,8 +66,13 @@ def product_detail(request, pk):
     return render(request, 'products/product_detail.html', context)
 
 
+@login_required
 def add_product(request):
     """ view for admin to add products to store """
+    # only allow super user access
+    if not request.user.is_superuser:
+        messages.error(request, "You must be logged in as KOR admin to do this")
+        return redirect(reverse('home'))
 
     if request.method == 'POST':
         form = ProductForm(request.POST)
@@ -83,9 +89,14 @@ def add_product(request):
     }
     return render(request, 'products/add_product.html', context)
 
-
+@login_required
 def edit_product(request, product_id):
     """ view for admin to edit products """
+    # only allow super user access
+    if not request.user.is_superuser:
+        messages.error(request, "You must be logged in as KOR admin to do this")
+        return redirect(reverse('home'))
+
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
         # if update form is valid, save and redirect user to specific product page
@@ -102,9 +113,14 @@ def edit_product(request, product_id):
     }
     return render(request, 'products/edit_product.html', context)
 
-
+@login_required
 def delete_product(request, product_id):
     """ view for admin to delete a product """
+    # only allow super user access
+    if not request.user.is_superuser:
+        messages.error(request, "You must be logged in as KOR admin to do this")
+        return redirect(reverse('home'))
+
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
     messages.success(request, f"Successfully deleted \"{product.name}\"")

@@ -22,14 +22,25 @@
     </div>
     {% endif %}
     <!-- Top Banner-->
-    <div class="py-2 bg-kor-blue-white-grad d-flex justify-content-between px-3">
-            <h1 class="text-white">Blog</h1>
+    <hr class="my-0 bg-kor-blue-grad">
+    <div class="py-1 my-auto px-3" style="background-color: #ffffff;">
+            <div class="d-flex justify-content-between">
+                <h6 class="pt-2 text-blue uppercase font-weight-normal">BLOG</h6>
+                <form method="GET" action="{% url 'search' %}" class="form-inline d-none d-md-block">
+                        <div class="form-group pt-1">
+                            <input  style="border: 1px solid blue;" class="form-control form-control-sm mr-sm-2 rounded-0" name="blog_q" type="search" placeholder="Search Blog" aria-label="Search">
+                            <button style="border: 1px solid blue;" class="btn btn-sm btn-outline-info my-2 my-sm-0 " type="submit">Search</button>
+                        </div>
+                </form>
+            </div>
+            <div class="d-block d-md-none">
             <form method="GET" action="{% url 'search' %}" class="form-inline">
                 <div class="form-group">
-                    <input class="form-control mr-sm-2 rounded-0" name="blog_q" type="search" placeholder="Search Blog" aria-label="Search">
-                    <button class="btn btn-outline-info my-2 my-sm-0 " type="submit">Search</button>
+                    <input class="form-control  form-control-sm mr-sm-1 rounded-0 input-sm" name="blog_q" type="search" placeholder="Search Blog" aria-label="Search">
+                    <button class="btn btn-outline-info my-2 my-sm-0 btn-sm " type="submit">Search</button>
                 </div>
-            </form>
+        </form>
+            </div>
     </div>
     <!-- Search / Tags -->
     <div class="px-3 py-2 bg-charcoal display-none">

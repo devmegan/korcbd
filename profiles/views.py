@@ -1,15 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from cart.models import Order
 from .forms import UserProfileForm
 # Create your views here.
 
-
+@login_required
 def profile(request):
     """ view returns profile page to user and handles updating profile info """
     profile = get_object_or_404(UserProfile, user=request.user)
-    form = UserProfileForm(instance=profile)
     orders = profile.orders.all()
 
     if request.method == 'POST':
@@ -17,6 +17,10 @@ def profile(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your Profile has been updated')
+        else:
+            messages.error(request, 'Failed to update profile. Please check the form is valid' )
+    else:
+        form = UserProfileForm(instance=profile)
 
     context = {
         'form': form,

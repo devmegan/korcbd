@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -87,6 +90,7 @@ class blogPost(DetailView):
         return context
 
 
+@login_required
 def commentPost(request, pk):
     # print(request.POST)
     new_comment = None
@@ -99,6 +103,7 @@ def commentPost(request, pk):
     return HttpResponseRedirect(reverse('blog_post', args=[str(pk)]))
 
 
+@login_required
 def deleteComment(request, pk):
     comment_pk = request.POST['comment_id']
     comment_to_delete = get_object_or_404(Comment, id=comment_pk)
@@ -106,6 +111,7 @@ def deleteComment(request, pk):
     return HttpResponseRedirect(reverse('blog_post', args=[str(pk)]))
 
 
+@login_required
 def heartPost(request, pk):
     post_to_heart = get_object_or_404(Post, id=request.POST.get('post_id'))
     if not post_to_heart.hearts.filter(id=request.user.id).exists():
@@ -117,6 +123,7 @@ def heartPost(request, pk):
     return HttpResponseRedirect(reverse('blog_post', args=[str(pk)]))
 
 
+@method_decorator(staff_member_required, name='dispatch')
 class addPost(CreateView):
     model = Post
     form_class = AddPostForm
@@ -124,12 +131,15 @@ class addPost(CreateView):
     # fields = ('title', 'image_url', 'body', 'tag_1', 'tag_2', 'tag_3')
 
 
+@method_decorator(staff_member_required, name='dispatch')
 class editPost(UpdateView):
     model = Post
     form_class = AddPostForm
     template_name = 'blog/edit_post.html'
     # fields = ('title', 'image_url', 'body', 'tag_1', 'tag_2', 'tag_3')
 
+
+@method_decorator(staff_member_required, name='dispatch')
 class deletePost(DeleteView):
     model = Post
     template_name = 'blog/delete_post.html'
