@@ -14,7 +14,6 @@
             {% else %}
             <h6 class="pt-2 text-blue uppercase font-weight-normal">SHOP</h6>
             {% endif %}
-            
             <div class="my-1">
             <div class="btn-group inline-block  mr-3">
                         {% if direction != 'desc' %}
@@ -85,6 +84,11 @@
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">£{{ product.price }}</p>
                         <a href="{% url 'product_detail' product.pk %}" class="btn btn-outline-info rounded-0">View Product</a>
+                        {% if request.user.is_superuser %}
+                        <hr>
+                        <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-warning rounded-0">Edit</a>
+                        <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-danger rounded-0">Delete</a>
+                        {% endif %}
                     </div>
                     </div>
             </div>
