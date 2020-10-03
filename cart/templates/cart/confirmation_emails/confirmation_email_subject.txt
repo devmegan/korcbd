@@ -1,0 +1,1 @@
+Your KOR CBD Order Reference {{ order.order_reference }}

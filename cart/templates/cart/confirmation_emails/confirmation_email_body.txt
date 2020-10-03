@@ -1,0 +1,22 @@
+Hello {{ order.full_name }}!
+
+Thank you for playing your order with KOR CBD. 
+
+Your order information is below:
+
+Order Reference: {{ order.order_reference }}
+Order Date: {{ order.date }}
+
+Order Total: £{{ order.order_total }}
+
+Your order will be shipped to {{ order.street_address1 }} in {{ order.town_or_city }}, {{ order.country }}.
+
+We've got your phone number on file as {{ order.phone_number }}.
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your order!
+
+Sincerely,
+
+KOR CBD
