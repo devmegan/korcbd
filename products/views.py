@@ -79,6 +79,25 @@ def add_product(request):
     else:
         form = ProductForm(request.POST)
     context = {
-        'form': form
+        'form': form,
     }
     return render(request, 'products/add_product.html', context)
+
+
+def edit_product(request, product_id):
+    """ view for admin to edit products """
+    product = get_object_or_404(Product, pk=product_id)
+    if request.method == 'POST':
+        # if update form is valid, save and redirect user to specific product page
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"{product.name} successfully updated")
+            return redirect(reverse('product_detail', args=[product.id]))
+    else:
+        form = ProductForm(instance=product)
+    context = {
+        'form': form,
+        'product': product,
+    }
+    return render(request, 'products/edit_product.html', context)

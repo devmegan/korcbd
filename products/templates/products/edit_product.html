@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_title %} Edit Product {% endblock %}
+{% block content %}
+<section class="min-vh-100 bg-kor-blue-grad">
+    <!-- Profile Detail -->
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-10 offset-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 mt-5">
+            <div class="bg-white mx-3 py-5">
+                <h2 class="text-blue text-center uppercase mt-3 mb-5">Edit Product</h2>
+                <div class="row">
+                    <div class="col-10 offset-1">
+                        <form class="text-center" method="POST" action="{% url 'edit_product' product.id %}" id="profile-update-form">
+                        {% csrf_token %}
+                        <div class="form-group text-left">
+                        <label for="name" class="mb-0"><small>Product Name:</small></label>
+                        {{ form.name }}
+                        <label for="sku" class="mt-3 mb-0"><small>Product SKU:</small></label>
+                        {{ form.sku }}
+                        <label for="category" class="mt-3 mb-0"><small>Product Category:</small></label>
+                        {{ form.category }}
+                        <label for="description" class="mt-3 mb-0"><small>Product Description:</small></label>
+                        {{ form.description}}
+                        <label for="sku" class="mt-3 mb-0"><small>Product Price to 2 d.p. (e.g. "13.99"):</small></label>
+                        {{ form.price }}
+                        <label for="sku" class="mt-3 mb-0"><small>Product Image URL ("https://..."):</small></label>
+                        {{ form.image_url }}
+                        </div>
+                            <a href="{% url 'products' %}" class="uppercase btn kor-btn-hover colour-cancel rounded-0 px-5 mb-2">Cancel</a>
+                            <button type="submit" class="uppercase btn kor-btn-hover colour-dark rounded-0 px-4 mb-2">Edit Product</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</section> 
+{% endblock %}
