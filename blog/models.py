@@ -12,12 +12,11 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField(blank=True, null=False)
     date = models.DateField(auto_now_add=True)
-    image_url = models.CharField(max_length=500, null=True)
+    image_url = models.URLField(null=True)
     tag_1 = models.CharField(max_length=20)
     tag_2 = models.CharField(max_length=20)
     tag_3 = models.CharField(max_length=20)
     hearts = models.ManyToManyField(User, related_name='blog_posts')
-    link_to_post = models.CharField(max_length=255, default='Read the Full Post by')
 
     def hearts_number(self):
         return(self.hearts.count)
