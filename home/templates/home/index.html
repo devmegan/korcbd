@@ -1,15 +1,227 @@
 {% extends "base.html" %}
 {% load static %}
-{% block extra_title %}
-Home
-{% endblock %}
+{% block extra_title %} Home {% endblock %}
 {% block content %}
-<section id="landing-jumbo" class="vh-100 pt-5">
-<div class="text-center pt-5">
-    <img class="my-5" src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/891/3754857891_060e96e4-6712-43aa-89c7-bb8faebf5252.png?cb=1600440684">
+<section class="mb-0">
+    <!--- Jumbotron carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 70vh;">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100 carousel-img" src="https://images.unsplash.com/photo-1576149146095-caa19d4de102?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100 carousel-img" src="https://images.unsplash.com/photo-1550759774-a027cb60b309?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1036&q=80" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100 carousel-img" src="https://images.unsplash.com/photo-1515025617920-e1e674b5033c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1114&q=80" alt="Third slide">
+            </div>
+        </div>
+    </div>
+    <!-- Logo & Text & CTA btn-->
+    <div class="row no-gutters">
+        <div class="col-12">
+            <div class="text-center mt-4">
+            <img src="https://dd28f10f-e884-4a67-a583-4e937cf389a6.ws-eu01.gitpod.io/mini-browser/workspace/korcbd/media/KOR%20Logo%20%281%29.png" alt="" style="height: 10vh;">
+            <h2 class="text-blue uppercase">KOR CBD</h2>
+            <h6 class="text-blue uppercase">Keep On Rolling</h6>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="text-center my-5">
+                <a class="btn kor-btn-hover colour-darker uppercase btn-lg px-3" href="{% url 'products' %}">Shop Sports CBD Products</a>
+            </div>
+        </div>
+    </div>
+    <!--Banner-->
+    <div class="row no-gutters">
+        <div class="col-12">
+            <div class="bg-purple text-white text-center p-3">
+                <h1 class="uppercase mt-3"><span id="fading-text"></span></h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Links Section-->
+<section class="py-5 my-5">
+<div class="row no-gutters">
+<!--link to store-->
+<div class="col-6 col-lg-3">
+    <div class="text-center">
+        <a href="{% url 'products' %}" class="text-decoration-none"><i class="fas fa-shopping-cart fa-3x text-blue d-block mb-3"></i></a>
+        <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'products' %}">Shop Now</a>
+    </div>
 </div>
-<div class="text-center mt-5">
-    <a class="btn btn-info btn-lg px-5 mt-5 btn-grad" style="border: 1px solid white">SHOP NOW</a>
+<!--link to about-->
+<div class="col-6 col-lg-3">
+    <div class="text-center">
+        <a href="{% url 'about' %}" class="text-decoration-none"><i class="fas fa-book-open fa-3x text-blue d-block mb-3"></i></a>
+        <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'about' %}">Learn More</a>
+    </div>
+</div>
+<!--link to blog-->
+<div class="col-6 col-lg-3">
+    <div class="text-center pt-5 pt-lg-0">
+        <a href="{% url 'blog' %}" class="text-decoration-none"><i class="fas fa-th fa-3x text-blue d-block mb-3"></i></a>
+        <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'blog' %}">Read Blog</a>
+    </div>
+</div>
+<!--link to profile-->
+<div class="col-6 col-lg-3">
+    <div class="text-center pt-5 pt-lg-0">
+        <a href="{% url 'profile' %}" class="text-decoration-none"><i class="fas fa-id-badge fa-3x text-blue d-block mb-3"></i></a>
+        <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'profile' %}">View Profile</a>
+    </div>
+</div>
 </div>
 </section>
+<section class="bg-purple-reverse pb-5">
+    <div class="row no-gutters pt-5">
+        <!-- soap category -->
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="px-4">
+                    <a href="{% url 'products' %}?category=Soaps,Bath">
+                        <div class="card m-4 border-0">
+                        <img src="https://cbdarmour.co.uk/pub/media/catalog/product/cache/038c3cf3df322902d70579e2c9c5d70c/s/o/soap_img.jpg" class="card-img-top brightness-40" alt="...">
+                        <div class="card-body text-center">
+                            <p class="card-title text-blue uppercase">Bath</p>
+                        </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- oil category -->
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="px-4">
+                    <a href="{% url 'products' %}?category=Oils">
+                    <div class="card m-4 border-0">
+                        <img src="https://cbdarmour.co.uk/pub/media/catalog/product/cache/038c3cf3df322902d70579e2c9c5d70c/1/0/10ml_1_1_2.jpg" class="card-img-top brightness-40" alt="...">
+                        <div class="card-body text-center">
+                            <p class="card-title text-blue uppercase">Oils</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <!-- balms and creams category -->
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="px-4">
+                    <a href="{% url 'products' %}?category=Creams">
+                    <div class="card m-4 border-0">
+                        <img src="https://cbdarmour.co.uk/pub/media/catalog/product/cache/038c3cf3df322902d70579e2c9c5d70c/s/k/skin-balm-20.png" class="card-img-top brightness-40" alt="...">
+                        <div class="card-body text-center">
+                            <p class="card-title text-blue uppercase">Creams</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <!-- gummies category-->
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="px-4">
+                    <a href="{% url 'products' %}?category=Gummies">
+                        <div class="card m-4 border-0">
+                        <img src="https://cbdasylum.com/wp-content/uploads/2019/03/New-Gummies-mockup-2-300x300.jpg" class="card-img-top brightness-40" alt="...">
+                        <div class="card-body text-center">
+                            <p class="card-title uppercase text-blue">Gummies</p>
+                        </div>
+                    </div>
+                     </a>
+                </div>
+            </div>
+            <!-- capsules category-->
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="px-4">
+                    <a href="{% url 'products' %}?category=Capsules">
+                        <div class="card m-4 border-0">
+                            <img src="https://images.hollandandbarrettimages.co.uk/productimages/HB/724/037895_A.jpg" class="card-img-top brightness-40" alt="...">
+                            <div class="card-body text-center">
+                                <p class="card-title text-blue uppercase">Capsules</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!--gels category-->
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="px-4">
+                    <a href="{% url 'products' %}?category=Gels">
+                    <div class="card m-4 border-0">
+                    <img src="https://images.hollandandbarrettimages.co.uk/productimages/HB/724/043467_A.jpg" class="card-img-top brightness-40" alt="...">
+                     <div class="card-body text-center">
+                        <p class="card-title text-blue uppercase">Gels</p>
+                    </div>
+                </div>
+                    </a>
+                </div>
+            </div>
+    </div>
+    <div class="row no-gutters">
+    <div class="col-12 text-center">
+        <a href="{% url 'blog' %}" class="btn btn-lg mt-5 kor-btn-hover colour-light uppercase px-5">Shop All Products</a>
+    </div>
+</div>
+</section>
+<!--Blog Post Section -->
+<section class="pb-5">
+<div class="text-center pt-4">
+    <h2 class="uppercase my-5"><a href="{% url 'blog' %}" class="text-blue">Recent Blog Posts</a></h2>
+</div>
+<div class="row no-gutters">
+    <div class="col-12 col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+        <div class="row no-gutters">
+        {% for post in blog_posts %}
+        <div class="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-0">
+            <div class="px-4">
+                <div class="card border-purple mb-4">
+                <div class="card-body">
+                    <div class="home-blog-card-title">
+                        <h5 class="card-title uppercase"><a href="{% url 'blog_post' post.pk %}" class="text-blue">{{ post.title }}</a></h5>
+                        <h6 class="text-muted">{{ post.author.first_name }} {{ post.author.last_name }}</h6>
+                        <h6 class="text-muted"><small>{{ post.date }}</small></h6>
+                    </div>
+                    <p class="card-text home-blog-card-body text-justify">{{ post.body|slice:":200"|safe }}...</p>
+                    <a href="{% url 'blog_post' post.pk %}" class="btn kor-btn-hover colour-darker w-100">Read Full Post</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="row no-gutters">
+    <div class="col-12 text-center">
+        <a href="{% url 'blog' %}" class="btn btn-lg mt-5 kor-btn-hover colour-darker uppercase px-5">View All Blog Posts</a>
+    </div>
+</div>
+</section>
+{% endblock %}
+{% block extrajs %}
+<script>
+var fadingWords = [
+    'Train Harder',
+    'Recover Faster',
+    'Heal Naturally',
+    'KOR CBD',
+    'Keep On Rolling',
+];
+
+$(document).ready(function(){
+/* fade through words in fadingWords list */
+(function displayClass(i) {
+    $('#fading-text').text(fadingWords[i]).fadeIn(1000, function() {
+        $(this).delay(1000).fadeOut(1000, function() {
+            displayClass((i + 1) % fadingWords.length);
+        });
+    });
+})(0);
+}
+
+)
+</script>
 {% endblock %}
