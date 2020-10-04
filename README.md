@@ -15,12 +15,7 @@ The django app is deployed using Amazon Web Services and Heroku and is availabe 
     - [User Goals](#user-goals)
     - [Wireframes](#wireframes)
     - [Colour Palette](#colour-palette)
- 2. [Information Architecture](#information-architecture)
-    - [Database](#database)
-    - [Data Models](#data-models)
- 3. [Design Choices](#design-choices)
-     - [Colours](#colours)
- 4. [Features](#features)
+3. [Features](#features)
      - [Navigation](#navigation)
      - [Home](#home)
      - [Allauth](#allauth)
@@ -32,6 +27,9 @@ The django app is deployed using Amazon Web Services and Heroku and is availabe 
      - [404](#404)
      - [Toasts](#toasts)
      - [Future Features](#future-features)
+4. [Information Architecture](#information-architecture)
+    - [Database](#database)
+    - [Data Models](#data-models)
 5. [Technologies Used](#technologies-used)
     - [Frameworks](#frameworks)
     - [Template Engines](#template-engines)
@@ -91,6 +89,78 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 ## Wireframes 
 
 ## Colour Palette
+
+# Features 
+
+## Navigation 
+
+### Nav Bar 
+
+<img src="README/assets/img/nav-sm.jpg" style="margin: 0; width: 75%">
+<img src="README/assets/img/nav-lg.jpg" style="margin: 0; width: 75%">
+
+- Occupies the full width at the top of every page. 
+- Sticks to the top of viewport so it is always visible page content appears to scroll beneath it. 
+- On the left is the company logo without the brand text. On hovering over the logo, it turns to the pink version of it. The logo acts as a link back to the home page. 
+- On large screens, links to the Home, Shop, About and blog Blog pages are shown. 
+- Also shown are links to log in, sign up, and log out depending on the status of the user. 
+- A cart logo is displayed next to the user's current order total. Clicking on the icon or total takes the user to view their cart.
+- An Admin dropdown link is shown for users who are authorised as staff.
+- On hovering over links, they turn pink to indicate to the user they can click it.
+- On smaller screens, these links are shown in a dropdown nav that is opened via the toggler icon.
+
+
+### Footer
+
+<img src="README/assets/img/footer.jpg" style="margin: 0; width: 75%">
+
+- Occupies the full width at the base of every page. 
+- Contains links to companies social media sites and to a modal containing contact info.
+- The company name acts as a link back to the home page. 
+- Maintains the same structure and order on all screen sizes. 
+
+## Home
+
+### Jumbotron Carousel
+
+<img src="README/assets/img/home-carousel.jpg" style="margin: 0; width: 75%">
+
+- The carousel at the top of the home page displays 3 images which are all of martial artists.
+- Three dark-ish images were chosen to contrast with the light colour scheme of the site.
+- The carousel occupies the whole width of the viewport. 
+
+### Intro Text 
+
+<img src="README/assets/img/home-intro-text.jpg" style="margin: 0; width: 75%">
+
+- The text below the carousel dispalys the companies logo, name and tag line. 
+- Below this, a banner displays words related to the company which automatically fade in.
+
+### Icon Links 
+
+<img src="README/assets/img/home-icon-links.jpg" style="margin: 0; width: 75%">
+
+- Icons with CTA buttons beneath them link users to the four main parts of the site: About, Products, Blog, Profile, 
+- On large screens, these icons display side-by-side in a row. On smaller screens they are stacked with two in the first row, and two in the second.
+
+### Product Category Cards
+
+<img src="README/assets/img/home-category-cards.jpg" style="margin: 0; width: 75%">
+
+- Six cards link to the products section with each of the six product categories included as queries in the url. 
+- A hero image for a product from each category is included in the card, along with the category name. 
+- The whole card acts as an anchor element so that users can click anywhere on it to go to the category page. This is useful on mobile devices where clicking on the small text link proved a matter of ninja-like accuracy.
+- A CTA button takes users to view all the products in the store. 
+
+### Recent Blog Posts 
+
+<img src="README/assets/img/home-blog-post-cards.jpg" style="margin: 0; width: 75%">
+
+- The three most recent blog posts are passed to the home view and rendered out in this section. They are displayed side-by-side on larger screens, and one on top of the other on mobile screens.
+- The post image, title, author, date and a snippet of the post body are displayed. A CTA button in each card links the user to the blog post.
+- A CTA button takes users to view all the blog posts. 
+
+### 
 
 # Information Architecture
 
@@ -195,5 +265,39 @@ Post To Comment | post_to_comment | | ForeignKey
 Author | author |  | ForeignKey
 Comment Body | body |  | TextField
 Date | date | auto_now_add=True | DateField
+
+
+## Technologies Used
+### Frameworks 
+- [Django]() used as a python framework to develop the track app. Not only does this act as the microserver for the app.
+### Template Engines 
+- [Django Template Engine]() to display data from the backend of the app and apply conditions to the HTML code. 
+### Databases 
+- [sqlite]()
+- [PostgreSQL]() to provide the database which backs this app. 
+### APIs
+- [Stripe]() 
+### Backend Packages
+- [Travis](https://pymongo.readthedocs.io/en/stable/) to allow the Python app to communicate with MongoDB. 
+- [Coverage](https://flask-pymongo.readthedocs.io/en/latest/) to bridge between Flask and PyMongo and simplify writing CRUD functions for MongoDB in Python. 
+### Frontend Libraries
+- [jQuery](https://jquery.com/) to make the app's elements interactive and provide DOM manipulation. 
+- [Bootstrap 4]() to provide the JavaScript charts for the view goal page. 
+- [FontAwesome]()
+- [Google Fonts]()
+### Languages
+- [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5) to create the app elements. 
+- [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS) to style the app elements. 
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), paired with [jQuery](https://jquery.com/), to make the app interactive.
+- [Python](https://docs.python.org/3/) to work with the Flask web framework. 
+### Development Tools
+- [GitHub](http://github.com/) and [Gitpod](https://gitpod.io/) to develop the app's code and provide version control. 
+- [Heroku](https://www.heroku.com/) to deploy the app via Heroku's cloud platform. 
+### Testing Tools
+For information about the testing of this app and the testing tools used, see the separate [testing.md](TESTING.md) file. 
+### Content
+- [Unsplash](https://unsplash.com/) to provide the image URLs used in the carousel on the index page.
+- [Smart Mockups](https://smartmockups.com/) to create the app mockups used in this readme. 
+
 
 
