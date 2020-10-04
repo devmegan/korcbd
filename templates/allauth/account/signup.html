@@ -6,9 +6,10 @@
 {% block head_title %}{% trans "Sign Up" %}{% endblock %}
 
 {% block allauth_inner_content %}
-<h2 class="text-center text-blue uppercase font-weight-bold">{% trans "Sign Up" %}</h2>
-
-
+<div class="text-center">
+    <img class="vh10 my-2" src="https://dd28f10f-e884-4a67-a583-4e937cf389a6.ws-eu01.gitpod.io/mini-browser/workspace/korcbd/media/KOR%20Logo%20%281%29.png" alt="">
+    <h2 class="text-center text-blue uppercase font-weight-bold">{% trans "Sign Up" %}</h2>
+</div>
 <form class="signup text-center mt-4 py-2" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
   <div class="form-group mb-4">
@@ -29,7 +30,7 @@
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
-  <button class="primaryAction btn kor-btn-hover colour-dark rounded-0 px-5 uppercase mb-2" type="submit">{% trans "Sign Up" %}</button>
+  <button class="primaryAction btn kor-btn-hover colour-darker px-5 uppercase mb-2" type="submit">{% trans "Sign Up" %}</button>
 </form>
 <hr>
 <p class="text-center">{% blocktrans %} Already have an account?

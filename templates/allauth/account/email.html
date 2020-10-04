@@ -4,12 +4,13 @@
 
 {% block head_title %}{% trans "E-mail Address" %}{% endblock %}
 
-
-{% block allauth_inner_content %}
-<h2 class="text-center text-blue uppercase font-weight-bold">{% trans "E-mail Addresses" %}</h2>
-{% if user.emailaddress_set.all %}
-<p class="text-center">{% trans 'The following e-mail addresses are associated with your account:' %}</p>
-
+<div class="text-center">
+    <img class="vh10 my-2" src="https://dd28f10f-e884-4a67-a583-4e937cf389a6.ws-eu01.gitpod.io/mini-browser/workspace/korcbd/media/KOR%20Logo%20%281%29.png" alt="">
+    {% block allauth_inner_content %}
+    <h2 class="text-center text-blue uppercase font-weight-bold">{% trans "E-mail Addresses" %}</h2>
+    {% if user.emailaddress_set.all %}
+    <p class="text-center">{% trans 'The following e-mail addresses are associated with your account:' %}</p>
+</div>
 <form action="{% url 'account_email' %}" class="email_list text-center" method="post">
 {% csrf_token %}
 <fieldset class="blockLabels">
@@ -32,11 +33,11 @@
 <div class="buttonHolder mt-2">
 {% for emailaddress in user.emailaddress_set.all %}
     {% if not emailaddress.primary %}
-      <button class="secondaryAction btn kor-btn-hover colour-dark rounded-0 px-5 uppercase mb-2" type="submit" name="action_primary">{% trans 'Make Primary' %}</button>
+      <button class="secondaryAction btn kor-btn-hover colour-darker px-5 uppercase mb-2" type="submit" name="action_primary">{% trans 'Make Primary' %}</button>
     {% endif %}
 {% endfor %}
-      <button class="secondaryAction btn kor-btn-hover colour-dark rounded-0 px-5 uppercase mb-2" type="submit" name="action_send">{% trans 'Re-send Verification' %}</button>
-      <button class="primaryAction btn kor-btn-hover colour-dark rounded-0 px-5 uppercase mb-2" name="action_remove" type="submit">{% trans 'Remove E-mail' %}</button>
+      <button class="secondaryAction btn kor-btn-hover colour-darker px-5 uppercase mb-2" type="submit" name="action_send">{% trans 'Re-send Verification' %}</button>
+      <button class="primaryAction btn kor-btn-hover colour-darker px-5 uppercase mb-2" name="action_remove" type="submit">{% trans 'Remove E-mail' %}</button>
 </div>
 
 </fieldset>
@@ -53,7 +54,7 @@
     <form method="post" action="{% url 'account_email' %}" class="add_email text-center">
         {% csrf_token %}
         {{ form.email }}
-        <button class="primaryAction btn kor-btn-hover colour-dark rounded-0 px-5 uppercase my-2" type="submit" name="action_add">{% trans "Add E-mail" %}</button>
+        <button class="primaryAction btn kor-btn-hover colour-darker px-5 uppercase my-2" type="submit" name="action_add">{% trans "Add E-mail" %}</button>
     </form>
 
 {% endblock %}
