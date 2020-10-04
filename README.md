@@ -134,7 +134,7 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 <img src="README/assets/img/home-intro-text.jpg" style="margin: 0; width: 75%">
 
 - The text below the carousel dispalys the companies logo, name and tag line. 
-- Below this, a banner displays words related to the company which automatically fade in.
+- Below this, a banner displays words related to the company which automatically fade in. The JavaScript used to make this text animated can be found inside the extrajs block at the bottom of the index.html template. 
 
 ### Icon Links 
 
@@ -160,7 +160,23 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 - The post image, title, author, date and a snippet of the post body are displayed. A CTA button in each card links the user to the blog post.
 - A CTA button takes users to view all the blog posts. 
 
-### 
+## Allauth 
+
+<img src="README/assets/img/allauth-login.jpg" style="margin: 0; width: 75%">
+<img src="README/assets/img/allauth-signup.jpg" style="margin: 0; width: 75%">
+<img src="README/assets/img/allauth-logout.jpg" style="margin: 0; width: 75%">
+
+- The templates provided by Allauth are used for the Log In, Sign Up and Log Out pages.
+- These templates also provide other templates used for user admin such as email verification, updating email addresses and passwords. 
+- All Allauth templates have been edited to match the rest of the site colour theme and layout.
+
+## About
+
+<img src="README/assets/img/about.jpg" style="margin: 0; width: 75%">
+
+- The about page contains the company logo and about title.
+- The about content is contained in a single card. 
+- Currently this content is split into three paragraphs, written by the client. 
 
 # Information Architecture
 
