@@ -35,6 +35,6 @@ class OrderForm(forms.ModelForm):
                 # set values for fields
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             # style fields to match stripe element
-            self.fields[field].widget.attrs['class'] = 'stripe-style-input'
+            self.fields[field].widget.attrs['class'] = 'stripe-style-input form-control rounded-0 my-2'
             # remove form field labels
             self.fields[field].label = False
