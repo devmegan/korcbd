@@ -86,7 +86,7 @@
                         <a href="{% url 'product_detail' product.pk %}" class="btn btn-sm w-100 uppercase kor-btn-hover colour-darker py-2">View Product</a>
                         {% if request.user.is_superuser %}
                         <hr>
-                        <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-warning ">Edit</a>
+                        <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-info ">Edit</a>
                         <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-danger ">Delete</a>
                         {% endif %}
                     </div>
