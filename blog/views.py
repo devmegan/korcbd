@@ -60,10 +60,9 @@ def filterPosts(request, tag_q):
     tag = tag_q.replace('-', ' ')
     filter_q = Q(tag_1__icontains=tag) | Q(tag_2__icontains=tag) | Q(tag_3__icontains=tag)
     # filter by tag and then pass to template as context
-    all_posts = Post.objects.all()
     tagged_posts = Post.objects.filter(filter_q)
     context = {
-        'tag': tag,
+        'query_term': tag,
         'object_list': tagged_posts,
     }
     return render(request, 'blog/blog.html', context)

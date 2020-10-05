@@ -5,7 +5,7 @@ from .models import Post, Comment
 class AddPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'author', 'image_url', 'body', 'tag_1', 'tag_2', 'tag_3')
+        fields = ('title', 'author', 'body', 'tag_1', 'tag_2', 'tag_3')
 
         widgets = {
             'title': forms.TextInput(attrs={
@@ -17,15 +17,11 @@ class AddPostForm(forms.ModelForm):
                 'placeholder': 'Username',
                 'id': 'author_id'
             }),
-            'image_url': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Add an Image URL'
-            }),
             'body': forms.Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Write your blog post here'
             }),
-              'tag_1': forms.TextInput(attrs={
+            'tag_1': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'ie: "Judo"'
             }),

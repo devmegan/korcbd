@@ -1,23 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
+{% block extra_title %} Edit "{{ post.title }}" {% endblock %}
 {% block content %}
-<div class="container-fluid bg-green-animated">
-     <div class="container pb-3 pt-5">
-     <div class="row">
-        <div class="col-10 col-lg-8 offset-1 offset-lg-2">
-            <div class="bg-white mt-5 rounded text-center">
-                <h1 class="display-4 text-success">Edit Post</h1>
-                <p class="lead">You are editing <a href="{% url 'blog_post' post.pk %}" class="text-info">"{{ post.title }}"</a></p>
-                <div class="form-group">
-                    <form method="POST" class="mt-5 px-5">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button class="btn btn-warning mb-5">Update Post</button>
-                    </form>
+<section class="min-vh-100">
+     <div class="container pb-3 pt-5 mb-5">
+        <div class="row">
+            <div class="col-10 col-lg-8 offset-1 offset-lg-2">
+                <div class="bg-white mt-5 rounded text-center card rounded-1 border-purple">
+                    <div class="text-center">
+                    <img class="vh10 my-2" src="https://dd28f10f-e884-4a67-a583-4e937cf389a6.ws-eu01.gitpod.io/mini-browser/workspace/korcbd/media/KOR%20Logo%20%281%29.png" alt="">
+                        <h2 class="text-blue uppercase">Edit Post</h2>
+                        <h4><a href="{% url 'blog_post' post.pk %}" class="text-muted uppercase">"{{ post.title }}"</a></h4>
+                    </div>
+                    <div class="form-group">
+                        <form method="POST" class="mt-5 px-5">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button class="btn kor-btn-hover colour-darker uppercase my-3">Update Post</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-     </div>
     </div>
-</div>
+<section>
 {% endblock %}

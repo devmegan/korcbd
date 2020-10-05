@@ -1,24 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
+{% block extra_title %} Delete "{{ post.title }}" {% endblock %}
 {% block content %}
-<div class="container-fluid bg-green-animated vh-100">
+<section class="min-vh-100">
      <div class="container pb-3 pt-5">
-     <div class="row">
-        <div class="col-10 col-md-6 offset-1 offset-md-3">
-            <div class="bg-white mt-5 rounded text-center">
-                <h1 class="display-4 text-success">Delete Post</h1>
-                <p class="lead"> Are you sure you want to delete the post:</p>
-                <p class="lead text-danger"> "{{ post.title }}"</p>
-                <div class="form-group">
-                    <form method="POST" class="mt-5">
-                    {% csrf_token %}
-                    <button class="btn btn-danger mb-5">Yes, Delete</button>
-                    </form>
+        <div class="row">
+            <div class="col-10 col-lg-8 offset-1 offset-lg-2">
+                <div class="bg-white mt-5 rounded text-center card rounded-1 border-purple">
+                    <div class="text-center">
+                        <img class="vh10 mt-4 mb-2" src="https://dd28f10f-e884-4a67-a583-4e937cf389a6.ws-eu01.gitpod.io/mini-browser/workspace/korcbd/media/KOR%20Logo%20%281%29.png" alt="">
+                        <h2 class="text-blue">Delete Post</h2>
+                        <p class="lead mt-4"> Are you sure you want to delete the following post:</p>
+                        <h4 class="text-blue uppercase mt-3"> "{{ post.title }}"</h4>
+                        <div class="form-group">
+                            <form method="POST" class="mt-5">
+                            {% csrf_token %}
+                            <button class="btn kor-btn-hover colour-darker px-4 mb-5">Yes, Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-     </div>
     </div>
-</div>
-
+</section>
 {% endblock %}

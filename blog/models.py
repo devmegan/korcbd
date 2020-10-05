@@ -12,7 +12,6 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField(blank=True, null=False)
     date = models.DateField(auto_now_add=True)
-    image_url = models.URLField(null=True)
     tag_1 = models.CharField(max_length=20)
     tag_2 = models.CharField(max_length=20)
     tag_3 = models.CharField(max_length=20)
