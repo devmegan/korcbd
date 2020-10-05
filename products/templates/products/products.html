@@ -67,11 +67,20 @@
     <hr class="mt-0 hr-purple p-02 mb-5">
 {% endblock %}
 {% block content %}
-<section class="min-vh-100 bg-kor-blue-grad pt-md-5 mt-5">
+<section class="min-vh-100 pt-md-5 mt-5">
     <!-- Products -->
     <div class="container pb-5">
         <div class="d-block d-md-none vh10 mb-5"></div>
         <div class="row">
+        {% if not products %}
+        <div class="col-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+            <div class="text-center mt-5 bg-white border-purple card p-5">
+                <h2 class="text-blue uppercase">No Products Found</h2>
+                <p>Sorry, it doesn't look like we have any products that match your query.</p>
+                <a class="uppercase btn kor-btn-hover colour-darker px-5 my-2" href="{% url 'products' %}">All Products</a>
+            </div>
+        </div>
+        {% endif %}
         {% for product in products %}
             <div class="col-10 offset-1 col-sm-6 offset-sm-0 col-lg-4 col-xl-3">
                 <div class="card mt-5 rounded-1 text-center border-purple">
