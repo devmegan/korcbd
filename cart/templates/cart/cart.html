@@ -26,7 +26,7 @@
                             <tr>
                                 <td title="{{ product.sku }}" class="text-uppercase">
                                     <div class="row">
-                                        <div class="col-3 vh5"><img src="{{ product.product.image_url }}" alt="product image for {{ product.product.name }}">
+                                        <div class="col-3"><img class="vh5" src="{{ product.product.image_url }}" alt="product image for {{ product.product.name }}">
                                         </div>
                                         <div class="col-6 d-none d-md-block">
                                             <small>{{ product.product.name }}</small>
@@ -41,7 +41,7 @@
                                                 <div class="form-group form-inline input-sm">
                                                     <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{ product.quantity }}" min="1" max="99" data-item_id="{{ product.product.id }}" id="id_qty_{{ product.product.id }}">
                                                     <div class="input-group-append">
-                                                        <button class="btn btn-sm kor-btn-hover colour-darker uppercase" disabled type="submit">
+                                                        <button disabled class="update-btn btn btn-sm kor-btn-hover colour-darker uppercase" type="submit">
                                                             <small>Update</small>
                                                         </button>
                                                     </div>
@@ -97,5 +97,10 @@
 {% endblock %}
 {% block extrajs %}
 {{ block.super }}
+<script>
+$('.qty_input').change(function() {
+    $(this).next("div").children().prop("disabled", false)
+});
 
+</script>
 {% endblock %}
