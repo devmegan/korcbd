@@ -1,8 +1,8 @@
 <div class="toast" role="alert" data-autohide="false">
-  <div class="toast-header bg-kor-blue-grad">
-    <strong class="mr-auto text-white">Toast Success</strong>
+  <div class="toast-header bg-blue">
+    <h6 class="mr-auto text-white my-2">Success!</h6>
     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
+      <span aria-hidden="true" class="text-white">&times;</span>
     </button>
   </div>
   <div class="toast-body">
@@ -12,7 +12,7 @@
         </div>
     </div>
     {% if total and not viewing_profile_page %} 
-        <hr class="bg-kor-blue-grad">
+        <hr>
         <p class="font-weight-bold">Your Cart: </p>
         <div id="cart-preview-wrapper">
             {% for product in cart_items %}
@@ -20,16 +20,19 @@
                 <div class="col-3">
                     <img src="{{ product.product.image_url }}" alt="" style="height: 50px;">
                 </div>
-                <div class="col-9">
+                <div class="col-6">
                     <p>{{ product.product.name }} x {{ product.quantity }}</p>
+                </div>
+                <div class="col-3">
                     <p>£{{ product.subtotal }}</p>
                 </div>
+                <hr>
             </div>
             {% endfor %}
             <div class="row">
             <div class="col">
-                <p>Total: £{{ total }}</p>
-                <a href="{% url 'checkout' %}" class="btn btn-sm btn-outline-info mb">Secure Checkout</a>
+                <p><strong>Total:</strong> £{{ total }}</p>
+                <a href="{% url 'checkout' %}" class="btn kor-btn-hover colour-darker">Secure Checkout</a>
             </div>
             </div>
         </div>
