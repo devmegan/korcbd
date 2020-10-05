@@ -3,109 +3,107 @@
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'cart/css/stripe.css' %}">
 {% endblock %}
-{% block extra_title %}
-Home
-{% endblock %}
+{% block extra_title %} Order Confirmation {% endblock %}
 {% block content %}
 <section class="min-vh-100 mt-5 pb-5 pt-3">
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-12 col-lg-10 offset-lg-1">
-            <div class="bg-white m-2 p-3">
-                <div class="bg-white m-2 p-3 card border-purple rounded-1">
-                    <div class="text-center">
-                        <img class="vh10 my-2" src="https://dd28f10f-e884-4a67-a583-4e937cf389a6.ws-eu01.gitpod.io/mini-browser/workspace/korcbd/media/KOR%20Logo%20%281%29.png" alt="">
-                        <h2 class="text-blue mt-3 ml-2 uppercase d-none d-md-block">Order Confirmation</h2>
-                        <h4 class="text-blue mt-3 ml-2 uppercase d-block d-md-none">Order Confirmation</h4>
-                        <p class="text-muted">{{ order.order_reference }}</p>
-                         <p>Your order information is below.</p>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 col-lg-10 offset-lg-1">
+                <div class="bg-white m-2 p-3">
+                    <div class="bg-white m-2 p-3 card border-purple rounded-1">
+                        <div class="text-center">
+                            <img class="vh10 my-2" src="https://dd28f10f-e884-4a67-a583-4e937cf389a6.ws-eu01.gitpod.io/mini-browser/workspace/korcbd/media/KOR%20Logo%20%281%29.png" alt="">
+                            <h2 class="text-blue mt-3 ml-2 uppercase d-none d-md-block">Order Confirmation</h2>
+                            <h4 class="text-blue mt-3 ml-2 uppercase d-block d-md-none">Order Confirmation</h4>
+                            <p class="text-muted">{{ order.order_reference }}</p>
+                            <p>Your order information is below.</p>
+                            {% if not viewing_order_history %}
+                            <p>A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
+                            {% else %}
+                            <p>A confirmation email for this order was sent to <strong>{{ order.email }}</strong>.</p>
+                            {% endif %}
+                        </div>
+                        <div class="row no-gutters mb-3">
+                            <div class="col-12 col-md-6">
+                                <p class="uppercase mt-4 mb-1"><small><strong>Delivery Address:</strong></small></p>
+                                <p class="uppercase my-0"><small>{{ order.street_address1 }}</small></p>
+                                {% if order.street_address2 %}
+                                <p class="uppercase my-0"><small>{{ order.street_address2 }}</small></p>
+                                {% endif %}
+                                <p class="uppercase my-0"><small>{{ order.town_or_city }}</small></p>
+                                {% if order.county %}
+                                <p class="uppercase my-0"><small>{{ order.county }}</small></p>
+                                {% endif %}
+                                <p class="uppercase my-0"><small>{{ order.country }}</small></p>
+                                {% if order.postcode %}
+                                <p class="uppercase my-0"><small>{{ order.postcode }}</small></p>
+                                {% endif %}
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <p class="uppercase mt-4 mb-1"><small><strong>Contact Details:</strong></small></p>
+                                <p class="uppercase my-0"><small>{{ order.full_name }}</small></p>
+                                <p class="uppercase my-0"><small>{{ order.phone_number }}</small></p>
+                                <p class="uppercase my-0"><small>{{ order.email }}</small></p>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0"><small><span class="uppercase">Order Date:</span> {{ order.date }}</small></p>
+                        <div class="row no-gutters">
+                            <table class="table">
+                                <thead class="bg-blue text-white">
+                                    <tr>
+                                        <th scope="col"><small>Product</small></th>
+                                        <th scope="col"><small>Quantity</small></th>
+                                        <th scope="col"><small>Price</small></th>
+                                        <th scope="col" class="d-none d-md-table-cell"><small>Subtotal</small></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in order.lineitems.all %}
+                                    <tr>
+                                        <td title="{{ product.sku }}" class="text-uppercase">
+                                            <div class="row">
+                                                <div class="col-3"><img class="vh5" src="{{ item.product.image_url }}" alt="product image for {{ product.product.name }}">
+                                                </div>
+                                                <div class="col-6 d-none d-md-block">
+                                                    <small>{{ item.product.name }}</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <small>{{ item.quantity }}</small>
+                                        </td>
+                                        <td>
+                                            <small>{{ item.product.price }}</small>
+                                        </td>
+                                        <td class="d-none d-md-block">
+                                            <small>£{{ item.lineitem_total }}</small>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-right">
+                            <p class="lead font-weight-normal text-blue mb-0">£{{ order.order_total }} <small>total</small></p>
+                            <p class="text-blue mt-0"><small>Delivery is Free!</small></p>
+                        </div>
+                        <hr>
                         {% if not viewing_order_history %}
-                        <p>A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
+                        <div class="text-center">
+                            <p>
+                                While you're waiting for your order to arrive, why not check out some of the posts on our blog?
+                            </p>
+                            <a href="{% url 'blog' %}" class="btn kor-btn-hover colour-darker px-5 uppercase">Blog</a>
+                        </div>
                         {% else %}
-                        <p>A confirmation email for this order was sent to <strong>{{ order.email }}</strong>.</p>
+                        <div class="text-center mt-2">
+                            <a href="{% url 'profile' %}" class="btn kor-btn-hover colour-darker px-5 uppercase">Back to Profile</a>
+                        </div>
                         {% endif %}
                     </div>
-                    <div class="row no-gutters mb-3">
-                        <div class="col-12 col-md-6">
-                            <p class="uppercase mt-4 mb-1"><small><strong>Delivery Address:</strong></small></p>
-                            <p class="uppercase my-0"><small>{{ order.street_address1 }}</small></p>
-                            {% if order.street_address2 %}
-                            <p class="uppercase my-0"><small>{{ order.street_address2 }}</small></p>
-                            {% endif %}
-                            <p class="uppercase my-0"><small>{{ order.town_or_city }}</small></p>
-                            {% if order.county %}
-                            <p class="uppercase my-0"><small>{{ order.county }}</small></p>
-                            {% endif %}
-                            <p class="uppercase my-0"><small>{{ order.country }}</small></p>
-                            {% if order.postcode %}
-                            <p class="uppercase my-0"><small>{{ order.postcode }}</small></p>
-                            {% endif %}
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <p class="uppercase mt-4 mb-1"><small><strong>Contact Details:</strong></small></p>
-                            <p class="uppercase my-0"><small>{{ order.full_name }}</small></p>
-                            <p class="uppercase my-0"><small>{{ order.phone_number }}</small></p>
-                            <p class="uppercase my-0"><small>{{ order.email }}</small></p>
-                        </div>
-                    </div>
-                    <p class="text-muted mb-0"><small><span class="uppercase">Order Date:</span> {{ order.date }}</small></p>
-                    <div class="row no-gutters">
-                        <table class="table">
-                            <thead class="bg-blue text-white">
-                                <tr>
-                                    <th scope="col"><small>Product</small></th>
-                                    <th scope="col"><small>Quantity</small></th>
-                                    <th scope="col"><small>Price</small></th>
-                                    <th scope="col" class="d-none d-md-table-cell"><small>Subtotal</small></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% for item in order.lineitems.all %}
-                                <tr>
-                                    <td title="{{ product.sku }}" class="text-uppercase">
-                                        <div class="row">
-                                            <div class="col-3"><img class="vh5" src="{{ item.product.image_url }}" alt="product image for {{ product.product.name }}">
-                                            </div>
-                                            <div class="col-6 d-none d-md-block">
-                                                <small>{{ item.product.name }}</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <small>{{ item.quantity }}</small>
-                                    </td>
-                                    <td>
-                                        <small>{{ item.product.price }}</small>
-                                    </td>
-                                    <td class="d-none d-md-block">
-                                        <small>£{{ item.lineitem_total }}</small>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="text-right">
-                        <p class="lead font-weight-normal text-blue mb-0">£{{ order.order_total }} <small>total</small></p>
-                        <p class="text-blue mt-0"><small>Delivery is Free!</small></p>
-                    </div>
-                    <hr>
-                    {% if not viewing_order_history %}
-                    <div class="text-center">
-                        <p>
-                            While you're waiting for your order to arrive, why not check out some of the posts on our blog?
-                        </p>
-                        <a href="{% url 'blog' %}" class="btn kor-btn-hover colour-darker px-5 uppercase">Blog</a>
-                    </div>
-                    {% else %}
-                    <div class="text-center mt-2">
-                        <a href="{% url 'profile' %}" class="btn kor-btn-hover colour-darker px-5 uppercase">Back to Profile</a>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-</div>
 </section>
 {% endblock %}
