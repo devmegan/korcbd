@@ -60,12 +60,12 @@ def remove_from_cart(request, product_id):
         messages.error(request, f"{product} removed from cart")
 
         request.session['cart'] = cart
-        return HttpResponse(status=200)
+        return redirect(reverse('cart'))
 
     except Exception as e:
         print(e)
         messages.error(request, f"Error removing item from cart \ {e}")
-        return HttpResponse(status=500)
+        return redirect(reverse('cart'))
 
 
 @require_POST
