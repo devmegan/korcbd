@@ -11,7 +11,7 @@
             {{ message }}
         </div>
     </div>
-    {% if total %}
+    {% if total and not viewing_profile_page %} 
         <hr class="bg-kor-blue-grad">
         <p class="font-weight-bold">Your Cart: </p>
         <div id="cart-preview-wrapper">
@@ -29,7 +29,7 @@
             <div class="row">
             <div class="col">
                 <p>Total: £{{ total }}</p>
-                <a href="#" class="btn btn-sm btn-outline-info mb">Secure Checkout</a>
+                <a href="{% url 'checkout' %}" class="btn btn-sm btn-outline-info mb">Secure Checkout</a>
             </div>
             </div>
         </div>

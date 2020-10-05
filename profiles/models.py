@@ -10,6 +10,7 @@ class UserProfile(models.Model):
     """ User profile with saved delivery details an order info """
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_full_name = models.CharField(max_length=100, null=True, blank=True)
     profile_phone_number = models.CharField(max_length=20, null=True, blank=True)
     profile_country = CountryField(blank_label='Country *', null=True, blank=True)
     profile_postcode = models.CharField(max_length=20, null=True, blank=True)

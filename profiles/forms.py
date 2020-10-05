@@ -11,6 +11,7 @@ class UserProfileForm(forms.ModelForm):
         """ placeholders for form fields """
         super().__init__(*args, **kwargs)
         placeholders = {
+            'profile_full_name': 'Full Name',
             'profile_phone_number': 'Phone Number',
             'profile_postcode': 'Post Code',
             'profile_town_or_city': 'Town or City',

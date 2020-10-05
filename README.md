@@ -160,11 +160,11 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 - The post image, title, author, date and a snippet of the post body are displayed. A CTA button in each card links the user to the blog post.
 - A CTA button takes users to view all the blog posts. 
 
-## Allauth 
+## Allauth
 
-<img src="README/assets/img/allauth-login.jpg" style="margin: 0; width: 75%">
-<img src="README/assets/img/allauth-signup.jpg" style="margin: 0; width: 75%">
-<img src="README/assets/img/allauth-logout.jpg" style="margin: 0; width: 75%">
+<img src="README/assets/img/allauth-login.jpg" style="margin: 0; width: 50%">
+<img src="README/assets/img/allauth-signup.jpg" style="margin: 0; width: 50%">
+<img src="README/assets/img/allauth-logout.jpg" style="margin: 0; width: 50%">
 
 - The templates provided by Allauth are used for the Log In, Sign Up and Log Out pages.
 - These templates also provide other templates used for user admin such as email verification, updating email addresses and passwords. 
@@ -177,6 +177,19 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 - The about page contains the company logo and about title.
 - The about content is contained in a single card. 
 - Currently this content is split into three paragraphs, written by the client. 
+
+
+## Profiles 
+
+<img src="README/assets/img/profile.jpg" style="margin: 0; width: 75%">
+
+- The products page allows a user to view and update their profile information and view their order history.
+- On large screens these cards are side-by side. On smaller screens, the profile details card sits on top of the order history card.
+- The user profile details here link to the profile model. These are the details used to pre-populates the checkout form.
+- The users profile details are also updated when the fields are edited at checkout and the user opts to save it via checkbox.  
+- The order history contains a table with an overview of all orders placed on the user's account. This includes the order reference, the date orderd, the order total and an icon indicating if the item has been dispatched or not (a boolean toggled by admin staff in Django Administration).
+- The order references in the table act as links to the confirmation page for that order, so that the user can review all of its details. 
+- If the number of orders exceeds the height of the order history container, a y-scroll bar allows the user to scroll down to see older orders. 
 
 # Information Architecture
 

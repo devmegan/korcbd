@@ -108,29 +108,28 @@
             </div>
         {% endif %}
         <!-- Modal -->
-<div class="modal fade" id="contact-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h5 class="modal-title text-blue uppercase font-weight-bold" id="exampleModalLabel"><i class="fas fa-at fa-lg text-blue"></i> Get in Touch</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        Until the contact form is up and running, send us an email at
-        <span class="text-blue font-weight-bold uppercase inline-block mt-3"> korcbd@gmail.com </span>
-      </div>
-      <div class="text-center py-2">
-        <button type="button" class="btn kor-btn-hover colour-darker text-center" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+            <div class="modal fade" id="contact-modal" tabindex="-1" role="dialog" aria-labelledby="contact modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title text-blue uppercase font-weight-bold"><i class="fas fa-at fa-lg text-blue"></i> Get in Touch</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    Until the contact form is up and running, send us an email at
+                    <span class="text-blue font-weight-bold uppercase inline-block mt-3"> korcbd@gmail.com </span>
+                </div>
+                <div class="text-center py-2">
+                    <button type="button" class="btn kor-btn-hover colour-darker text-center" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+            </div>
         {% block content %}
-        
         {% endblock %}
-        <footer class="mt-5">
+        <footer class="">
             <div class="row no-gutters bg-blue text-white">
                 <div class="col-12 text-center my-3">
                     <a rel="noopener" target="_blank" class="mr-3" data-toggle="modal" data-target="#contact-modal"><i class="fas fa-at fa-2x text-blue bg-white p-2 rounded-circle"></i></a>

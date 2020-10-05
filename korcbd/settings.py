@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'about',
     'products',
     'cart',
+    'profiles',
 ]
 
 MIDDLEWARE = [
@@ -126,7 +127,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -170,8 +170,12 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Stripe settings
+# Stripe Settings
 STRIPE_CURRENCY = 'gbp'
-STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
-STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
-STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET')
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '-_-')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '-_-')
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '-_-')
+
+# Email Settings
+DEFAULT_FROM_EMAIL = 'korcbd@gmail.com'
+

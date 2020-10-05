@@ -2,25 +2,8 @@
 {% load static %}
 {% block extra_title %} BLOG {% endblock %}
 {% block content %}
-<style>
-.bg-kor-blue-white-grad {
-    background-color: #fc5296;
-    background-image: linear-gradient(315deg, #646464 70%, #4B72B7 0%); 
-}
-
-.bg-charcoal {
-    background-color: #646464;
-}
-</style>
-<section class="min-vh-100 bg-kor-blue-grad">
+<section class="min-vh-100">
 {% with object_list as posts %}
-    <!--Admin Alert -->
-    {% if not user %}
-    <div class="alert alert-info alert-dismissible fade show mb-0 px-3 d-flex justify-content-between" role="alert">
-        <a href="{% url 'add_post' %}" class="alert-link my-auto">Admin Access: Add a blog post </a>
-        <a href="{% url 'add_post' %}" class="btn btn-outline-info">Add Post</a>
-    </div>
-    {% endif %}
     <!-- Top Banner-->
     <hr class="my-0 bg-kor-blue-grad">
     <div class="py-1 my-auto px-3" style="background-color: #ffffff;">
