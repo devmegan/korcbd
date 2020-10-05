@@ -81,6 +81,10 @@ background: radial-gradient(circle, rgba(94,63,133,1) 3%, rgba(29,38,113,1) 100%
 .border-purple {
     border: 1px solid #1D2671 !important;
 }
+
+.shadow-grey {
+    box-shadow: 2px 2px 5px rgb(145, 148, 170);
+}
 /* BUTTONS */
 
 .kor-btn-hover {
@@ -184,4 +188,11 @@ input {
 
 .home-blog-card-title {
     min-height: 12vh;
+}
+
+/* Cards */
+.card-img-top {
+    width: 100%;
+    height: calc(200px + 2vh);
+    object-fit: cover;
 }
