@@ -71,7 +71,8 @@
                 </div>
                 <hr>
                 <div class="text-right">
-                    <p class="lead font-weight-normal text-blue">£{{ total }} <small>total</small></p>
+                    <p class="lead font-weight-normal text-blue mb-0">£{{ total }} <small>total</small></p>
+                    <p class="text-blue mt-0"><small>Delivery is Free!</small></p>
                     <a type="button" href="{% url 'products' %}" class="btn kor-btn-hover colour-darker uppercase">
                         <i class="fas fa-angle-double-left"></i> Keep Shopping
                     </a>
@@ -101,6 +102,5 @@
 $('.qty_input').change(function() {
     $(this).next("div").children().prop("disabled", false)
 });
-
 </script>
 {% endblock %}
