@@ -180,17 +180,34 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 - Currently this content is split into three paragraphs, written by the client. 
 
 ## Products 
+
+### All Products 
+
 <img src="README/assets/img/products.jpg" style="margin: 0; width: 75%">
 
 - The prodcuts page displays all products in the store. These products can then be sorted by price (ascending and descending) or filtered by category and seach query.
 - Under the nav bar, the current products being viewed is displayed, along with the number of products included in the products queryset. Any search terms of category filters are also shown here as breadcrumbs. 
 - Clicking the all prodcuts link in this banner removes and filters and returns the user to viewing all products in the store. 
-- Each product card displays the product image, name and price. A button on each card linsk to the product detail page. 
+- Each product card displays the product image, name and price. The image acts as a link to the product's detail page. A button on each card also links to the product details page. 
 
 <img src="README/assets/img/products-sm.jpg" style="margin: 0; width: 50%">
 
 - On mobile screens, products are stacked on top of each other making it easy for the user to scroll through them.
 - The price ordering and category filtering buttons are removed. Users can easily locate products they are interested in using the search bar. 
+
+### Product detail
+
+<img src="README/assets/img/product-detail-lg.jpg" style="margin: 0; width: 75%">
+
+- The product detail page displays the product title, image, price, description and ingredients. 
+- A link under the product title links the user to view all products in the same category as the product being viewed.
+- A quantity input allows users to enter the quantity they would like to buy either by using the adder and subtractor buttons, or by typing in the number manually. 
+- An add to cart button adds the specified quantity of the item to the users card. A toast success message displays the new cart contents to the user, with a link to checkout at the bottom of the toast.
+- A button at the bottom of the product detail card links the user back to view all products in the store.
+
+<img src="README/assets/img/product-detail-sm.jpg" style="margin: 0; width: 75%">
+
+- On mobile screens, the product detail page is very similar. Instead of being displayed in two columns side-by-side, the page elements are stacked on top of each other.
 
 ## Cart
 
