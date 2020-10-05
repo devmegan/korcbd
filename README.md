@@ -189,6 +189,7 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 - Under the nav bar, the current products being viewed is displayed, along with the number of products included in the products queryset. Any search terms of category filters are also shown here as breadcrumbs. 
 - Clicking the all prodcuts link in this banner removes and filters and returns the user to viewing all products in the store. 
 - Each product card displays the product image, name and price. The image acts as a link to the product's detail page. A button on each card also links to the product details page. 
+- Users logged in as staff can access the edit page for each product, and delete each product, by links at the bottom of each product card.
 
 <img src="README/assets/img/products-sm.jpg" style="margin: 0; width: 50%">
 
@@ -208,6 +209,29 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 <img src="README/assets/img/product-detail-sm.jpg" style="margin: 0; width: 75%">
 
 - On mobile screens, the product detail page is very similar. Instead of being displayed in two columns side-by-side, the page elements are stacked on top of each other.
+
+## Product Admin
+<img src="README/assets/img/product-admin.jpg" style="margin: 0; width: 75%">
+<img src="README/assets/img/product-detail-admin.jpg" style="margin: 0; width: 75%">
+
+- Simple product admin can be done using three views. One to add products, one to edit products, and one to delete them.
+- For users logged in as staff, the buttons to perform the edit and delete tasks can be found at the bottom of each product card on the shop page. They are also found at the bottom of each product detail page.
+- For users logged in as staff, the link to add a product can be found in the dropdown menu from the Admin link in the nav bar.
+- All these tasks can also be performed from the Django Administration interface. 
+
+### Add Product
+
+<img src="README/assets/img/add-product.jpg" style="margin: 0; width: 75%">
+
+- The add product template renders out a form that creates a new instance of the product model when the form is submitted with valid inputs. 
+- If a user attempts to access the add product url but is not logged in as a member of staff, they are redirected to the login page.
+
+### Edit Product 
+<img src="README/assets/img/edit-product.jpg" style="margin: 0; width: 75%">
+
+- The edit product template renders out the product model form, pre-populated with the existing product details, including a preview of the current product image.
+- Submitting the edit product form updates the product details in the database, as long as all fields still contain a valid input.
+- If a user attempts to access the edit product url but is not logged in as a member of staff, they are redirected to the login page.
 
 ## Cart
 
