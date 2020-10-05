@@ -2,14 +2,15 @@
 {% load static %}
 {% block extra_title %} Shop {% endblock %}
 {% block page_header %}
-    <hr class="my-0 hr-purple p-02">
+    <hr class="my-0 hr-purple">
     <div class="py-1 my-auto px-3 bg-white mb-5">
         <div class="d-flex justify-content-between">
             <!-- info about products being viewed-->
-            <h6 class="uppercase mt-1 d-none d-md-block"><small><a href="{% url 'products' %}" class="text-blue">All Products</a>{% if query_term %} <i class="fas fa-angle-double-right"></i>{{ query_term }}{% endif %}{% if category_name %} <i class="fas fa-angle-double-right text-muted"></i> {{ category_name }}{% endif %}<span class="font-weight-normal"> ({{ products | length }} product{{products|pluralize}})</span></small></h6>
+            <h6 class="uppercase mt-1 d-none d-md-block"><small><a href="{% url 'products' %}" class="text-blue">All Products</a>{% if query_term %} <i class="fas fa-angle-double-right"></i> {{ query_term }}{% endif %}{% if category_name %} <i class="fas fa-angle-double-right text-muted"></i> {{ category_name }}{% endif %}<span class="font-weight-normal"> ({{ products | length }} product{{products|pluralize}})</span></small></h6>
             <!-- sort/search fields -->
             <div class="d-none d-md-block">
-                    <div class="mr-4 d-inline-block">
+                    {% if not query_term %}
+                    <div class="mr-4 d-none d-lg-inline-block">
                             {% if direction != 'desc' %}
                                 {% if category_name %}
                                 <a type="button" href="{% url 'products' %}?category={{ category_name }}&sort=price&direction=desc" class="btn kor-btn-hover colour-darker btn-sm px-4">
@@ -32,6 +33,7 @@
                                 {% endif %}
                             {% endif %}
                     </div>
+                    {% endif %}
                     <div class="d-inline-block mr-2">
                         <button type="button" class="btn kor-btn-hover colour-darker dropdown-btn-rounded dropdown-toggle  btn-sm px-4 mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Categories
@@ -53,8 +55,8 @@
                     </form>
             </div>
         </div>
-        <!-- Mobile Search -->
-        <h6 class="uppercase mt-1 d-block d-md-none text-center"><a href="{% url 'products' %}" class="text-blue">All Products</a>{% if query_term %} <i class="fas fa-angle-double-right"></i>{{ query_term }}{% endif %}{% if category_name %} <i class="fas fa-angle-double-right text-muted"></i> {{ category_name }}{% endif %}<span class="font-weight-normal"> ({{ products | length }} product{{products|pluralize}})</span></h6>
+        <!-- Small screen search -->
+        <h6 class="uppercase mt-1 d-block d-md-none text-center"><a href="{% url 'products' %}" class="text-blue">All Products</a>{% if query_term %} <i class="fas fa-angle-double-right"></i> {{ query_term }}{% endif %}{% if category_name %} <i class="fas fa-angle-double-right text-muted"></i> {{ category_name }}{% endif %}<span class="font-weight-normal"> ({{ products | length }} product{{products|pluralize}})</span></h6>
             <div class="d-block d-md-none mt-3 text-center">
                 <form method="GET" action="{% url 'products' %}" class="form-inline">
                 <input class="form-control form-control-sm  input-sm d-inline-block w-100 text-center" name="search_q" type="search" placeholder="Search Products" aria-label="Search">
@@ -62,24 +64,26 @@
                 </form>
             </div>
     </div>
-    <hr class="mt-0 hr-purple p-02">
+    <hr class="mt-0 hr-purple p-02 mb-5">
 {% endblock %}
 {% block content %}
-<section class="min-vh-100 bg-kor-blue-grad pt-md-5">
+<section class="min-vh-100 bg-kor-blue-grad pt-md-5 mt-5">
     <!-- Products -->
     <div class="container pb-5">
         <div class="d-block d-md-none vh10 mb-5"></div>
         <div class="row">
         {% for product in products %}
             <div class="col-10 offset-1 col-sm-6 offset-sm-0 col-lg-4 col-xl-3">
-                <div class="card mt-5 rounded-1 text-center">
+                <div class="card mt-5 rounded-1 text-center border-purple">
+                    <div class="card-img-top">
                     <a href="{% url 'product_detail' product.pk %}">
-                        <img class="card-img-top max-vh-30" src="{{ product.image_url }}" alt="product image for {{ product.name }}">
+                        <img class="card-img-top" src="{{ product.image_url }}" alt="product image for {{ product.name }}">
                     </a>
+                    </div>
                     <div class="card-body">
                         <h6 class="card-title text-blue uppercase">{{ product.name }}</h6>
                         <p class="card-text">£{{ product.price }}</p>
-                        <a href="{% url 'product_detail' product.pk %}" class="btn kor-btn-hover colour-darker ">View Product</a>
+                        <a href="{% url 'product_detail' product.pk %}" class="btn btn-sm w-100 uppercase kor-btn-hover colour-darker py-2">View Product</a>
                         {% if request.user.is_superuser %}
                         <hr>
                         <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-warning ">Edit</a>

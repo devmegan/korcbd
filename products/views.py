@@ -13,7 +13,8 @@ def products(request):
     view returns products page and
     handles search/sorting queries
     """
-    products = Product.objects.all()
+    products = Product.objects.all().order_by("price")
+    # products = products.order_by("price")
     query_term = None
     category_name = None
     direction = None
@@ -27,8 +28,6 @@ def products(request):
             categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
-
-
 
         if 'search_q' in request.GET:
             query_term = request.GET['search_q']
@@ -46,7 +45,6 @@ def products(request):
                 if direction == 'desc':
                     sortkey = f'-{sortkey}'
             products = products.order_by(sortkey)
-
     context = {
         'products': products,
         'query_term': query_term,
