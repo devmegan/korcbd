@@ -235,6 +235,24 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 
 ## Cart
 
+<img src="README/assets/img/cart.jpg" style="margin: 0; width: 75%">
+
+- The cart page displays a summary of all the items that the user has added to their cart.
+- From this page, users can update the quantity of an item in the cart or remove it. 
+- The update button for an item's quantity is initially disabled. If users edit the quantity of an item, the update button next to it becomes enabled and clicking it updates the users cart, including product subtotal and cart total. 
+- Below the cart items table, the order total is displayed with a note to remind users that delivery is free, as KOR CBD encorporate delivery charges into product prices. 
+- There are two buttons at the bottom of the card. One invites the user to continue shopping, and links back to the products page. The second button takes the user through to the checkout page. 
+
+<img src="README/assets/img/cart-empty.jpg" style="margin: 0; width: 75%">
+
+- If a user gets through to the cart page without having added any items, they see a notice letting them know that there aren't any items in their cart yet. This prevents users from bein presented with an empty cart table and a total of £0.00.
+- A button on this page invites users to start shopping now, and links them to view all the products in the store. 
+
+<img src="README/assets/img/cart-update.jpg" style="margin: 0; width: 75%">
+
+- Update buttons in the cart are initially disabled, since on loading the page, there is nothing to update. 
+- When a user changes the value in the quantity input, a little bit of jQuery removes the disabled attribute from its corresponding update button. Clicking the button updates all changes made to cart item quantities. 
+- After updating the item quantity, the cart page reloads and users see the updated quantiies, subtotals and order total. 
 ## Checkout
 
 ## Profiles 
