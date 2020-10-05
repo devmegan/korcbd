@@ -46,7 +46,6 @@ class StripeWH_Handler:
         pid = intent.id
         cart = intent.metadata.cart
         save_info = intent.metadata.save_info
-
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
         order_total = round(intent.charges.data[0].amount/100, 2)
@@ -61,7 +60,7 @@ class StripeWH_Handler:
         username = intent.metadata.username
         if username != 'AnonymousUser':
             profile = UserProfile.objects.get(user__username=username)
-            if save_info:
+            if save_info == "true":
                 profile.profile_phone_number = shipping_details.phone
                 profile.profile_country = shipping_details.address.country
                 profile.profile_postcode = shipping_details.address.postal_code

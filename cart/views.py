@@ -148,13 +148,12 @@ def checkout(request):
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
-
             currency=settings.STRIPE_CURRENCY,
         )
 
         if request.user.is_authenticated:
             try:
-                profile=UserProfile.objects.get(user=request.user)
+                profile = UserProfile.objects.get(user=request.user)
                 order_form = OrderForm(initial={
                     'full_name': profile.user.first_name + " " + profile.user.last_name,
                     'email': profile.user.email,
@@ -188,7 +187,7 @@ def checkout_success(request, order_reference):
         order.user_profile = profile
         order.save()
 
-    if save_info:
+    if save_info == "true":
         profile_data = {
             'profile_phone_number': order.phone_number,
             'profile_country': order.country,

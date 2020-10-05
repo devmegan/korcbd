@@ -54,7 +54,12 @@ form.addEventListener('submit', function(ev) {
 
     
     // save info that can't be saved in payment intent
-    var saveInfo = Boolean($('#id-save-info').attr('checked'));
+    var saveInfoVal = $("#save_info").val();
+    if (saveInfoVal == "True"){
+        var saveInfo = true; 
+    } else {
+        var saveInfo = false; 
+    }
     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
     var postData = {
         'csrfmiddlewaretoken': csrfToken,
