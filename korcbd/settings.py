@@ -27,7 +27,7 @@ SECRET_KEY = 'of!v_90h#wq8p(rpbke_9-a+#e^!=v1(6hmz@@rqnlpfse81%w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["korcbd.herokuapp.com", "localhost"]
 
 
 # Application definition
@@ -123,18 +123,17 @@ WSGI_APPLICATION = 'korcbd.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
-# default db config 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-}
-"""
-DATABASES = {
-    'default': dj_database_url.parse("<db_url>")
-}
-"""
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
