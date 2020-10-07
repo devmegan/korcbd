@@ -2,13 +2,17 @@
 {% load static %}
 {% block extra_title %} 404 {% endblock %}
 {% block content %}
-<section class="min-vh-100 mt-5 pt-3">
-    <!-- Blog Posts -->
+<section class="min-vh-100 mt-5 pt-3 min-vh-100 bg-purple-reverse py-5">
+    <!-- 404 Message-->
     <div class="container">
-        <div class="text-center pt-4">
-            <img class="vh10 my-2" src="{{ MEDIA_URL }}logo-purple.png" alt="KOR CBD logo">            
-            <h2 class="uppercase mb-4 text-blue">404</h2>
-            <h6 class="uppercase mb-4 text-blue">Page Not Found</h6>
+        <div class="row">
+        <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 bg-white mt-5 p-5 ">
+            <div class="text-center"> 
+                <img class="vh10 my-2" src="logo-purple.png" alt="KOR CBD logo">
+                <h1 class="text-center text-blue uppercase font-weight-bold">404</h1>
+                <h6 class="text-center">Page Not Found</h6>
+            </div>
+        </div>
         </div>
     </div>
 </section>
