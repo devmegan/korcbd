@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_title %} 404 {% endblock %}
+{% block content %}
+<section class="min-vh-100 mt-5 pt-3">
+    <!-- Blog Posts -->
+    <div class="container">
+        <div class="text-center pt-4">
+            <img class="vh10 my-2" src="{{ MEDIA_URL }}logo-purple.png" alt="KOR CBD logo">            
+            <h2 class="uppercase mb-4 text-blue">404</h2>
+            <h6 class="uppercase mb-4 text-blue">Page Not Found</h6>
+        </div>
+    </div>
+</section>
+{% endblock %}
