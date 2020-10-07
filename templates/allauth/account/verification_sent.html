@@ -7,7 +7,7 @@
 
 {% block allauth_inner_content %}
 <div class="text-center">
-    <img class="vh10 my-2" src="https://dd28f10f-e884-4a67-a583-4e937cf389a6.ws-eu01.gitpod.io/mini-browser/workspace/korcbd/media/KOR%20Logo%20%281%29.png" alt="">
+    <img class="vh10 my-2" src="{{ MEDIA_URL }}logo-purple.png" alt="">
     <h2 class="text-center text-blue uppercase font-weight-bold">{% trans "Verify E-mail Address" %}</h2>
 </div>
 <p class="text-justify">{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
