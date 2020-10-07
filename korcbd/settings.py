@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = "DEVELOPMENT" in os.environ
 
 ALLOWED_HOSTS = ["korcbd.herokuapp.com", "localhost"]
 
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'profiles',
-    # other
+    # other apps
     'crispy_forms',
     'storages',
 ]
@@ -86,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
                 # cart context processor
                 'cart.contexts.cart_contents',
             ],
@@ -181,6 +182,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if 'USE_AWS':
+    # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+
     # AWS S3 Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'korcbd'
     AWS_S3_REGION_NAME = 'eu-west-2'
@@ -195,8 +202,8 @@ if 'USE_AWS':
     MEDIAFILES_LOCATION = 'media'
 
     # static/media urls for production
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
 # Stripe Settings
 STRIPE_CURRENCY = 'gbp'
@@ -205,5 +212,4 @@ STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '-_-')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '-_-')
 
 # Email Settings
-DEFAULT_FROM_EMAIL = 'korcbd@gmail.com'
-
+DEFAULT_FROM_EMAIL = 'korcbdproducts@gmail.com'
