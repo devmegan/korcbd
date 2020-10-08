@@ -162,6 +162,10 @@ a:hover {
 input {
     padding: 10px 12px;
 }
+.errorlist { 
+    list-style: none; 
+    padding: 0px;
+}
 
 /* Order Profile & Order History Containers */
 #order-history-container {
