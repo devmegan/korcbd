@@ -211,7 +211,6 @@ STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '-_-')
 
 # Email Settings
 site_name = "KOR CBD"
-site_domain = "www.korcbd.herokuapp.co.uk"
 
 if 'DEVELOPMENT' in os.environ:
     DEFAULT_FROM_EMAIL = 'korcbdproducts@gmail.com'
