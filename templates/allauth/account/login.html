@@ -22,6 +22,15 @@
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
+   <!-- Display Log In Errors -->
+    {% if form.errors %}
+    <div class="text-center text-danger">
+        <p><i class="fas fa-exclamation-triangle"></i></p>
+        {% for key, value in form.errors.items %}
+            {{ value }}
+        {% endfor %}
+    </div>
+    {% endif %}
   <button class="primaryAction btn kor-btn-hover colour-darker px-5 uppercase mb-2" type="submit">{% trans "Sign In" %}</button>
   <hr>
   <a class="button secondaryAction text-muted" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
