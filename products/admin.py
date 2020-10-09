@@ -7,10 +7,10 @@ from .models import Product, Category
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'name',
-        'category',
         'sku',
+        'category',
+        'stock_qty',
         'price',
-        'image_url'
     )
 
     ordering = ('name',)
