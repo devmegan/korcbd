@@ -22,6 +22,15 @@
     {% endblock%}
 
     <title>KOR | {% block extra_title %} {% endblock%}</title>
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("user_0BKHc2tjJuMjT7Ysz61mr");
+        })();
+    </script>
+
     </head>
     <body>
          <header>
@@ -118,11 +127,26 @@
                     </button>
                 </div>
                 <div class="modal-body text-center">
-                    Until the contact form is up and running, send us an email at
-                    <span class="text-blue font-weight-bold uppercase inline-block mt-3"> korcbd@gmail.com </span>
-                </div>
-                <div class="text-center py-2">
-                    <button type="button" class="btn kor-btn-hover colour-darker text-center uppercase" data-dismiss="modal">Close</button>
+                    <h4 class="text-blue uppercase my-3" id="contactFormResponseHeader"></h4>
+                    <p id="contactFormResponseBody"></p>
+                    <form id="contactForm">
+                    {% csrf_token %}
+                    <span id="contactFormFields">
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-0" id="sender_name" name="sender_name"  placeholder="Name *" value="{{ profile.profile_full_name }}" required>
+                        </div>
+                        <div class="form-group">
+                             <input type="email" class="form-control rounded-0" id="sender_email" name="sender_email" placeholder="Email *" value="{{ user.email }}" required>
+                        </div>
+                        <div class="form-group">
+                             <input type="phonenumber" class="form-control rounded-0" id="sender_phonenumber" name="sender_phonenumber" placeholder="Phone Number" value="{{ profile.profile_phone_number }}">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control rounded-0" rows="5" id="sender_message" name="sender_message" placeholder="Message *" required></textarea>
+                        </div>
+                        </span>
+                        <button class="w-100 btn kor-btn-hover colour-darker text-center uppercase" type="submit" id="contactFormSubmitBtn">Send</button>
+                    </form>
                 </div>
                 </div>
             </div>
@@ -153,15 +177,23 @@
         <script src="https://js.stripe.com/v3/"></script>
         <!--google fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
-        <!--toasts -->
+        <!--emailjs -->
+        <script src="{% static 'js/email.js' %}"></script>
         <script type="text/javascript">
+            // toasts
             $('.toast').toast('show');
+            // nav bar img 
             $('#nav-img').mouseover(function(){
                 $(this).attr('src', '{{ MEDIA_URL }}logo-pink.png');
             })
             $('#nav-img').mouseout(function(){
                 $(this).attr('src', '{{ MEDIA_URL }}logo-purple.png');
             })
+            // emailjs 
+            $("#contactForm").submit(function(){
+                return sendMail(this);
+            })
+            // close modal after email
         </script>
         {% endblock %}
          
