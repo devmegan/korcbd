@@ -74,7 +74,8 @@ h6,
 }
 
 .nav-link:hover, 
-.footer-icon:hover {
+.footer-icon:hover,
+.pink-hover:hover {
     color: #c03b66 !important;
 }
 .hr-purple {
