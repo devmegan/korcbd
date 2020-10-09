@@ -12,29 +12,16 @@
         <div class="row">
         <div class="col-12 col-md-8 offset-md-2">
             <div class="rounded border-purple p-3 p-md-5 mb-5 mt-2">
+                {% for section in about_sections %}
                 <div class="mb-5">
-                    <h5 class="text-blue"><b>K</b>eep <b>O</b>n <b>R</b>olling</h5>
-                    <p class="lead text-justify"><small>KOR started as a company to provide medicinal CBD products to martial
-                    artists with the simple aim - Keep On Rolling. With many years of martial arts experience and competing internationally, 
-                    we know the strain that martial can take on your body, and the long term impacts of this if it's not taken care of.
-                    Our CBD products have been designed to get martial artists back on the mats as soon as possible, and for as many years as possible.</small></p>
+                    <h5 class="text-blue">{{ section.section_title }}</h5>
+                    <p class="lead text-justify">
+                        <small>
+                            {{ section.body }}
+                        </small>
+                    </p>
                 </div>
-                <div class="mb-5">
-                    <h5 class="text-blue">Our CBD Products</h5>
-                    <p class="lead text-justify"><small> Building on significant scientific research aroudn the power of CBD in treating and 
-                    preventing athletic injudies, our range of products was born. We were concerned with the quality of some CBD products on
-                    the market, so we ensure that all our CBD products have 3rd party certification. This certification verifies the product
-                    quality and ensures that they do not contain illegal or controlled substances, something we know is really important to 
-                    athletes who are out competing. </small></p>
-               </div>
-               <div class="mb-5">
-                    <h5 class="text-blue">KOR CBD Customers</h5>
-                    <p class="lead text-justify"><small>Starting out, our customers were almost exclusively martial arts athletes. A lot of them
-                    were competing at a high level, and many were finding conventional pharmaceutical treatments inaffective and inconvenient over the
-                    long term. The word has spread, and there are now athletes from a wide range of sports using our products. Judo, Tennis, Football, Hiking, Golf... 
-                    You name it. If there's one thing that unites us across all sports, it's those aches and pains. We're really proud that KOR CBD is
-                    providing products that help keep so many athletes active. </small></p>
-               </div>
+               {% endfor %}
             </div>
         </div>
         </div>
