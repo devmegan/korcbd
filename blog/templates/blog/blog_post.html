@@ -48,12 +48,16 @@
                             </div>
                             <div class="mx-5 mb-2">
                                 <h5 class="text-blue uppercase my-3">Comments ({{ post.comments.all|length }})</h5>
+                                {% if request.user.is_authenticated %}
                                 <form action="{% url 'add_comment' post.pk %}" method="POST">
                                     {% csrf_token %}
                                     <input type="hidden" name="author" id="author" value="{{ user.id }}">
                                     <input class="form-control" rows="4" placeholder="Write a comment here" id="comment_body" name="comment_body">
                                     <button class="btn kor-btn-hover colour-darker px-4" type="submit" name="post_to_comment_id" value="{{ post.id }}">Post Comment</button>
                                 </form>
+                                {% else %}
+                                <span><small><a class="pink-hover" href="{% url 'account_login' %}"><u>Log In</u></a> or <a class="pink-hover" href="{% url 'account_signup' %}"><u>Sign Up</u></a> to post a comment</small></span>
+                                {% endif %}
                             </div>
                             {% for comment in post.comments.all %}
                             <div class="mx-5 mb-2">
