@@ -34,7 +34,10 @@ def products(request):
             if not query_term:
                 messages.error(request, "You didn't enter any search terms")
                 return redirect(reverse('products'))
-            queries = Q(name__icontains=query_term) | Q(description__icontains=query_term) | Q(sku__icontains=query_term)
+            queries = Q(name__icontains=query_term) | \
+                Q(description__icontains=query_term) | \
+                Q(sku__icontains=query_term)
+
             products = products.filter(queries)
 
         if 'sort' in request.GET:
@@ -55,7 +58,7 @@ def products(request):
 
 
 def product_detail(request, pk):
-    """ view returns details product page """ 
+    """ view returns details product page """
 
     product = get_object_or_404(Product, pk=pk)
     context = {
@@ -69,17 +72,26 @@ def add_product(request):
     """ view for admin to add products to store """
     # only allow super user access
     if not request.user.is_superuser:
-        messages.error(request, "You must be logged in as KOR admin to do this")
+        messages.error(
+            request,
+            "You must be logged in as KOR admin to do this"
+        )
         return redirect(reverse('home'))
 
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
             new_product = form.save()
-            messages.success(request, "New product, {new_product.name} has been added to the store")
+            messages.success(
+                request,
+                "New product, {new_product.name} has been added to the store"
+            )
             return redirect(reverse('product_detail', args=[new_product.id]))
         else:
-            messages.error(request, 'Failed to add new product. Double check the form is valid.')
+            messages.error(
+                request,
+                'Failed to add new product. Double check the form is valid.'
+            )
     else:
         form = ProductForm(request.POST)
     context = {
@@ -87,17 +99,21 @@ def add_product(request):
     }
     return render(request, 'products/add_product.html', context)
 
+
 @login_required
 def edit_product(request, product_id):
     """ view for admin to edit products """
     # only allow super user access
     if not request.user.is_superuser:
-        messages.error(request, "You must be logged in as KOR admin to do this")
+        messages.error(
+            request,
+            "You must be logged in as KOR admin to do this"
+        )
         return redirect(reverse('home'))
 
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
-        # if update form is valid, save and redirect user to specific product page
+        # validate, save and redirect user to product page
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
             form.save()
@@ -111,12 +127,16 @@ def edit_product(request, product_id):
     }
     return render(request, 'products/edit_product.html', context)
 
+
 @login_required
 def delete_product(request, product_id):
     """ view for admin to delete a product """
     # only allow super user access
     if not request.user.is_superuser:
-        messages.error(request, "You must be logged in as KOR admin to do this")
+        messages.error(
+            request,
+            "You must be logged in as KOR admin to do this"
+        )
         return redirect(reverse('home'))
 
     product = get_object_or_404(Product, pk=product_id)

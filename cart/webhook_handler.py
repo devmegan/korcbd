@@ -9,26 +9,32 @@ from profiles.models import UserProfile
 import json
 import time
 
+
 class StripeWH_Handler:
     """handle stripe webhooks """
 
     def __init__(self, request):
         self.request = request
-    
+
     def _send_confirmation_email(self, order):
         """ send confirmation email to user when order is placed """
         customer_email = order.email
         subject = render_to_string(
             'cart/confirmation_emails/confirmation_email_subject.txt',
-            {'order': order}
+            {
+                'order': order
+            }
         )
         body = render_to_string(
             'cart/confirmation_emails/confirmation_email_body.txt',
-            {'order': order,
-            'contact_email': settings.DEFAULT_FROM_EMAIL}
+            {
+                'order': order,
+                'contact_email':
+                settings.DEFAULT_FROM_EMAIL
+            }
         )
         send_mail(
-            subject, 
+            subject,
             body,
             settings.DEFAULT_FROM_EMAIL,
             [customer_email]
@@ -61,13 +67,20 @@ class StripeWH_Handler:
         if username != 'AnonymousUser':
             profile = UserProfile.objects.get(user__username=username)
             if save_info == "true":
-                profile.profile_phone_number = shipping_details.phone
-                profile.profile_country = shipping_details.address.country
-                profile.profile_postcode = shipping_details.address.postal_code
-                profile.profile_town_or_city = shipping_details.address.city
-                profile.profile_street_address1 = shipping_details.address.line1
-                profile.profile_street_address2 = shipping_details.address.line2
-                profile.profile_county = shipping_details.address.state
+                profile.profile_phone_number = \
+                    shipping_details.phone
+                profile.profile_country = \
+                    shipping_details.address.country
+                profile.profile_postcode = \
+                    shipping_details.address.postal_code
+                profile.profile_town_or_city = \
+                    shipping_details.address.city
+                profile.profile_street_address1 = \
+                    shipping_details.address.line1
+                profile.profile_street_address2 = \
+                    shipping_details.address.line2
+                profile.profile_county = \
+                    shipping_details.address.state
                 profile.save()
 
         # create a webhook if order hasn't been saved
@@ -99,12 +112,13 @@ class StripeWH_Handler:
             # now order exists, send a confirmation email to user
             self._send_confirmation_email(order)
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | SUCCESS: verified order already exists in database',
+                content=f'Webhook received: {event["type"]} | \
+                SUCCESS: verified order already exists in database',
                 status=200)
         else:
             order = None
             try:
-                # if order doesn't exist after 5x searches over 5s, go ahead and create it
+                # if order doesn't exist after 5 searches, create it
                 order = Order.objects.create(
                     full_name=shipping_details.name,
                     email=billing_details.email,
@@ -138,7 +152,8 @@ class StripeWH_Handler:
         # now order created by webhooks, send a confirmation email to user
         self._send_confirmation_email(order)
         return HttpResponse(
-            content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',
+            content=f'Webhook received: {event["type"]} \
+            | SUCCESS: Created order in webhook',
             status=200)
 
     def handle_payment_intent_payment_failed(self, event):

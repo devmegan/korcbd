@@ -1,8 +1,6 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.utils import timezone
-# from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -30,7 +28,10 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post_to_comment = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+    post_to_comment = models.ForeignKey(
+        Post, related_name="comments",
+        on_delete=models.CASCADE
+    )
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     comment_body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)

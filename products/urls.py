@@ -1,12 +1,27 @@
-from django.contrib import admin
 from django.urls import path
-from .views import products, product_detail, add_product, edit_product, delete_product
+from . import views
 
 
 urlpatterns = [
-    path('', products, name='products'),
-    path('product_detail/<int:pk>/', product_detail, name='product_detail'),
-    path('add_product/', add_product, name='add_product'),
-    path('edit_product/<int:product_id>/', edit_product, name='edit_product'),
-    path('delete_product/<int:product_id>/', delete_product, name='delete_product'),
+    path('', views.products, name='products'),
+    path(
+        'product_detail/<int:pk>/',
+        views.product_detail,
+        name='product_detail'
+    ),
+    path(
+        'add_product/',
+        views.add_product,
+        name='add_product'
+    ),
+    path(
+        'edit_product/<int:product_id>/',
+        views.edit_product,
+        name='edit_product'
+    ),
+    path(
+        'delete_product/<int:product_id>/',
+        views.delete_product,
+        name='delete_product'
+    ),
 ]

@@ -6,6 +6,7 @@ from cart.models import Order
 from .forms import UserProfileForm
 # Create your views here.
 
+
 @login_required
 def profile(request):
     """ view returns profile page to user and handles updating profile info """
@@ -18,7 +19,10 @@ def profile(request):
             form.save()
             messages.success(request, 'Your Profile has been updated')
         else:
-            messages.error(request, 'Failed to update profile. Please check the form is valid' )
+            messages.error(
+                request,
+                'Failed to update profile. Please check the form is valid'
+            )
     else:
         form = UserProfileForm(instance=profile)
 
@@ -33,7 +37,10 @@ def profile(request):
 def order_history(request, order_reference):
     """ view to return details of previous order to user """
     order = get_object_or_404(Order, order_reference=order_reference)
-    messages.info(request, ( f'This is a past order confirmation for order {order_reference}'))
+    messages.info(
+        request,
+        (f'This is a past order confirmation for order {order_reference}')
+    )
     context = {
         'order': order,
         'viewing_order_history': True,

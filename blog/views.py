@@ -5,7 +5,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import (
+    ListView, DetailView, CreateView, UpdateView, DeleteView
+)
 from django.db.models import Q
 from .models import Post, Comment
 from .forms import AddPostForm, AddCommentForm
@@ -46,7 +48,12 @@ def searchPosts(request):
                 messages.error(request, "You didn't enter any search terms")
                 return redirect(reverse('blog'))
 
-            queries = Q(title__icontains=query_term) | Q(body__icontains=query_term) | Q(tag_1__icontains=query_term) | Q(tag_2__icontains=query_term) | Q(tag_3__icontains=query_term)
+            queries = Q(title__icontains=query_term) | \
+                Q(body__icontains=query_term) | \
+                Q(tag_1__icontains=query_term) | \
+                Q(tag_2__icontains=query_term) | \
+                Q(tag_3__icontains=query_term)
+
             query_posts = posts.filter(queries)
         context = {
             'object_list': query_posts,
@@ -58,7 +65,9 @@ def searchPosts(request):
 def filterPosts(request, tag_q):
     # deslugify any slugged tags
     tag = tag_q.replace('-', ' ')
-    filter_q = Q(tag_1__icontains=tag) | Q(tag_2__icontains=tag) | Q(tag_3__icontains=tag)
+    filter_q = Q(tag_1__icontains=tag) | \
+        Q(tag_2__icontains=tag) | \
+        Q(tag_3__icontains=tag)
     # filter by tag and then pass to template as context
     tagged_posts = Post.objects.filter(filter_q)
     context = {
@@ -94,7 +103,10 @@ def commentPost(request, pk):
     # print(request.POST)
     new_comment = None
     form = AddCommentForm(request.POST)
-    post_to_comment = get_object_or_404(Post, id=request.POST.get('post_to_comment_id'))
+    post_to_comment = get_object_or_404(
+        Post,
+        id=request.POST.get('post_to_comment_id')
+        )
     if form.is_valid():
         new_comment = form.save(commit=False)
         new_comment.post_to_comment = post_to_comment

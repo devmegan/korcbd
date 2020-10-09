@@ -1,11 +1,14 @@
 from django.contrib import admin
 from .models import Order, OrderLineItem
 
+
 # Register your models here.
+
 class OrderLineItemAdminInline(admin.TabularInline):
     """ allow editing line items on order model """
     model = OrderLineItem
     readonly_fields = ('lineitem_total', 'lineitem_price_per_unit')
+
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = OrderLineItemAdminInline,

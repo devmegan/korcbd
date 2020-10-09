@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
+from django.shortcuts import (
+    render, redirect, reverse, HttpResponse, get_object_or_404
+)
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
@@ -64,7 +66,7 @@ def remove_from_cart(request, product_id):
 
     except Exception as e:
         print(e)
-        messages.error(request, f"Error removing item from cart \ {e}")
+        messages.error(request, f"Error removing item from cart {e}")
         return redirect(reverse('cart'))
 
 
@@ -81,7 +83,8 @@ def cache_checkout_data(request):
         })
         return HttpResponse(status=200)
     except Exception as e:
-        messages.error(request, 'Sorry, there\'s been a problem processing your payment. Please try again in a few minutes.')
+        messages.error(request, 'Sorry, there\'s been a problem processing your payment. \
+        Please try again in a few minutes.')
         return HttpResponse(content=e, status=400)
 
 
@@ -89,11 +92,13 @@ def checkout(request):
     """ a view to process customer order details and stripe payment """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     if not stripe_public_key:
-        print("Error fetching stripe public key - is it definitely exported to settings?")
+        print("Error fetching stripe public key \
+        - is it definitely exported to settings?")
 
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     if not stripe_secret_key:
-        print("Error fetching stripe secret key - is it definitely exported to settings?")
+        print("Error fetching stripe secret key \
+        - is it definitely exported to settings?")
 
     cart = request.session.get('cart', {})
     current_cart = cart_contents(request)
@@ -132,16 +137,29 @@ def checkout(request):
                     )
                     order_line_item.save()
                 except Product.DoesNotExist:
-                    messages.error(request, "One of the products your trying to order has been discontinuted \ Please call for assistance!")
+                    messages.error(
+                        request,
+                        "One of the products your trying to order has been discontinuted \
+                        Please call for assistance!"
+                    )
                     order.delete()
                     return redirect(reverse('cart'))
-            return redirect(reverse('checkout_success', args=[order.order_reference]))
+            return redirect(
+                reverse(
+                    'checkout_success',
+                    args=[order.order_reference]
+                )
+            )
         else:
-            messages.error(request, "There was an error processing your order. Please double-check your information")
+            messages.error(request, "There was an error processing your order. \
+            Please double-check your information")
     else:
         if not cart:
             """ prevent users manually accessing checkout url """
-            messages.error(request, "There's nothing in your cart at the moment")
+            messages.error(
+                request,
+                "There's nothing in your cart at the moment"
+            )
             return redirect(reverse('products'))
 
         stripe_total = round(total * 100)
@@ -155,15 +173,24 @@ def checkout(request):
             try:
                 profile = UserProfile.objects.get(user=request.user)
                 order_form = OrderForm(initial={
-                    'full_name': profile.user.first_name + " " + profile.user.last_name,
-                    'email': profile.user.email,
-                    'phone_number': profile.profile_phone_number,
-                    'country': profile.profile_country,
-                    'postcode': profile.profile_postcode,
-                    'town_or_city': profile.profile_town_or_city,
-                    'street_address1': profile.profile_street_address1,
-                    'street_address2': profile.profile_street_address2,
-                    'county': profile.profile_county,
+                    'full_name':
+                        profile.user.first_name + " " + profile.user.last_name,
+                    'email':
+                        profile.user.email,
+                    'phone_number':
+                        profile.profile_phone_number,
+                    'country':
+                        profile.profile_country,
+                    'postcode':
+                        profile.profile_postcode,
+                    'town_or_city':
+                        profile.profile_town_or_city,
+                    'street_address1':
+                        profile.profile_street_address1,
+                    'street_address2':
+                        profile.profile_street_address2,
+                    'county':
+                        profile.profile_county,
                 })
             except UserProfile.DoesNotExist:
                 order_form = OrderForm()
@@ -182,7 +209,7 @@ def checkout_success(request, order_reference):
     order = get_object_or_404(Order, order_reference=order_reference)
     save_info = request.session.get('save_info')
     if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user = request.user)
+        profile = UserProfile.objects.get(user=request.user)
         # Link the new order to users profile
         order.user_profile = profile
         order.save()
