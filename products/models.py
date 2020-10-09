@@ -8,6 +8,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
+
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, blank=True)
 
@@ -34,6 +35,11 @@ class Product(models.Model):
     ingredients = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image_url = models.URLField(max_length=1024, blank=True)
+    stock_qty = models.PositiveSmallIntegerField(
+        null=False,
+        blank=False,
+        default=0
+    )
 
     def __str__(self):
         return self.name
