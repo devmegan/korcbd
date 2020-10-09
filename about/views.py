@@ -31,7 +31,7 @@ def add_section(request):
         form = AboutSectionForm(request.POST)
         if form.is_valid():
             about_section = form.save()
-            messages.success(
+            messages.info(
                 request,
                 f"New Section, \
                     {about_section.section_title} has been added to the store"
@@ -66,7 +66,7 @@ def edit_section(request, section_id):
         form = AboutSectionForm(request.POST, instance=about_section)
         if form.is_valid():
             about_section = form.save()
-            messages.success(
+            messages.info(
                 request,
                 f"New Section, \
                     {about_section.section_title} has been added to the store"
@@ -100,7 +100,7 @@ def delete_section(request, section_id):
 
     about_section = get_object_or_404(AboutSection, pk=section_id)
     about_section.delete()
-    messages.success(
+    messages.info(
         request,
         f"Successfully deleted \"{about_section.section_title}\""
     )

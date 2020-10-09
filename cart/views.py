@@ -47,7 +47,7 @@ def update_cart(request, product_id):
         cart[product_id] = quantity
     else:
         cart.pop(product_id)
-        messages.error(request, f"{product} (x{quantity}) removed from cart")
+        messages.success(request, f"{product} (x{quantity}) removed from cart")
 
     request.session['cart'] = cart
     return redirect(reverse('cart'))
@@ -59,7 +59,7 @@ def remove_from_cart(request, product_id):
         product = get_object_or_404(Product, pk=product_id)
         cart = request.session.get('cart', {})
         cart.pop(product_id)
-        messages.error(request, f"{product} removed from cart")
+        messages.success(request, f"{product} removed from cart")
 
         request.session['cart'] = cart
         return redirect(reverse('cart'))

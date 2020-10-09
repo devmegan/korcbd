@@ -24,7 +24,6 @@ def products(request):
             category_name = request.GET['category']
             if len(category_name) > 1:
                 category_name = category_name.replace(",", " & ")
-                print(category_name)
             categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
@@ -82,9 +81,9 @@ def add_product(request):
         form = ProductForm(request.POST)
         if form.is_valid():
             new_product = form.save()
-            messages.success(
+            messages.info(
                 request,
-                "New product, {new_product.name} has been added to the store"
+                f"New product, {new_product.name} has been added to the store"
             )
             return redirect(reverse('product_detail', args=[new_product.id]))
         else:
@@ -117,7 +116,7 @@ def edit_product(request, product_id):
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
             form.save()
-            messages.success(request, f"{product.name} successfully updated")
+            messages.info(request, f"{product.name} successfully updated")
             return redirect(reverse('product_detail', args=[product.id]))
     else:
         form = ProductForm(instance=product)
@@ -141,5 +140,5 @@ def delete_product(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
-    messages.success(request, f"Successfully deleted \"{product.name}\"")
+    messages.info(request, f"Successfully deleted \"{product.name}\"")
     return redirect(reverse('products'))
