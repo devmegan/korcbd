@@ -136,6 +136,12 @@ def checkout(request):
                         lineitem_total=quantity * product.price
                     )
                     order_line_item.save()
+
+                    # update product stock and sold quantities
+                    product.sold_qty = product.sold_qty + order_line_item.quantity
+                    product.stock_qty = product.stock_qty - order_line_item.quantity
+                    product.save()
+
                 except Product.DoesNotExist:
                     messages.error(
                         request,
