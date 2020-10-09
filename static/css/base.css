@@ -89,7 +89,10 @@ h6,
 .shadow-grey {
     box-shadow: 2px 2px 5px rgb(145, 148, 170);
 }
-
+/* CURSORS */
+a:hover {
+    cursor: pointer;
+}
 /* BUTTONS */
 
 .kor-btn-hover {
