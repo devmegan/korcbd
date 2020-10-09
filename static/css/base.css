@@ -71,10 +71,9 @@ h6,
 }
 
 .nav-link:hover, 
-a:hover {
+.footer-icon:hover {
     color: #c03b66 !important;
 }
-
 .hr-purple {
     background-color: #1D2671 !important;
 }
