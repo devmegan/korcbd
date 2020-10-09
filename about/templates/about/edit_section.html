@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_title %} Add Post {% endblock %}
+{% block content %}
+<section class="min-vh-100">
+     <div class="container pb-3 pt-5 mb-5">
+        <div class="row">
+        <div class="col-10 col-lg-8 offset-1 offset-lg-2">
+                <div class="bg-white mt-5 rounded text-center card rounded-1 border-purple">
+                    <div class="text-center">
+                        <img class="vh10 my-2" src="{{ MEDIA_URL }}logo-purple.png" alt="KOR CBD Logo">
+                        <h2 class="text-blue uppercase">Edit Section</h2>
+                    </div>
+                 <div class="form-group">
+                   <form method="POST" class="mt-5 px-5">
+                        {% csrf_token %}
+                        <div class="form-group text-left">
+                            <label for="section_title" class="mb-0"><small>Section Subheader:</small></label>
+                            {{ form.section_title }}
+                        </div>
+                        <div class="form-group text-left">
+                            <label for="body" class="mb-0"><small>Section Body:</small></label>
+                            {{ form.body }}
+                        </div>
+                        <button class="btn kor-btn-hover colour-darker px-5 uppercase mb-5 mt-3">Edit Section</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+     </div>
+    </div>
+</section>
+{% endblock %}
