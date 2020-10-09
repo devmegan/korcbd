@@ -15,6 +15,13 @@
                 {% for section in about_sections %}
                 <div class="mb-5">
                     <h5 class="text-blue">{{ section.section_title }}</h5>
+                    {% if request.user.is_superuser %}
+                    <div class="my-2">
+                    <hr>
+                        <a href="{% url 'edit_section' section.id %}" class="btn btn-sm btn-info ">Edit</a>
+                        <a href="{% url 'delete_section' section.id %}" class="btn btn-sm btn-danger ">Delete</a>
+                    </div>
+                    {% endif %}
                     <p class="lead text-justify">
                         <small>
                             {{ section.body }}
