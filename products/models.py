@@ -40,6 +40,11 @@ class Product(models.Model):
         blank=False,
         default=0
     )
+    sold_qty = models.PositiveSmallIntegerField(
+        null=False,
+        blank=False,
+        default=0
+    )
 
     def __str__(self):
         return self.name

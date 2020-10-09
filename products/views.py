@@ -60,8 +60,14 @@ def product_detail(request, pk):
     """ view returns details product page """
 
     product = get_object_or_404(Product, pk=pk)
+    qty_in_cart = 0
+    cart = request.session.get('cart', {})
+    for product_id, quantity in cart.items():
+        if int(product_id) == int(pk):
+            qty_in_cart = quantity
     context = {
         'product': product,
+        'qty_in_cart': qty_in_cart,
     }
     return render(request, 'products/product_detail.html', context)
 

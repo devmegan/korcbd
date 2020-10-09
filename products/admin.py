@@ -11,6 +11,7 @@ class ProductAdmin(admin.ModelAdmin):
         'category',
         'stock_qty',
         'price',
+        'sold_qty',
     )
 
     ordering = ('name',)

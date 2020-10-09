@@ -20,7 +20,6 @@ def cart_contents(request):
             'product': product,
             'subtotal': subtotal,
         })
-
     context = {
         'cart_items': cart_items,
         'product_count': product_count,

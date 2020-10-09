@@ -82,25 +82,27 @@
         </div>
         {% endif %}
         {% for product in products %}
-            <div class="col-10 offset-1 col-sm-6 offset-sm-0 col-lg-4 col-xl-3">
-                <div class="card mt-5 rounded-1 text-center border-purple">
-                    <div class="card-img-top">
-                    <a href="{% url 'product_detail' product.pk %}">
-                        <img class="card-img-top" src="{{ product.image_url }}" alt="product image for {{ product.name }}">
-                    </a>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title text-blue uppercase">{{ product.name }}</h6>
-                        <p class="card-text">£{{ product.price }}</p>
-                        <a href="{% url 'product_detail' product.pk %}" class="btn btn-sm w-100 uppercase kor-btn-hover colour-darker py-2">View Product</a>
-                        {% if request.user.is_superuser %}
-                        <hr>
-                        <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-info ">Edit</a>
-                        <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-danger ">Delete</a>
-                        {% endif %}
+            {% if product.stock_qty > 0 %}
+                <div class="col-10 offset-1 col-sm-6 offset-sm-0 col-lg-4 col-xl-3">
+                    <div class="card mt-5 rounded-1 text-center border-purple">
+                        <div class="card-img-top">
+                        <a href="{% url 'product_detail' product.pk %}">
+                            <img class="card-img-top" src="{{ product.image_url }}" alt="product image for {{ product.name }}">
+                        </a>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title text-blue uppercase">{{ product.name }}</h6>
+                            <p class="card-text">£{{ product.price }}</p>
+                            <a href="{% url 'product_detail' product.pk %}" class="btn btn-sm w-100 uppercase kor-btn-hover colour-darker py-2">View Product</a>
+                            {% if request.user.is_superuser %}
+                            <hr>
+                            <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-info ">Edit</a>
+                            <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-danger ">Delete</a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
         </div>
     </div>

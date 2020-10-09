@@ -30,10 +30,31 @@ def add_to_cart(request, product_id):
     cart = request.session.get('cart', {})
 
     if product_id in list(cart.keys()):
-        cart[product_id] += quantity
+        if cart[product_id] + quantity <= product.stock_qty:
+            cart[product_id] += quantity
+            messages.success(
+                request,
+                f"{quantity} more of '{product.name}' added to your cart"
+            )
+        else:
+            messages.error(
+                request,
+                f"There's only {product.stock_qty} of this item in stock. \
+                You can only add {product.stock_qty} to your cart in total. \
+                You already have {cart[product_id]} in your cart."
+            )
+            return redirect(redirect_url)
     else:
-        cart[product_id] = quantity
-    messages.success(request, f"{product} (x{quantity}) added to cart")
+        if quantity <= product.stock_qty:
+            cart[product_id] = quantity
+        else:
+            messages.error(
+                request,
+                f"There's only {product.stock_qty} of this item in stock. \
+                You can only add {product.stock_qty} to your cart in total."
+            )
+            return redirect(redirect_url)
+
     request.session['cart'] = cart
     return redirect(redirect_url)
 
