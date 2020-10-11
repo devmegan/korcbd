@@ -5,11 +5,11 @@
 {% endblock %}
 {% block extra_title %} Order Confirmation {% endblock %}
 {% block content %}
-<section class="min-vh-100 mt-5 pb-5 pt-3">
+<section class="min-vh-100 mt-5 pb-5 pt-3 bg-blue">
     <div class="container mt-5">
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
-                <div class="bg-white m-2 p-3">
+                <div class="bg-white m-2 p-3 rounded-1 card">
                     <div class="bg-white m-2 p-3 card border-purple rounded-1">
                         <div class="text-center">
                             <img class="vh10 my-2" src="{{ MEDIA_URL }}logo-purple.png" alt="">
@@ -24,6 +24,14 @@
                             {% endif %}
                         </div>
                         <div class="row no-gutters mb-3">
+                            <div class="col-12">
+                                 <p class="uppercase mt-4 mb-1"><small><strong>Order Status:</strong></small></p>
+                                {% if order.dispatched %}
+                                <p class="uppercase my-0"><small>Dispatched</small></p>
+                                {% else %}
+                                <p class="uppercase my-0"><small>Preparing for dispatch</small></p>
+                                {% endif %}
+                            </div>
                             <div class="col-12 col-md-6">
                                 <p class="uppercase mt-4 mb-1"><small><strong>Delivery Address:</strong></small></p>
                                 <p class="uppercase my-0"><small>{{ order.street_address1 }}</small></p>
@@ -96,9 +104,15 @@
                             <a href="{% url 'blog' %}" class="btn kor-btn-hover colour-darker px-5 uppercase">Blog</a>
                         </div>
                         {% else %}
-                        <div class="text-center mt-2">
-                            <a href="{% url 'profile' %}" class="btn kor-btn-hover colour-darker px-5 uppercase">Back to Profile</a>
-                        </div>
+                            {% if user.is_authenticated %}
+                            <div class="text-center mt-2">
+                                <a href="{% url 'profile' %}" class="btn kor-btn-hover colour-darker px-5 uppercase">Back to Profile</a>
+                            </div>
+                            {% else %}
+                            <div class="text-center mt-2">
+                                <a href="{% url 'home' %}" class="btn kor-btn-hover colour-darker px-5 uppercase">Back to Home</a>
+                            </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>

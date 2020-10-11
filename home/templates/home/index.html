@@ -1,10 +1,25 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extra_title %} Home {% endblock %}
+{% block page_header %}
+{% if track_order %}
+<div class="alert bg-purple-reverse alert-dismissible fade show" role="alert">
+    {% if track_order.dispatched %}
+    <h6 class="text-white"><i class="fas fa-check-circle pr-2"></i>Your order has been dispatched!<h6>
+    {% else %}
+    <h6 class="text-white"><i class="fas fa-box-open pr-2"></i></i>We're preparing your order!<h6>
+    {% endif %}
+    <a class="btn btn-sm kor-btn-hover colour-light uppercase" href="{% url 'order_history' track_order.order_reference %}"><small>View Order Confirmation</small></a>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+{% endblock %}
 {% block content %}
 <section class="mb-0">
     <!--- Jumbotron carousel -->
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 70vh;">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -47,7 +62,7 @@
     </div>
 </section>
 <!--Links Section-->
-<section class="py-5 my-5">
+<section class="py-5 mx-5 mt-5">
 <div class="row no-gutters">
 <!--link to store-->
 <div class="col-6 col-lg-3">
@@ -75,6 +90,23 @@
     <div class="text-center pt-5 pt-lg-0">
         <a href="{% url 'profile' %}" class="text-decoration-none"><i class="fas fa-id-badge fa-3x text-blue d-block mb-3"></i></a>
         <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'profile' %}">View Profile</a>
+    </div>
+</div>
+<div class="col-12 mt-5">
+    <div class="div text-center m-5 p-5 bg-purple">
+        <hr>
+        <h2 class="text-white"><i class="fas fa-truck-moving"></i></h2>
+        <h2 class="text-white uppercase my-3">Track Your Order</h2>
+        <div class="row no-gutters">
+            <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                <form class="text-center" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="order-ref-track" id="order-ref-track" class="w-100 form-control rounded-0" placeholder='Order Reference (i.e. "KOR-123123123123123123123")'>
+                    <p class="text-white mt-2"><small>Your order reference can be found on your order confirmation email.</small></p>
+                    <button type="submit" class="btn kor-btn-hover colour-light uppercase mt-2 px-5">Track</button>
+                </form>
+            </div>
+        
     </div>
 </div>
 </div>
@@ -161,10 +193,10 @@
             </div>
     </div>
     <div class="row no-gutters">
-    <div class="col-12 text-center">
-        <a href="{% url 'blog' %}" class="btn btn-lg mt-5 kor-btn-hover colour-light uppercase px-5">Shop All Products</a>
+        <div class="col-12 text-center">
+            <a href="{% url 'products' %}" class="btn btn-lg mt-5 kor-btn-hover colour-light uppercase px-5">Shop All Products</a>
+        </div>
     </div>
-</div>
 </section>
 <!--Blog Post Section -->
 <section class="pb-5">
