@@ -67,12 +67,15 @@ h6,
 .modal {
     background-color: rgba(29, 38, 113, 0.7)
 }
+
 /* COLOURS */
 
 .text-blue {
     color: #1D2671 !important;
 }
-
+.close {
+    color: #fff !important;
+}
 .nav-link:hover, 
 .footer-icon:hover,
 .pink-hover:hover {
