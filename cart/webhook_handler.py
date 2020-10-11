@@ -142,6 +142,14 @@ class StripeWH_Handler:
                         lineitem_total=quantity * product.price
                     )
                     order_line_item.save()
+
+                    # update product stock and sold quantities
+                    product.sold_qty = \
+                        product.sold_qty + order_line_item.quantity
+                    product.stock_qty = \
+                        product.stock_qty - order_line_item.quantity
+                    product.save()
+
             except Exception as e:
                 # if any error, delete order that's just been created
                 if order:
