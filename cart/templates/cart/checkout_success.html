@@ -10,6 +10,7 @@
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
                 <div class="m-2 p-3">
+                    {% if show_details %}
                     <div class="bg-white m-2 p-3 card border-purple rounded-1">
                         <div class="text-center">
                             <img class="vh10 my-2" src="{{ MEDIA_URL }}logo-purple.png" alt="">
@@ -115,6 +116,27 @@
                             {% endif %}
                         {% endif %}
                     </div>
+                    {% else %}
+                    <div class="bg-white m-2 p-3 card border-purple rounded-1">
+                        <div class="text-center">
+                            <img class="vh10 my-2" src="{{ MEDIA_URL }}logo-purple.png" alt="">
+                            <h2 class="text-blue mt-3 ml-2 uppercase d-none d-md-block">Confirm Email</h2>
+                            <h4 class="text-blue mt-3 ml-2 uppercase d-block d-md-none">Confirm Email</h4>
+                            <div class="row no-gutters">
+                                <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                                <p>To keep your information secure, please confirm your email to view this order.</p>
+                                    <form method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="email" name="confirm-email" id="confirm-email" placeholder="Email *" class="form-control rounded-0 w-100">
+                                        <input type="hidden" name="order-reference" id="order-reference" value="{{ order_reference }}">
+                                    </div>
+                                    <button class="btn kor-btn-hover colour-darker uppercase">Confirm</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

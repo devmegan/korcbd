@@ -163,8 +163,10 @@ def checkout(request):
                     order_line_item.save()
 
                     # update product stock and sold quantities
-                    product.sold_qty = product.sold_qty + order_line_item.quantity
-                    product.stock_qty = product.stock_qty - order_line_item.quantity
+                    product.sold_qty = \
+                        product.sold_qty + order_line_item.quantity
+                    product.stock_qty = \
+                        product.stock_qty - order_line_item.quantity
                     product.save()
 
                 except Product.DoesNotExist:
@@ -175,6 +177,7 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse('cart'))
+            request.session['view_confirmation_authorised'] = True
             return redirect(
                 reverse(
                     'checkout_success',
@@ -237,7 +240,9 @@ def checkout(request):
 
 def checkout_success(request, order_reference):
     """ view to display order confirmation to user """
+    show_details = False
     order = get_object_or_404(Order, order_reference=order_reference)
+    order_reference = order.order_reference
     save_info = request.session.get('save_info')
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
@@ -262,7 +267,29 @@ def checkout_success(request, order_reference):
     if 'cart' in request.session:
         del request.session['cart']
 
+    # prevent unauthorised users accessing order confirmations
+    if request.POST:
+        if request.POST['confirm-email'] == order.email:
+            # show conf if user confirmed email and order emails match
+            show_details = True
+    else:
+        if 'view_confirmation_authorised' in request.session:
+            # show conf if user has just completed checkout
+            # (then delete one-time session var created at checkout/profile)
+            show_details = True
+            del request.session['view_confirmation_authorised']
+        elif request.user.is_authenticated:
+            # show conf if user and order emails match, or user is superuser
+            if request.user.email == order.email or request.user.is_superuser:
+                show_details = True
+        else:
+            # will require user to confirm email before showing order conf
+            show_details = False
+            order = None
+
     context = {
         'order': order,
+        'show_details': show_details,
+        'order_reference': order_reference,
     }
     return render(request, 'cart/checkout_success.html', context)
