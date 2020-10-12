@@ -33,24 +33,31 @@ def profile(request):
     }
     return render(request, 'profiles/profile.html', context)
 
+
 @login_required
 def order_history(request, order_reference):
     """ view to return details of previous order to user """
     order = get_object_or_404(Order, order_reference=order_reference)
-    messages.info(
-        request,
-        (f'This is a past order confirmation for order {order_reference}')
-    )
     # prevent logged in users accessing order confiramtions of other users
     if request.POST:
         if request.POST['confirm-email'] == order.email:
             # show conf if user confirmed email and order emails match
             show_details = True
+            messages.info(
+                request,
+                f'This is a past order confirmation for order \
+                {order_reference}'
+            )
     else:
         if request.user.email == order.email:
             # or request.user.is_superuser:
             show_details = True
             print("here")
+            messages.info(
+                request,
+                f'This is a past order confirmation for order \
+                {order_reference}'
+            )
         else:
             # will require user to confirm email before showing order conf
             show_details = False
