@@ -64,14 +64,26 @@ def update_cart(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     quantity = int(request.POST.get('quantity'))
     cart = request.session.get('cart', {})
-
     if quantity > 0:
-        cart[product_id] = quantity
+        if quantity <= product['stock_qty']:
+            cart[product_id] = quantity
+            messages.success(
+                request,
+                f"{product} quantity updated cart"
+            )
+        else:
+            # prevent user adding product quantity to cart that exceeds stock qty
+            cart[product_id] = product['stock_qty']
+            messages.error(
+                request,
+                f"There are only {product['stock_qty']} {product} in stock \
+                You cannot add more than this to your cart."
+            )
     else:
         cart.pop(product_id)
         messages.success(
             request,
-            f"{product} (x{quantity}) removed from cart"
+            f"{product} removed from cart"
         )
 
     request.session['cart'] = cart

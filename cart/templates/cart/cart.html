@@ -14,11 +14,24 @@
                     <table class="table">
                         <thead class="bg-blue text-white">
                             <tr>
-                                <th scope="col"><small>Product</small></th>
-                                <th scope="col"><small>Quantity</small></th>
-                                <th scope="col"><small>Product Price</small></th>
-                                <th scope="col"><small>Subtotal</small></th>
-                                <th scope="col"><small>Remove</small></th>
+                                <th scope="col" class="align-top uppercase">
+                                    <small>Product</small>
+                                </th>
+                                <th scope="col" class="align-top uppercase">
+                                    <small>Quantity
+                                        <br>
+                                        <small>*update one product at a time</small>
+                                    </small>
+                                </th>
+                                <th scope="col" class="align-top uppercase">
+                                    <small class="uppercase">Product Price</small>
+                                </th>
+                                <th scope="col" class="align-top uppercase">
+                                    <small class="uppercase">Subtotal</small>
+                                </th>
+                                <th scope="col" class="align-top uppercase">
+                                    <small class="uppercase">Remove</small>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,7 +52,9 @@
                                         <div class="form-row">
                                             <div class="col-12">
                                                 <div class="form-group form-inline input-sm">
-                                                    <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{ product.quantity }}" min="1" max="99" data-item_id="{{ product.product.id }}" id="id_qty_{{ product.product.id }}">
+                                                    <input type="hidden" name="initQty" class="initQty" id="initQty-{{product.product.id}}" value="{{ product.quantity }}">
+                                                    <input type="hidden" name="maxQty" class="maxQty" id="maxQty-{{product.product.id}}" value="{{ product.product.stock_qty }}">
+                                                    <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{ product.quantity }}" min="1" max="{{ product.product.stock_qty }}" data-item_id="{{ product.product.id }}" id="id_qty_{{ product.product.id }}"> 
                                                     <div class="input-group-append">
                                                         <button disabled class="update-btn btn btn-sm kor-btn-hover colour-darker uppercase" type="submit">
                                                             <small>Update</small>
@@ -51,7 +66,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <small>{{ product.product.price }}</small>
+                                    <small>£{{ product.product.price }}</small>
                                 </td>
                                 <td>
                                     <small>£{{ product.subtotal }}</small>
@@ -100,7 +115,21 @@
 {{ block.super }}
 <script>
 $('.qty_input').change(function() {
-    $(this).next("div").children().prop("disabled", false)
+    // enable update cart btn on valid qty change 
+    let cartQty = parseInt($(this).val())
+    let stockQty = parseInt($(this).prev(".maxQty").val())
+    let initQty = parseInt($(this).prev().prev(".initQty").val())
+    if (cartQty > stockQty) {
+        // prevent user manually increasing cart qty beyond stock qty (clientside)
+        $(this).val(stockQty)
+        alert("you can't increase the quantity past the items in stock")
+    } else if (cartQty != initQty) {
+        // enable update btn as qty != qty in cart already and under stock qty
+        $(this).next("div").children().prop("disabled", false)
+    } else {
+        // disable update btn if qty input == qty in cart already
+        $(this).next("div").children().prop("disabled", true)
+    }
 });
 </script>
 {% endblock %}
