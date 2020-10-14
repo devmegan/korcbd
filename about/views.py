@@ -68,8 +68,7 @@ def edit_section(request, section_id):
             about_section = form.save()
             messages.info(
                 request,
-                f"New Section, \
-                    {about_section.section_title} has been added to the store"
+                f'Section {about_section.section_title} has been updated.'
             )
             return redirect(reverse('about'))
         else:
