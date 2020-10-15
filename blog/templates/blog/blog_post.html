@@ -36,12 +36,12 @@
                                 {% csrf_token %}
                                 {% if user %}
                                 {% if not heart_bool %}
-                                <button class="btn text-blue pr-1 pb-3" type="submit" name="post_id" value="{{ post.id }}"><i class="fas fa-heart fa-lg"></i></button><span class="small text-muted">{{ hearts_number }}</span>
+                                <button class="btn text-blue pr-1 pb-3" type="submit" name="post_id"><i class="fas fa-heart fa-lg"></i></button><span class="small text-muted">{{ hearts_number }}</span>
                                 {% else %}
-                                <button class="btn text-danger pr-1 pb-3" type="submit" name="post_id" value="{{ post.id }}"><i class="fas fa-heart fa-lg"></i></button><span class="small text-danger">{{ hearts_number }}</span>
+                                <button class="btn text-danger pr-1 pb-3" type="submit" name="post_id"><i class="fas fa-heart fa-lg"></i></button><span class="small text-danger">{{ hearts_number }}</span>
                                 {% endif %}
                                 {% else %}
-                                <a href="#" class="btn disabled pr-1 pb-3" type="submit" name="post_id" value="{{ post.id }}"><i class="fas fa-heart fa-lg"></i></a> | Login to Like
+                                <a href="#" class="btn disabled pr-1 pb-3" type="submit" name="post_id"><i class="fas fa-heart fa-lg"></i></a> | Login to Like
                                 {% endif %}
                                 </form>
                                 <a href="#comments-section" class="btn text-blue pr-0 pb-3"><i class="fas fa-comment-alt fa-lg"></i></a> <span class="small text-info">{{ post.comments.all | length }}</span>
@@ -65,7 +65,7 @@
                                 <h6 class="text-blue uppercase"><small>{{ comment.author.first_name }} {{ comment.author.last_name }}</small></h6>
                                 <h6 class="uppercase text-muted"><small>{{ comment.date }}</small></h6>
                                 <p class="text-muted px-2 text-justify">{{ comment.comment_body }}</p>
-                                {% if request.user.is_superuser %}
+                                {% if request.user.is_superuser or user.id == comment.author.id %}
                                 <form method="POST" action="{% url 'delete_comment' post.id %}" class="px-2">
                                     {% csrf_token %}
                                     <input type="hidden" name="comment_id" value="{{ comment.id }}">

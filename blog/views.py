@@ -124,7 +124,7 @@ def deleteComment(request, pk):
 
 @login_required
 def heartPost(request, pk):
-    post_to_heart = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post_to_heart = get_object_or_404(Post, id=pk)
     if not post_to_heart.hearts.filter(id=request.user.id).exists():
         # heart post
         post_to_heart.hearts.add(request.user)
