@@ -69,16 +69,6 @@ class BlogViewsTestsLoggedOut(TestCase):
         self.assertEqual(context['query_term'], 'test')
 
 
-class BlogViewsTestsLoggedIn(TestCase):
-
-    def setUp(self):
-        self.factory = RequestFactory()
-        self.user = User.objects.create_user(
-            username='hjansen', email='hj@email.com', password='ikhebkaas42'
-        )
-
-
-
 class BlogPostViewsTestsLoggedOut(TestCase):
     def setUp(self):
         self.client = Client()
@@ -87,6 +77,7 @@ class BlogPostViewsTestsLoggedOut(TestCase):
         )
 
     def test_response_200(self):
+        """ test blog post pages are loading """
         post = Post.objects.create(
             title="Test Post Title",
             body="Test post body",
@@ -95,7 +86,6 @@ class BlogPostViewsTestsLoggedOut(TestCase):
             tag_2='tag2',
             tag_3='tag3',
         )
-        """ test loading blog home page successful """
         response = self.client.get(f'/blog/blog_post/{post.id}/')
         context = response.context
         self.assertEqual(response.status_code, 200)
@@ -136,8 +126,8 @@ class BlogPostViewsTestsNonSuperuserLoggedIn(TestCase):
         self.assertEqual(response.url, f"/blog/blog_post/{post.id}/")
 
     def test_nonsuperuser_can_delete_own_comments(self):
-        """ check nonsuperuser can create comment and is
-        redirected back to blog post """
+        """ check nonsuperuser can delete their comment on a
+        blog post """
         post = Post.objects.create(
             title="Test Post Title",
             author=self.user,
@@ -165,8 +155,7 @@ class BlogPostViewsTestsNonSuperuserLoggedIn(TestCase):
         self.assertEqual(response.url, f"/blog/blog_post/{post.id}/")
 
     def test_nonsuperuser_can_heart_a_post(self):
-        """ check nonsuperuser can create comment and is
-        redirected back to blog post """
+        """ check nonsuperuser can heart a blog post"""
         client = Client()
         client.login(username='hjansen', password='ikhebkaas42')
         post = Post.objects.create(
