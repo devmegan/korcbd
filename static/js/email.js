@@ -24,8 +24,8 @@ function sendMail(contactForm) {
     );
     // prevent page reloading
     return false;
-};
+}
 
 function initEmailJS() {
     emailjs.init("user_0BKHc2tjJuMjT7Ysz61mr");
-};
+}

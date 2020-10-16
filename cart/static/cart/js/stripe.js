@@ -124,5 +124,5 @@ form.addEventListener('submit', function(ev) {
     }).fail(function () {
         // reload page if caching fails/400 response returned
         location.reload();
-    })
+    });
 });
