@@ -11,5 +11,3 @@ class HomeAppTests(TestCase):
         """ test index url/view set up correctly """
         url = reverse('home')
         self.assertEqual(resolve(url).func, views.index)
-
-    
