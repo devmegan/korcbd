@@ -22,6 +22,9 @@
 .display-none {
     display: none;
 }
+.h50px {
+    height: 50px;
+}
 
 
 /* Typography */
