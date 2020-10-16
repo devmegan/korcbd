@@ -35,6 +35,7 @@ def products(request):
                 return redirect(reverse('products'))
             queries = Q(name__icontains=query_term) | \
                 Q(description__icontains=query_term) | \
+                Q(ingredients__icontains=query_term) | \
                 Q(sku__icontains=query_term)
 
             products = products.filter(queries)
