@@ -5,7 +5,7 @@
 {% block head_title %}{% trans "E-mail Address" %}{% endblock %}
 
 <div class="text-center">
-    <img class="vh10 my-2" src="{{ MEDIA_URL }}logo-purple.png" alt="">
+    <img class="vh10 my-2" src="{{ MEDIA_URL }}logo-purple.png" alt="KOR CBD company logo">
     {% block allauth_inner_content %}
     <h2 class="text-center text-blue uppercase font-weight-bold">{% trans "E-mail Addresses" %}</h2>
     {% if user.emailaddress_set.all %}
