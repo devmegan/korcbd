@@ -29,7 +29,7 @@ To run tests on a specific app:
 
 At deployment, 100% of the tests pass without error. 
 
-### Django Coverage
+#### Django Coverage
 
 First make sure ```coverage``` is installed using:
 
@@ -87,8 +87,30 @@ The cart app has significantly less coverage than the other apps.
 This app and the checkout flow has undergone significant manual
 testing to assure its functionality.
 
+### Validation
 
-# Flake8 
+#### W3C Markup Validation 
+
+#### W3C CSS Validation
+<a href="http://jigsaw.w3.org/css-validator/check/referer">
+    <img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS!" />
+</a>
+
+[W3C CSS Validation](https://jigsaw.w3.org/css-validator/) has been used on the main [style.css](static/css/style.css) file and the [stripe.css] file which 
+provides the styles for the stripe and stripe-style form elements. 
+
+Both these files pass the W3C CSS validation with no errors. 
+#### JSHint
+
+[JSHint](https://jshint.com/) has been used to validate the two main Javascript files 
+used in this project. [email.js](static/js/email.js) which provides the JavaScript for 
+the emailJS email form, and [striple.js](cart/static/js/stripe.js) which provides the 
+JavaScript for the stripe payment API. 
+
+JSHint didn't flag up any major errors, and the three missing semi-colons it flagged up
+have been added to the JavaScript files.
+
+### Flake8 
 
 I have used the [Flake8](https://pypi.org/project/flake8/) python linting tool to ensure the python code 
 in this project conforms to PEP8 style standards. 
