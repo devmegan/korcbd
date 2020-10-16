@@ -187,10 +187,4 @@ Deployment Errors Excluing migrations files
 
 ------------------------------------------------------------------------------------
 
-./blog/tests.py:1:1: F401 'django.test.TestCase' imported but unused
-./about/tests.py:1:1: F401 'django.test.TestCase' imported but unused
-./products/tests.py:1:1: F401 'django.test.TestCase' imported but unused
-./profiles/tests.py:1:1: F401 'django.test.TestCase' imported but unused
-./home/tests.py:1:1: F401 'django.test.TestCase' imported but unused
-./cart/tests.py:1:1: F401 'django.test.TestCase' imported but unused
 ./cart/apps.py:9:9: F401 'cart.signals' imported but unused
