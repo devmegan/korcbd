@@ -116,19 +116,19 @@
 <script>
 $('.qty_input').change(function() {
     // enable update cart btn on valid qty change 
-    let cartQty = parseInt($(this).val())
-    let stockQty = parseInt($(this).prev(".maxQty").val())
-    let initQty = parseInt($(this).prev().prev(".initQty").val())
+    let cartQty = parseInt($(this).val());
+    let stockQty = parseInt($(this).prev(".maxQty").val());
+    let initQty = parseInt($(this).prev().prev(".initQty").val());
     if (cartQty > stockQty) {
         // prevent user manually increasing cart qty beyond stock qty (clientside)
-        $(this).val(stockQty)
-        alert("you can't increase the quantity past the items in stock")
+        $(this).val(stockQty);
+        alert("you can't increase the quantity past the items in stock");
     } else if (cartQty != initQty) {
         // enable update btn as qty != qty in cart already and under stock qty
-        $(this).next("div").children().prop("disabled", false)
+        $(this).next("div").children().prop("disabled", false);
     } else {
         // disable update btn if qty input == qty in cart already
-        $(this).next("div").children().prop("disabled", true)
+        $(this).next("div").children().prop("disabled", true);
     }
 });
 </script>

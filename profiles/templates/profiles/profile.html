@@ -41,39 +41,39 @@
                     <h2 class="text-blue text-center uppercase mt-3 mb-4">Order History</h2>
                     <div class="ml-5 mr-3" id="order-history-container">
                         <div class="row no-gutters">
-                        {% if not orders %}
+                            {% if not orders %}
                             <div class="col-12">
                                 <div class="text-center">
                                     <p>As soon as you've made an order through your account, a copy of it will appear here.</p>
                                      <a class="uppercase btn kor-btn-hover colour-darker px-5 my-2" href="{% url 'products' %}">Shop Now</a>
                                 </div>
                             </div>
-                        {% else %}
-                        <table class="table">
-  <thead class="bg-blue text-white">
-    <tr>
-        <th scope="col"><small><i class="fas fa-link fa-sm"></i> Reference</small></th>
-        <th scope="col"><small>Order Date</small></th>
-        <th scope="col"><small>Order total</small></th>
-        <th scope="col"><small>Dispatched</small></th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for order in orders reversed %}
-    <tr>
-      <td title="{{ order.order_reference }}"><small><a class="text-muted" href="{% url 'order_history' order.order_reference %}">{{ order.order_reference|truncatechars:10}}</a></small></td>
-      <td title="{{ order.date }}"><small>{{ order.date|truncatewords:1 }}</small></td>
-      <td><small>£{{ order.order_total }}</small></td>
-      {% if order.dispatched %}
-      <td><small><i class="fas fa-check-circle text-success"></i></small></td>
-      {% else %}
-      <td><small><i class="fas fa-times-circle text-danger"></i></small></td>
-      {% endif %}
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% endif %}
+                            {% else %}
+                            <table class="table">
+                                <thead class="bg-blue text-white">
+                                    <tr>
+                                        <th scope="col"><small><i class="fas fa-link fa-sm"></i> Reference</small></th>
+                                        <th scope="col"><small>Order Date</small></th>
+                                        <th scope="col"><small>Order total</small></th>
+                                        <th scope="col"><small>Dispatched</small></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for order in orders reversed %}
+                                    <tr>
+                                        <td title="{{ order.order_reference }}"><small><a class="text-muted" href="{% url 'order_history' order.order_reference %}">{{ order.order_reference|truncatechars:10}}</a></small></td>
+                                        <td title="{{ order.date }}"><small>{{ order.date|truncatewords:1 }}</small></td>
+                                        <td><small>£{{ order.order_total }}</small></td>
+                                        {% if order.dispatched %}
+                                        <td><small><i class="fas fa-check-circle text-success"></i></small></td>
+                                        {% else %}
+                                        <td><small><i class="fas fa-times-circle text-danger"></i></small></td>
+                                        {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
