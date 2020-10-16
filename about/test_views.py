@@ -1,7 +1,5 @@
 from django.contrib.auth.models import User
 from django.test import Client, TestCase, RequestFactory
-from . import views
-from . import forms
 from .models import AboutSection
 
 # Create your tests here.
@@ -60,7 +58,8 @@ class AboutViewsTestsNonSuperUser(TestCase):
         # create a test user
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
-            username='hjansen', email='hj@email.com', password='ikhebkaas42')
+            username='hjansen', email='hj@email.com', password='ikhebkaas42'
+        )
 
     def test_nonsuperuser_redirected_from_add_section(self):
         """ check nonsuperuser redirected from add section to home """

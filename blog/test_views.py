@@ -1,7 +1,5 @@
 from django.contrib.auth.models import User
-from django.test import Client, TestCase, RequestFactory
-from . import views
-from . import forms
+from django.test import Client, TestCase
 from .models import Post, Comment
 
 

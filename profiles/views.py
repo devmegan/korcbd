@@ -48,11 +48,14 @@ def order_history(request, order_reference):
                 f'This is a past order confirmation for order \
                 {order_reference}'
             )
+        else:
+            # will require user to confirm email before showing order conf
+            show_details = False
+            order = None
     else:
         if request.user.email == order.email:
             # or request.user.is_superuser:
             show_details = True
-            print("here")
             messages.info(
                 request,
                 f'This is a past order confirmation for order \

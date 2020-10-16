@@ -1,13 +1,11 @@
 from django.test import Client, TestCase, RequestFactory
-from django.urls import reverse, resolve
 from . import views
 from cart.models import Order
-from django.contrib import messages
 
 # Home App tests
 
 
-class HomeAppTests(TestCase):
+class HomeViewsTests(TestCase):
     def setUp(self):
         self.client = Client()
         self.factory = RequestFactory()
@@ -53,8 +51,6 @@ class HomeAppTests(TestCase):
         )
         self.assertEqual(test_order, track_order)
         self.assertEqual(response.status_code, 200)
-
-
 
 
 # testing helper functions

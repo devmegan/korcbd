@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.test import Client, TestCase, RequestFactory
 from .models import Product
-# Create your tests here.
 
 
 class ProductsViewsTestsLoggedOut(TestCase):
@@ -80,7 +79,7 @@ class ProductDetailViewsTestsLoggedOut(TestCase):
             price=29.99,
             stock_qty=1,
             sold_qty=0,
-        ) 
+        )
         response = self.client.get(f'/products/product_detail/{product.id}/')
         context = response.context
         self.assertTrue(context['product'])
@@ -95,7 +94,7 @@ class ProductDetailViewsTestsLoggedOut(TestCase):
             price=29.99,
             stock_qty=1,
             sold_qty=0,
-        ) 
+        )
         response = self.client.get(f'/products/product_detail/{product.id}/')
         templates = response.templates
         names = fetch_template_names(templates)

@@ -5,5 +5,5 @@ from . import apps
 class HomeAppTests(TestCase):
 
     def test_apps_config(self):
-            """ test home app configured correctly"""
-            self.assertEqual(apps.HomeConfig.name, 'home')
+        """ test home app configured correctly"""
+        self.assertEqual(apps.HomeConfig.name, 'home')

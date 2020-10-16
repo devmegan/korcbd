@@ -1,7 +1,5 @@
-from django.contrib.auth.models import User
-from django.test import Client, TestCase, RequestFactory
+from django.test import Client, TestCase
 from products.models import Product
-from cart.contexts import cart_contents
 
 
 class CartViewsTests(TestCase):
@@ -120,6 +118,7 @@ class CartViewsTests(TestCase):
         self.assertEqual(context['cart_items'][0]['quantity'], 9)
 
     def test_cart_can_be_update_from_cart_view(self):
+        """ test user can update product qtys from their cart view """
         client = Client()
         product = Product.objects.create(
             name='Test Product',
@@ -149,6 +148,9 @@ class CartViewsTests(TestCase):
         self.assertEqual(context['cart_items'][0]['quantity'], 1)
 
     def test_product_in_cart_cant_be_increased_past_stock_qty(self):
+        """ test user cant update product qtys from their cart view
+        to a qty that exceeds the stock qty """
+        client = Client()
         client = Client()
         product = Product.objects.create(
             name='Test Product',
@@ -179,6 +181,8 @@ class CartViewsTests(TestCase):
         self.assertNotEqual(context['cart_items'][0]['quantity'], 2)
 
     def test_product_can_be_removed_from_cart_by_0_qty(self):
+        """ test user can set product qty to 0 in cart
+        and this deletes product when user updates cart """
         client = Client()
         product = Product.objects.create(
             name='Test Product',
@@ -206,6 +210,7 @@ class CartViewsTests(TestCase):
         self.assertEqual(context['cart_items'], [])
 
     def test_product_can_be_removed_from_cart_by_delete_view(self):
+        """ test user can delete product from cart using delete btn """
         client = Client()
         product = Product.objects.create(
             name='Test Product',
@@ -229,6 +234,8 @@ class CartViewsTests(TestCase):
         self.assertEqual(context['cart_items'], [])
 
     def test_exception_when_removing_from_cart_by_delete_view(self):
+        """ test that the delete view is properly configured
+        to handle any exceptions """
         client = Client()
         product = Product.objects.create(
             name='Test Product',
