@@ -12,8 +12,7 @@
 
 ## Automated Testing
 
-### Coverage 
-
+### Coverage
 #### Python Testing
 
 Python testing used to test the functionality of the backend code, using Django's inbuilt
@@ -41,7 +40,7 @@ To find the coverage of the tests, use the command:
 ```coverage run manage.py test```
 
 Coverage will check all .py files in the repo. I have not tested any automatically
-generated files, and have ommited migration files and pip3 files from the coverage test,
+generated files, and have ommited migration files and .pip files from the coverage test,
 using the --omit flag:
 
 ```coverage run --omit=*migrations*,*.pip* manage.py test```
@@ -67,7 +66,52 @@ and open it up the browser.
 
 Go to the ```htmlcov`` directory to view and interact with the report.  
 
-At deployment, there is 86% coverage across all apps.
+At deployment, ommiting migrations and .pip files, there is 86% coverage across all apps.
+
+A breakdown of this coverage by app can be seen below:
+
+| App | Coverage |
+|-|-|
+| Home | 97% |
+| About | 99% |
+| Blog | 97% |
+| Products | 99% |
+| Cart | 66% |
+| Total | 86% |
+
 
 A copy of the final coverage report has been written to the
 [coverage_report.txt](coverage_report.txt) file. 
+
+The cart app has significantly less coverage than the other apps.
+This app and the checkout flow has undergone significant manual
+testing to assure its functionality.
+
+
+# Flake8 
+
+I have used the [Flake8](https://pypi.org/project/flake8/) python linting tool to ensure the python code 
+in this project conforms to PEP8 style standards. 
+
+To install flake8 ues:
+
+```python3 -m pip install flake8```
+
+To run flake8, use: 
+
+```python3 -m flake8```
+
+This will cover all .py files in the repo. As with the coverage testing, I have ommitted
+the migration files, which are automatically generated, using: 
+
+```python3 -m flake8 --exclude=*/migrations/*```
+
+At deployment, I have written the output of this flake8 command to the 
+[flake8_errors.txt](flake8_errors.txt) file. The only unsolved error is that
+the cart.signals file is imported into the cart apps file but is unused:
+
+```./cart/apps.py:9:9: F401 'cart.signals' imported but unused```
+
+This import is required here so that the signals.py file runs whenever order line
+items are updated on an existing order, to ensure the order is updated accordingly. 
+
