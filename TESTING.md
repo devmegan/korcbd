@@ -7,6 +7,9 @@
         - [Django Coverage](#django-coverage)
     - [Jasmine](#jasmine)
     - [Validation](#validation)
+        - [HTML](#w3c-markup-validation)
+        - [CSS](#w3c-css-validation)
+        - [JavaScript](#jshint)
     - [Flake8](#flake-8)
 
 
@@ -91,15 +94,16 @@ testing to assure its functionality.
 
 #### W3C Markup Validation 
 
+[W3C Markup Validation](https://validator.w3.org/) has been used on all HTML files in the project. The Django templating used in the raw HTML
+files throws a lot of errors on the validator, so I have run it using the HTML copied from the source code of the website when it is up and running.
+
 #### W3C CSS Validation
-<a href="http://jigsaw.w3.org/css-validator/check/referer">
-    <img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS!" />
-</a>
 
 [W3C CSS Validation](https://jigsaw.w3.org/css-validator/) has been used on the main [style.css](static/css/style.css) file and the [stripe.css] file which 
 provides the styles for the stripe and stripe-style form elements. 
 
 Both these files pass the W3C CSS validation with no errors. 
+
 #### JSHint
 
 [JSHint](https://jshint.com/) has been used to validate the two main Javascript files 
@@ -136,4 +140,3 @@ the cart.signals file is imported into the cart apps file but is unused:
 
 This import is required here so that the signals.py file runs whenever order line
 items are updated on an existing order, to ensure the order is updated accordingly. 
-
