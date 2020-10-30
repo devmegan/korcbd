@@ -5,7 +5,7 @@ The KOR CBD e-Commerce store is for a company which sells CBD products to athlet
 allow users to shop and checkout either anonymously or as a logged in user using Stripe's Payment appearing. Extra features are available to logged in users, such as persiting their user
 profile information, a saved order history, and the ability to interact with blog posts. The whole app is written in Python using the Django framework. 
 
-The django app is deployed using Amazon Web Services and Heroku and is availabe here: <deployed_link>
+The django app is deployed using Amazon Web Services and Heroku and is availabe here (KOR CBD)[https://korcbd.herokuapp.com/].
 
 ## Contents
 1. [Client](#client)
@@ -70,7 +70,7 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 
 ## User Goals 
 
-- As a customers I want to be able to:
+- As a user I want to be able to:
     - Easily navigate the store using a layout that is consitent across all pages. 
     - Find out a bit about the business and its products before I commit to buying them. 
     - Search for specific products and content that I am interested in.
@@ -89,11 +89,31 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 
 ## Wireframes 
 
+The wireframes here were made using [Balsamiq](https://balsamiq.com/). 
+
+- [Home](README/assets/pdf/Home.pdf)
+- [Allauth](README/assets/pdf/Allauth.pdf)
+- [About](README/assets/pdf/About.pdf)
+- [Shop](README/assets/pdf/Products.pdf)
+- [Product Detail](README/assets/pdf/Product_Detail.pdf)
+- [Blog](README/assets/pdf/Blog.pdf)
+- [Blog Post](README/assets/pdf/Blog_Post.pdf)
+- [Profile](README/assets/pdf/Profile.pdf)
+- [Cart](README/assets/pdf/Cart.pdf)
+- [Checkout](README/assets/pdf/Checkout.pdf)
+- [Confirmation](README/assets/pdf/Confirmation.pdf)
+
 ## Colour Palette
+
+<img src="README/assets/img/colour-palette.jpg" style="margin: 0; width: 75%">
+
+The colour palette used here has been chosen to work with the company logo. The white is used for the majority of the backgrounds
+and contrasts well with the blue and purple colours. The blues and purples provide a contrasting gradient background against the main
+white background and are used accross all headings and buttons. 
 
 # Features 
 
-## Navigation 
+## Navigation
 
 ### Nav Bar 
 
@@ -143,6 +163,17 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 
 - Icons with CTA buttons beneath them link users to the four main parts of the site: About, Products, Blog, Profile, 
 - On large screens, these icons display side-by-side in a row. On smaller screens they are stacked with two in the first row, and two in the second.
+
+### Order Tracking
+
+<img src="README/assets/img/home-tracking.jpg" style="margin: 0; width: 75%">
+
+- When a user inputs their order reference into the field and clicks track, the page reloads and gives the user
+the status of the order (order doesn't exist, preparing order, order dispatched) at the top of the page.
+- A link with the tracking information lets the user go to the order confirmation page. If the user is logged in, they will
+go straight to the order confirmation. If they aren't logged in, they will be asked to confirm their email address before they can
+view the full order confirmation.
+
 
 ### Product Category Cards
 
@@ -253,10 +284,30 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 - Update buttons in the cart are initially disabled, since on loading the page, there is nothing to update. 
 - When a user changes the value in the quantity input, a little bit of jQuery removes the disabled attribute from its corresponding update button. Clicking the button updates all changes made to cart item quantities. 
 - After updating the item quantity, the cart page reloads and users see the updated quantiies, subtotals and order total. 
+
 ## Checkout
 
-## Profiles 
+<img src="README/assets/img/cart-checkout.jpg" style="margin: 0;">
 
+- The checkout page contains two card, one give the user another summary of their order and the other allows the user to enter their order and payment details. 
+- The order summary card is displayed on the right on large screens, and is stacked on top of the checkout form on small and medium screens. 
+- The checkout form allows the user to put in their contact and shipping details. For users that are logged in and already have details in their user profile, this
+form will be prepopulated with them. Users also have the option to update their profile with the checkout form details if they have changed.
+- The stripe payment element handles user payements and payment method validation.
+- On clicking the "Complete Order" button, if the card details need verifying, a full-screen overlay prevents a user making any further changes or form submissions until this validation has taken place. 
+ the user is redirected to the order confirmation page back on The House of Mouse website.
+- If validation is completed succesfully, or is not required, the users order is then created and the user is redirected to an order confirmation screen, the order will either be created directly as an
+instance of the django Order model or, if this fails, by Stripe Webook.
+
+## Order Confirmation 
+<img src="README/assets/img/checkout-success.jpg" style="margin: 0; width: 75%">
+
+- Users are redirected to the order confirmation page after successfully placing the order.
+- At the top of the confirmation page is the user's order reference number, shipping address and contact details.
+- An order summery including products and order total is included in the page. 
+- At the bottom of the order confiratmion, there is a link that takes users to the site blog.
+
+## Profiles
 <img src="README/assets/img/profile.jpg" style="margin: 0; width: 75%">
 
 - The products page allows a user to view and update their profile information and view their order history.
@@ -269,13 +320,30 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
 - If the number of orders exceeds the height of the order history container, a y-scroll bar allows the user to scroll down to see older orders. 
 
 ## Blog
+<img src="README/assets/img/blog.jpg" style="margin: 0; width: 75%">
 
+- From the blog page, all blog posts can be accessed.
+- Blog posts are arranged in reverse chronological order. The most recent blog post is desplayed as the largest card on the page.
+- Blog posts are given tags which can be clicked on to return a a queryset of posts with the same tag.
+- Users can also search the blog by query term using the search bar at the top of the blog page. If the search returns no results, or the search is empty, this is fed back to the user. 
+- Each post contains a button which can be clicked to take the user to read the full blog post.
+
+## Blog Post
+<img src="README/assets/img/blog-post.jpg" style="margin: 0; width: 75%">
+
+- When a user clicks through to view the full blog post, the post is displayed in a card on the page.
+- The card contains the blog title, author, and date published. Below this is the post itself.
+- Below the post is a button that takes the user back to all the blog posts, and the tags for the post. 
+- Clicking the tags takes the user back to the blog page, but filters blog posts to ones which have also been tagged with the same tag.
+- At the bottom of the blog post are two icons, one for the post comments and one for logged in users to "heart" the post.
+- Logged in users can add comments. Users can also delete any comments made by themselves, and admin users can delete any comments.
 
 # Information Architecture
 
 ## Database
 
-The app was developed using the local [sqlite]() database that is installed with django. For the deployed version of the app, a [PostgreSQL]() database is used that is provided by [Heroku](). 
+The app was developed using the local [sqlite](https://www.sqlite.org/index.html) database that is installed with django.
+For the deployed version of the app, a [PostgreSQL](https://www.postgresql.org/) database is used that is provided by [Heroku](https://dashboard.heroku.com/). 
 
 ## Database Models 
 
@@ -377,36 +445,70 @@ Date | date | auto_now_add=True | DateField
 
 
 ## Technologies Used
+
 ### Frameworks 
-- [Django]() used as a python framework to develop the track app. Not only does this act as the microserver for the app.
+- [Django](https://www.djangoproject.com/) used as a python framework to develop the track app. Not only does this act as the microserver for the app.
+
 ### Template Engines 
-- [Django Template Engine]() to display data from the backend of the app and apply conditions to the HTML code. 
+- [Django Template Engine](https://docs.djangoproject.com/en/3.1/topics/templates/) to display data from the backend of the django app and dynamically generate HTML content.
+
 ### Databases 
-- [sqlite]()
-- [PostgreSQL]() to provide the database which backs this app. 
+- [sqlite](https://www.sqlite.org/index.html) to provide a database during development. 
+- [PostgreSQL](https://www.postgresql.org/) to replace the sqlite database after deployment. 
+
+### Hosting
+- [Heroku](https://www.heroku.com/) to deploy the django project publically.
+- [AWS S3 Bucket](https://aws.amazon.com/) to store the static files for the deployed site.
+
 ### APIs
-- [Stripe]() 
-### Backend Packages
-- [Travis](https://pymongo.readthedocs.io/en/stable/) to allow the Python app to communicate with MongoDB. 
-- [Coverage](https://flask-pymongo.readthedocs.io/en/latest/) to bridge between Flask and PyMongo and simplify writing CRUD functions for MongoDB in Python. 
+- [Stripe](https://stripe.com/docs/api) to handle payment processing and validation.
+
+### Python Packages
+- [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
+- [Coverage](https://coverage.readthedocs.io/en/v4.5.x/) to measure the coverage of python testing across the django app. 
+- [Django Heroku](https://pypi.org/project/django-heroku/) to set up the django app to deploy properly to Heroku.
+- [Django Storages](https://django-storages.readthedocs.io/en/latest/) to setup custom AWS S3 static file storage.
+- [Gunicorn](https://pypi.org/project/gunicorn/) to provide a WSGI HTTP server compatible with the django framework.
+- [Pyscopg2](https://pypi.org/project/psycopg2/) to integrate Heroku's PostgreSQL database with the python django app.
+- [PIP](https://pip.pypa.io/en/stable/installing/) to install the python packages needed for this project.
+ 
 ### Frontend Libraries
 - [jQuery](https://jquery.com/) to make the app's elements interactive and provide DOM manipulation. 
-- [Bootstrap 4]() to provide the JavaScript charts for the view goal page. 
-- [FontAwesome]()
-- [Google Fonts]()
+- [Bootstrap 4](https://getbootstrap.com/) to provide pre-built components and the grid-system used to position site elements 
+and make them responsive across devices with different screen-sizes.
+- [FontAwesome](https://fontawesome.com/) to provide the icons used across the site.
+- [Google Fonts](https://fonts.google.com/) to provide the [Fira Sans](https://fonts.google.com/specimen/Fira+Sans?query=fira+san) font which is applied to all headings and buttons. 
+
 ### Languages
 - [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5) to create the app elements. 
 - [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS) to style the app elements. 
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), paired with [jQuery](https://jquery.com/), to make the app interactive.
-- [Python](https://docs.python.org/3/) to work with the Flask web framework. 
+- [Python](https://docs.python.org/3/) to work with the Flask web framework.
+
 ### Development Tools
 - [GitHub](http://github.com/) and [Gitpod](https://gitpod.io/) to develop the app's code and provide version control. 
-- [Heroku](https://www.heroku.com/) to deploy the app via Heroku's cloud platform. 
+- [Heroku](https://www.heroku.com/) to deploy the app via Heroku's cloud platform.
+
 ### Testing Tools
-For information about the testing of this app and the testing tools used, see the separate [testing.md](TESTING.md) file. 
+For information about the testing of this app and the testing tools used, see the separate [testing.md](TESTING.md) file.
+
 ### Content
+- [Smart Mockups](https://smartmockups.com/) to create the app mockups used in this readme.
+
+## Deployment
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+## Credits
+
+### Content and Code
+All the content and code for this django app has been written by myself.
+I learnt how to build the e-commerce store using the Boutique Ado example from the Full-Stack Frameworks with Django module of the 
+[Code Institute's](https://courses.codeinstitute.net/) Full-Stack Web Developer course. 
+
+### Media
 - [Unsplash](https://unsplash.com/) to provide the image URLs used in the carousel on the index page.
-- [Smart Mockups](https://smartmockups.com/) to create the app mockups used in this readme. 
+- The product images have been taken from other stores offering similar products and are used in this educational project only. The source urls
+for the images are the original urls.
 
-
-
+### Acknowledgements
+This project was created an app for submission to the [Code Institute](https://codeinstitute.net/) and is for educational use only.
