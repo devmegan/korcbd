@@ -61,6 +61,8 @@
                         Admin
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'admin:index' %}">Site Admin</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'add_product' %}">Add Product</a>
                         <a class="dropdown-item" href="{% url 'products' %}">Edit/Delete Products</a>
                         <div class="dropdown-divider"></div>
