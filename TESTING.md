@@ -223,7 +223,7 @@ can get in touch with them about their message.
 - It is immediately fed back to the user whether the email has sent succesffuly. If it has not, they are alerted to this and given
 the email address of the company to email them directly from their personal email account.
 
-## Testing
+## Manual Testing
 
 ### Navbar/Footer
 - The nav bar and footer are visible on all pages and occupy the full width of the viewport. 
