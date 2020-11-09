@@ -21,6 +21,7 @@
                         {{ form.sku }}
                         <label for="name" class="mb-0"><small>Quantity in Stock:</small></label>
                         {{ form.stock_qty }}
+                        <input type="hidden" name="sold_qty" id="id_sold_qty" value="{{ product.sold_qty }}">
                         <label for="category" class="mt-3 mb-0"><small>Product Category:</small></label>
                         {{ form.category }}
                         <label for="description" class="mt-3 mb-0"><small>Product Description:</small></label>

@@ -121,10 +121,14 @@ def edit_product(request, product_id):
     if request.method == 'POST':
         # validate, save and redirect user to product page
         form = ProductForm(request.POST, instance=product)
+        print(form)
         if form.is_valid():
+            print("is valid")
             form.save()
             messages.info(request, f"{product.name} successfully updated")
             return redirect(reverse('product_detail', args=[product.id]))
+        else: 
+            print("isn't valid")
     else:
         form = ProductForm(instance=product)
     context = {
