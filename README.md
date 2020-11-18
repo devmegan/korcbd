@@ -296,8 +296,10 @@ form will be prepopulated with them. Users also have the option to update their 
 - The stripe payment element handles user payements and payment method validation.
 - On clicking the "Complete Order" button, if the card details need verifying, a full-screen overlay prevents a user making any further changes or form submissions until this validation has taken place. 
  the user is redirected to the order confirmation page back on The House of Mouse website.
+- Stripe test card numbers can be found in the [Stripe testing docs](https://stripe.com/docs/testing).
 - If validation is completed succesfully, or is not required, the users order is then created and the user is redirected to an order confirmation screen, the order will either be created directly as an
 instance of the django Order model or, if this fails, by Stripe Webook.
+
 
 ## Order Confirmation 
 <img src="README/assets/img/checkout-success.jpg" style="margin: 0; width: 75%">
@@ -496,7 +498,147 @@ For information about the testing of this app and the testing tools used, see th
 - [Smart Mockups](https://smartmockups.com/) to create the app mockups used in this readme.
 
 ## Deployment
-<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+This django app was developed as GitHub repository using GitPod.
+
+It has been deployed to Heroku and can be found here: [KOR CBD](https://korcbd.herokuapp.com/).
+
+The development version and deployed version of the app are identitical.
+The master branch is the only branch.
+
+
+### Running locally
+
+1. 
+
+- Download a copy of the repository using GitHub's "download zip" option. Extract the zip file and upload the files to your
+own repo/project.
+
+OR 
+
+- Clone the project by using the following command in your Git terminal:
+
+```git clone https://github.com/mvmolloy/korcbd ```
+
+
+2. 
+
+Make sure the most up-to-date version of pip is installed using:
+``` pip install --upgrate pip```
+
+Then install the required python packages for the app:
+```pip3 install -r requirements.txt```
+
+3. 
+
+Set the following environment variables to the development environment:
+- ```DEVELOPMENT = True```
+- ```SECRET_KEY = <your django secret key>```
+- ```STRIPE_PUBLIC_KEY = <your stripe public key>```
+- ```STRIPE_SECRET_KEY = <your stripe secret key>```
+- ```STRIPE_WH_SECRET = <your stripe wehbhook secret>```
+
+5. 
+
+In the settings.py file, at line 223, change the "DEFAULT_FROM_EMAIL" value to the the email you want to recieve customer enquiries at. 
+
+At line 31 of the templates/base.html file, switch the EmailJS key to your own key.
+
+4. 
+
+Migrate the existing django models to provision the sqlite database: 
+``` python manage.py migrate ```
+
+5. 
+
+Create a superuser to access the django admin panel and carry out admin-only tasks: 
+
+``` python manage.py createsuperuser``` 
+
+Follow the instructions in the terminal to create the superuser. 
+
+6. 
+
+Run the project locally using the following command:
+
+``` python3 manage.py runserver ```
+
+### Deploying to Heroku 
+
+With the project running well locally, deploy to Heroku with the following steps:
+
+1. 
+Update the requirements.txt file with any added requirements: 
+
+```pip freeze > requirements.txt```
+
+2. 
+
+Create a ```Procfile``` using the command:
+
+ ```echo web: python app.py > Procfile```
+
+3. 
+
+Commit and push any changes before connecting to Heroku: 
+
+``` git add requirements.txt Procfile```
+``` git commit -m "added Procfile and updated requirements```
+``` git push ```
+
+4. 
+
+Create a new Heroku app and provision the app with a Hobby Dev Postgre SQL database.
+
+5. 
+
+Reveal and set the Congig Vars for the Heroku App:
+
+- ```AWS_ACCESS_KEY_ID = <your AWS secret key>```
+- ```AWS_SECRET_ACCESS_KEY = <your AWS secret access key>```
+- ```DATABASE_URL = <your Postgre databse URL>```
+- ```EMAIL_HOST_PASS = <your host email API password>```
+- ```EMAIL_HOST_USER = <your host email API address>``` 
+- ```SECRET_KEY = <your django secret key>```
+- ```STRIPE_PUBLIC_KEY = <your stripe public key>```
+- ```STRIPE_SECRET_KEY = <your stripe secret key>```
+- ```STRIPE_WH_SECRET = <your stripe wehbhook secret>```
+- ```USE_AWS = True```
+
+6. 
+
+From the Heroku dashboard, deploy the new app by going to the ```Deploy``` tab and setting the deployment method to GitHub.
+
+To connect the Heroku App to the GitHub project, select the master branch of the GitHub Repo and select ```Deploy Branch```.
+
+Select "Enable Automatic Deploys" to ensure any future changes are automatically deployed to the Heroku app.
+
+7. 
+
+To configure the Heroku Postgres SQL database and provide it with a superuser,
+temporarily create a "DATABASE_URL" variable in the environment variables and set it to the Postgres URL set in the 
+Heroku Config Vars. 
+
+First migrate all the models to the Postgres SQL databse using: 
+
+```python3 manage.py migrate ```
+
+Then create a superuser using: 
+
+
+``` python3 manage.py createsuperuser ``` 
+
+And follow the steps in the terminal to create the superuser. 
+
+Once the superuser is created, remove the ```DATABASE_URL``` variable from the development environment variables. 
+
+8. 
+
+Push the project to GitHub and it will be remotely pushed to Heroku and deployed. 
+
+Once the build is complete, click "Open App" to view the deployed app.
+
+If there are any errors, check the Heroku build log for the app to investigate any error messages.
 
 ## Credits
 
@@ -511,4 +653,4 @@ I learnt how to build the e-commerce store using the Boutique Ado example from t
 for the images are the original urls.
 
 ### Acknowledgements
-This project was created an app for submission to the [Code Institute](https://codeinstitute.net/) and is for educational use only.
+This project was created an app for submission to the [Code Institute](https://codeinstitute.net/)
