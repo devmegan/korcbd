@@ -62,38 +62,38 @@
     </div>
 </section>
 <!--Links Section-->
-<section class="py-5 mx-5 mt-5">
+<section class="py-5 mx-2 mx-md-5 mt-5">
     <div class="row no-gutters">
     <!--link to store-->
         <div class="col-6 col-lg-3">
-            <div class="text-center">
+            <div class="text-center mb-5 mb-lg-0">
                 <a href="{% url 'products' %}" class="text-decoration-none"><i class="fas fa-shopping-cart fa-3x text-blue d-block mb-3"></i></a>
-                <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'products' %}">Shop Now</a>
+                <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'products' %}">Shop <span class="d-none d-md-inline-block">Now</span></a>
             </div>
         </div>
         <!--link to about-->
         <div class="col-6 col-lg-3">
-            <div class="text-center">
+            <div class="text-center mb-5 mb-lg-0">
                 <a href="{% url 'about' %}" class="text-decoration-none"><i class="fas fa-book-open fa-3x text-blue d-block mb-3"></i></a>
-                <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'about' %}">Learn More</a>
+                <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'about' %}">About <span class="d-none d-md-inline-block">KOR</span></a>
             </div>
         </div>
         <!--link to blog-->
         <div class="col-6 col-lg-3">
             <div class="text-center pt-5 pt-lg-0">
                 <a href="{% url 'blog' %}" class="text-decoration-none"><i class="fas fa-th fa-3x text-blue d-block mb-3"></i></a>
-                <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'blog' %}">Read Blog</a>
+                <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'blog' %}"><span class="d-none d-md-inline-block">Read</span> Blog</a>
             </div>
         </div>
         <!--link to profile-->
         <div class="col-6 col-lg-3">
             <div class="text-center pt-5 pt-lg-0">
                 <a href="{% url 'profile' %}" class="text-decoration-none"><i class="fas fa-id-badge fa-3x text-blue d-block mb-3"></i></a>
-                <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'profile' %}">View Profile</a>
+                <a class="btn kor-btn-hover colour-darker uppercase px-3" href="{% url 'profile' %}"><span class="d-none d-md-inline-block">View</span> Profile</a>
             </div>
         </div>
         <div class="col-12 mt-5">
-            <div class="div text-center m-5 p-5 bg-purple">
+            <div class="div text-center my-5 mx-md-5 py-5 px-1 px-md-5 bg-purple">
                 <h2 class="text-white uppercase my-3">
                     <i class="fas fa-truck-moving d-block mb-3"></i>
                     Track Your Order
@@ -102,7 +102,7 @@
                     <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
                         <form class="text-center" method="POST">
                             {% csrf_token %}
-                            <input type="text" name="order-ref-track" id="order-ref-track" class="w-100 form-control rounded-0" placeholder='Order Reference (i.e. "KOR-123123123123123123123")'>
+                            <input type="text" name="order-ref-track" id="order-ref-track" class="w-100 form-control rounded-0" placeholder="Order Reference (i.e. 'KOR-123123123123123123123')">
                             <p class="text-white mt-2"><small>Your order reference can be found on your order confirmation email.</small></p>
                             <button type="submit" class="btn kor-btn-hover colour-light uppercase mt-2 px-5">Track</button>
                         </form>
@@ -115,7 +115,7 @@
 <section class="bg-purple-reverse pb-5">
     <div class="row no-gutters pt-5">
         <!-- soap category -->
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-12 col-sm-6 col-md-4 col-xl-2">
                 <div class="px-4">
                     <a href="{% url 'products' %}?category=Soaps,Bath">
                         <div class="card m-4 border-0">
@@ -128,7 +128,7 @@
                 </div>
             </div>
             <!-- oil category -->
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-12 col-sm-6 col-md-4 col-xl-2">
                 <div class="px-4">
                     <a href="{% url 'products' %}?category=Oils">
                     <div class="card m-4 border-0">
@@ -141,7 +141,7 @@
                 </div>
             </div>
             <!-- balms and creams category -->
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-12 col-sm-6 col-md-4 col-xl-2">
                 <div class="px-4">
                     <a href="{% url 'products' %}?category=Creams">
                     <div class="card m-4 border-0">
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <!-- gummies category-->
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-12 col-sm-6 col-md-4 col-xl-2">
                 <div class="px-4">
                     <a href="{% url 'products' %}?category=Gummies">
                         <div class="card m-4 border-0">
@@ -167,7 +167,7 @@
                 </div>
             </div>
             <!-- capsules category-->
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-12 col-sm-6 col-md-4 col-xl-2">
                 <div class="px-4">
                     <a href="{% url 'products' %}?category=Capsules">
                         <div class="card m-4 border-0">
@@ -180,7 +180,7 @@
                 </div>
             </div>
             <!--gels category-->
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-12 col-sm-6 col-md-4 col-xl-2">
                 <div class="px-4">
                     <a href="{% url 'products' %}?category=Gels">
                     <div class="card m-4 border-0">
@@ -229,7 +229,7 @@
 </div>
 <div class="row no-gutters">
     <div class="col-12 text-center">
-        <a href="{% url 'blog' %}" class="btn btn-lg mt-5 kor-btn-hover colour-darker uppercase px-5">View All Blog Posts</a>
+        <a href="{% url 'blog' %}" class="btn btn-lg mt-3 kor-btn-hover colour-darker uppercase px-3 px-md-5">View All Blog Posts</a>
     </div>
 </div>
 </section>

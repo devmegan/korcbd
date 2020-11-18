@@ -6,10 +6,11 @@
     <!-- Profile Detail -->
     <div class="container pb-5">
         <div class="row">
-            <div class="col-10 offset-1 col-lg-6 offset-lg-0 mt-5">
-            <div class="bg-white mx-3 py-5 border-purple rounded-1 card">
+            <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-0 mt-5">
+            <div class="bg-white mx-md-3 py-5 border-purple rounded-1 card">
                 <h1 class="text-center text-blue"><i class="fas fa-id-badge"></i></h1>
-                <h2 class="text-blue text-center uppercase mt-3 mb-4">Profile Details</h2>
+                <h2 class="d-none d-md-block text-blue text-center uppercase mt-3 mb-4">Profile Details</h2>
+                <h4 class="d-block d-md-none text-blue text-center uppercase mt-3 mb-4">Profile Details</h4>
                 <div class="row">
                     <div class="col-10 offset-1">
                         <form class="text-center" method="POST" action="{% url 'profile' %}" id="profile-update-form">
@@ -35,11 +36,12 @@
                 </div>
             </div>
             </div>
-            <div class="col-10 offset-1 col-lg-6 offset-lg-0 mt-5">
-                <div class="bg-white mx-3 py-5 border-purple rounded-1 card">
+            <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-0 mt-5">
+                <div class="bg-white mx-md-3 py-5 border-purple rounded-1 card">
                     <h1 class="text-center text-blue"><i class="fas fa-history"></i></h1> 
-                    <h2 class="text-blue text-center uppercase mt-3 mb-4">Order History</h2>
-                    <div class="ml-5 mr-3" id="order-history-container">
+                    <h2 class="d-none d-md-block text-blue text-center uppercase mt-3 mb-4">Order History</h2>
+                    <h4 class="d-block d-md-none text-blue text-center uppercase mt-3 mb-4">Order History</h4>
+                    <div class="mx-1 ml-md-5 mr-md-3" id="order-history-container">
                         <div class="row no-gutters">
                             {% if not orders %}
                             <div class="col-12">
@@ -53,9 +55,9 @@
                                 <thead class="bg-blue text-white">
                                     <tr>
                                         <th scope="col"><small><i class="fas fa-link fa-sm"></i> Reference</small></th>
-                                        <th scope="col"><small>Order Date</small></th>
-                                        <th scope="col"><small>Order total</small></th>
-                                        <th scope="col"><small>Dispatched</small></th>
+                                        <th scope="col"><small>Date</small></th>
+                                        <th scope="col" class="d-none d-sm-table-cell"><small>Total</small></th>
+                                        <th scope="col" class="px-0 px-md-2"><small>Dispatched</small></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,7 +65,7 @@
                                     <tr>
                                         <td title="{{ order.order_reference }}"><small><a class="text-muted" href="{% url 'order_history' order.order_reference %}">{{ order.order_reference|truncatechars:10}}</a></small></td>
                                         <td title="{{ order.date }}"><small>{{ order.date|truncatewords:1 }}</small></td>
-                                        <td><small>£{{ order.order_total }}</small></td>
+                                        <td class="d-none d-sm-table-cell"><small>£{{ order.order_total }}</small></td>
                                         {% if order.dispatched %}
                                         <td><small><i class="fas fa-check-circle text-success"></i></small></td>
                                         {% else %}

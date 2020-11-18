@@ -5,7 +5,7 @@
 <section class="min-vh-100">
      <div class="container pb-3 pt-5">
         <div class="row">
-            <div class="col-10 col-lg-8 offset-1 offset-lg-2">
+            <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
                 <div class="bg-white mt-5 rounded-1 card rounded-1 border-purple">
                     <div class="text-center mx-5 mt-5">
                         <img class="vh10 mb-2" src="{{ MEDIA_URL }}logo-purple.png" alt="KOR CBD company logo">
@@ -14,12 +14,12 @@
                         <p class="lead text-muted">{{ post.date }}</p>
                         <p class="text-justify lead">{{ post.body }}</p>
                         <div class="mt-2 text-left">
-                            <a href="{% url 'tag' post.tag_1|slugify %}" class="btn kor-btn-hover colour-darker"><i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_1 }} </a>
-                            <a href="{% url 'tag' post.tag_2|slugify %}" class="btn kor-btn-hover colour-darker"> <i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_2 }} </a>
-                            <a href="{% url 'tag' post.tag_3|slugify %}" class="btn kor-btn-hover colour-darker"> <i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_3 }} </a> 
+                            <a href="{% url 'tag' post.tag_1|slugify %}" class="btn kor-btn-hover colour-darker d-md-inline-block mb-1 text-left"><i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_1 }} </a>
+                            <a href="{% url 'tag' post.tag_2|slugify %}" class="btn kor-btn-hover colour-darker d-md-inline-block mb-1 text-left"> <i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_2 }} </a>
+                            <a href="{% url 'tag' post.tag_3|slugify %}" class="btn kor-btn-hover colour-darker d-md-inline-block mb-1 text-left"> <i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_3 }} </a> 
                         </div>
                         <div class="mt-2 text-left">
-                            <a class="btn kor-btn-hover colour-darker uppercase" href="{% url 'blog' %}"><i class="fas fa-arrow-left fa-sm"></i> Back to Blog</a>
+                            <a class="btn kor-btn-hover colour-darker uppercase" href="{% url 'blog' %}"><i class="fas fa-angle-double-left"></i> Back to Blog</a>
                         </div>
                         {% if request.user.is_superuser %}
                         <div class="mt-2 text-left">

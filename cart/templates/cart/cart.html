@@ -11,42 +11,44 @@
                 <h5 class="text-blue mt-3 ml-2 uppercase">Your Cart</h5>
                 <hr>
                 <div class="row no-gutters">
-                    <table class="table">
+                    <table class="table d-none d-sm-block">
                         <thead class="bg-blue text-white">
                             <tr>
-                                <th scope="col" class="align-top uppercase">
+                                <th scope="col" class="align-top w-25">
                                     <small>Product</small>
                                 </th>
-                                <th scope="col" class="align-top uppercase">
+                                <th scope="col" class="align-top w-25">
                                     <small>Quantity
                                         <br>
                                         <small>*update one product at a time</small>
                                     </small>
                                 </th>
-                                <th scope="col" class="align-top uppercase">
-                                    <small class="uppercase">Product Price</small>
+                                <th scope="col" class="align-top w-25">
+                                    <small>Product Price</small>
                                 </th>
-                                <th scope="col" class="align-top uppercase">
-                                    <small class="uppercase">Subtotal</small>
+                                <th scope="col" class="align-top w-25">
+                                    <small>Subtotal</small>
                                 </th>
-                                <th scope="col" class="align-top uppercase">
-                                    <small class="uppercase">Remove</small>
+                                <th scope="col" class="align-top">
+                                    <small>Remove</small>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                         {% for product in cart_items %}
+                            <tr class="border-top">
+                                <td class="border-0">
+                                    <small>{{ product.product.name }}</small>
+                                </td>
+                            </tr>
                             <tr>
-                                <td title="{{ product.sku }}" class="text-uppercase">
+                                <td title="{{ product.sku }}" class="text-uppercase border-0">
                                     <div class="row">
-                                        <div class="col-3"><img class="vh5" src="{{ product.product.image_url }}" alt="product image for {{ product.product.name }}">
-                                        </div>
-                                        <div class="col-6 d-none d-md-block">
-                                            <small>{{ product.product.name }}</small>
+                                        <div class="col-6"><img class="vh10" src="{{ product.product.image_url }}" alt="product image for {{ product.product.name }}">
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="border-0">
                                     <form action="{% url 'update_cart' product.product.id %}" method="POST">
                                         {% csrf_token %}
                                         <div class="form-row">
@@ -65,13 +67,13 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td>
+                                <td class="border-0">
                                     <small>£{{ product.product.price }}</small>
                                 </td>
-                                <td>
+                                <td class="border-0">
                                     <small>£{{ product.subtotal }}</small>
                                 </td>
-                                <td>
+                                <td class="border-0">
                                     <form method="POST" action="{% url 'remove_from_cart' product.product.id %}">
                                         {% csrf_token %}
                                         <button class="btn btn-sm rounded-0" type="submit">
@@ -83,15 +85,86 @@
                         {% endfor %}
                         </tbody>
                     </table>
+                    <table class="table d-block d-sm-none table-responsive mx-auto w-auto">
+                        <thead class="bg-blue text-white">
+                            <tr>
+                                <th scope="col" class="align-top pr-0">
+                                    <small>Product</small>
+                                </th>
+                                <th scope="col" class="align-top">
+                                    <small>Price</small>
+                                </th>
+                                <th scope="col" class="align-top">
+                                    <small>Subtotal</small>
+                                </th>
+                                <th scope="col" class="align-top">
+                                    <small>Remove</small>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in cart_items %}
+                            <tr>
+                                <td class="border-top-1">
+                                {{ product.product.name }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td title="{{ product.sku }}" class="text-uppercase border-top-0">
+                                    <div class="row">
+                                        <div class="col-3"><img class="vh10" src="{{ product.product.image_url }}" alt="product image for {{ product.product.name }}">
+                                        </div>
+                                        <div class="col-6 d-none d-md-block">
+                                            <small>{{ product.product.name }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="border-top-0">
+                                    <small>£{{ product.product.price }}</small>
+                                </td>
+                                <td class="border-top-0">
+                                    <small>£{{ product.subtotal }}</small>
+                                </td>
+                                <td class="text-center border-top-0">
+                                    <form method="POST" action="{% url 'remove_from_cart' product.product.id %}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-sm rounded-0" type="submit">
+                                        <i class="fas fa-trash text-muted"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                            <td colspan="4" class="border-0">
+                                <form action="{% url 'update_cart' product.product.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            <div class="form-group form-inline input-sm">
+                                                <input type="hidden" name="initQty" class="initQty" id="initQty-{{product.product.id}}" value="{{ product.quantity }}">
+                                                <input type="hidden" name="maxQty" class="maxQty" id="maxQty-{{product.product.id}}" value="{{ product.product.stock_qty }}">
+                                                <input class="form-control form-control-sm qty_input w-50" type="number" name="quantity" value="{{ product.quantity }}" min="1" max="{{ product.product.stock_qty }}" data-item_id="{{ product.product.id }}" id="id_qty_{{ product.product.id }}"> 
+                                                    <button disabled class="update-btn btn btn-sm kor-btn-hover colour-darker uppercase" type="submit">
+                                                        <small>Update</small>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </form>
+                            </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
                 <hr>
                 <div class="text-right">
                     <p class="lead font-weight-normal text-blue mb-0">£{{ total }} <small>total</small></p>
                     <p class="text-blue mt-0"><small>Delivery is Free!</small></p>
-                    <a type="button" href="{% url 'products' %}" class="btn kor-btn-hover colour-darker uppercase">
+                    <a type="button" href="{% url 'products' %}" class="btn kor-btn-hover colour-darker uppercase mb-2">
                         <i class="fas fa-angle-double-left"></i> Keep Shopping
                     </a>
-                    <a type="button" href="{% url 'checkout' %}" class="btn kor-btn-hover colour-darker uppercase">
+                    <a type="button" href="{% url 'checkout' %}" class="btn kor-btn-hover colour-darker uppercase mb-2">
                         <i class="fas fa-lock"></i> Checkout
                     </a>
                 </div>

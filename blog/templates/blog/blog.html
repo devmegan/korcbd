@@ -53,9 +53,9 @@
                             <p class="my-3 text-justify lead">{{ post.body|slice:":450"|safe }}...</p>
                             <a href="{% url 'blog_post' post.pk %}" class="btn btn-lg kor-btn-hover colour-darker uppercase px-5">Continue reading</a>
                             <div class="mt-2">
-                                <a href="{% url 'tag' post.tag_1|slugify %}" class="btn kor-btn-hover colour-darker"><i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_1 }} </a>
-                                <a href="{% url 'tag' post.tag_2|slugify %}" class="btn kor-btn-hover colour-darker"> <i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_2 }} </a>
-                                <a href="{% url 'tag' post.tag_3|slugify %}" class="btn kor-btn-hover colour-darker"> <i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_3 }} </a> 
+                                <a href="{% url 'tag' post.tag_1|slugify %}" class="btn kor-btn-hover colour-darker d-inline-block mb-1"><i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_1 }} </a>
+                                <a href="{% url 'tag' post.tag_2|slugify %}" class="btn kor-btn-hover colour-darker d-inline-block mb-1"> <i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_2 }} </a>
+                                <a href="{% url 'tag' post.tag_3|slugify %}" class="btn kor-btn-hover colour-darker d-inline-block mb-1"> <i class="fas fa-tag px-1 fa-xs"></i> {{ post.tag_3 }} </a> 
                             </div>
                             {% if request.user.is_superuser %}
                             <div class="mt-2">

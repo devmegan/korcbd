@@ -35,7 +35,8 @@
         <div class="row">
             <div class="col-10 offset-1 mt-5">
             <div class="card bg-white rounded-1 p-5 mt-sm-2 mt-md-5 border-purple"> 
-            <h2 class="text-blue uppercase">{{ product.name}}</h2>
+            <h2 class="d-none d-md-block text-blue uppercase">{{ product.name}}</h2>
+            <h4 class="d-block d-md-none text-blue uppercase">{{ product.name}}</h4>
             <h6 class="pt-2 text-muted font-weight-light mb-5"> <a href="{% url 'products' %}?category={{ product.category }}" class="text-blue"><small>View all Products in {{ product.category }} Category</small></a></h6> 
             <div class="row">
                 <div class="col-12 col-md-6 mb-3">
@@ -74,18 +75,21 @@
                                 </div>
                             </div>
                             {% endif %}
-                            <div class="col-12 mb-5 sm-mb-2">
+                            <div class="col-12 mb-5 mb-sm-2">
                                 {% if product.stock_qty > 0 %}
                                     {% if product.stock_qty > qty_in_cart %}
-                                        <button type="submit" class="btn kor-btn-hover colour-darker text-uppercase mt-1 px-5 px-lg-0 w-100">Add to Cart</button>
+                                        <button type="submit" class="d-none d-md-block btn kor-btn-hover colour-darker text-uppercase mt-1 px-5 px-lg-0 w-100">Add to Cart</button>
+                                        <button type="submit" class="d-block d-md-none btn btn-sm kor-btn-hover colour-darker text-uppercase mt-1 px-5 px-lg-0 w-100">Add to Cart</button>
                                     {% else %}
-                                        <button type="submit" class="disabled btn kor-btn-hover colour-darker text-uppercase mt-1 px-5 px-lg-3 w-100">All stock already in your Cart</button>
+                                        <button type="submit" class="d-none d-md-block disabled btn kor-btn-hover colour-darker text-uppercase mt-1 px-5 px-lg-3 w-100">All stock already in your Cart</button>
+                                        <button type="submit" class="d-block d-md-none disabled btn btn-sm kor-btn-hover colour-darker text-uppercase mt-1 px-5 px-lg-3 w-100">All stock already in your Cart</button>
                                     {% endif %}
                                     {% if qty_in_cart > 0 %}
                                         <span class="text-blue d-block"><small>Want to edit the quantity in your cart? <a href="{% url 'cart' %}" class="text-blue pink-hover"><u>Click here</u></a></small></span>
                                     {% endif %}
                                 {% else %}
-                                <button type="button" class="btn btn-danger disabled text-uppercase mt-1 px-5 px-lg-0 w-100">Out of Stock</button>
+                                <button type="button" class="d-none d-md-block btn btn-danger disabled text-uppercase mt-1 px-5 px-lg-0 w-100">Out of Stock</button>
+                                <button type="button" class="d-block d-md-none btn btn-sm btn-danger disabled text-uppercase mt-1 px-5 px-lg-0 w-100">Out of Stock</button>
                                 {% endif %}
                             </div>
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
@@ -93,12 +97,14 @@
                     </form>
                     </div>
                     <div class="col-12">
-                    <h5 class="text-blue mt-4 uppercase">Description</h5>
+                    <h5 class="d-none d-md-block text-blue mt-1 mt-md-4 uppercase">Description</h5>
+                    <h6 class="d-block d-md-none text-blue mt-1 mt-md-4 uppercase">Description</h6>
                     <p class="card-text text-justify">{{ product.description }}</p>
-                    <h5 class="text-blue mt-4 uppercase">Ingredients</h5>
+                    <h5 class="d-none d-md-block text-blue mt-4 uppercase">Ingredients</h5>
+                    <h6 class="d-block d-md-none text-blue mt-4 uppercase">Ingredients</h6>
                     <p class="card-text text-justify">{{ product.ingredients }}</p>
                     <a href="{% url 'products' %}" class="btn kor-btn-hover colour-darker mt-2">
-                        <span class="icon"><i class="fas fa-chevron-left"></i></span>
+                        <span class="icon d-block d-md-inline-block"><i class="fas fa-angle-double-left"></i></span>
                         <span class="text-uppercase">Keep Shopping</span>
                     </a>
                     {% if request.user.is_superuser %}
