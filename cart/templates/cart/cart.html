@@ -97,9 +97,6 @@
                                 <th scope="col" class="align-top">
                                     <small>Subtotal</small>
                                 </th>
-                                <th scope="col" class="align-top">
-                                    <small>Remove</small>
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -125,33 +122,35 @@
                                 <td class="border-top-0">
                                     <small>£{{ product.subtotal }}</small>
                                 </td>
-                                <td class="text-center border-top-0">
-                                    <form method="POST" action="{% url 'remove_from_cart' product.product.id %}">
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="border-0 py-0">
+                                    <form action="{% url 'update_cart' product.product.id %}" method="POST">
                                         {% csrf_token %}
-                                        <button class="btn btn-sm rounded-0" type="submit">
-                                        <i class="fas fa-trash text-muted"></i>
-                                        </button>
+                                        <div class="form-row">
+                                            <div class="col-12">
+                                                <div class="form-group form-inline input-sm">
+                                                    <input type="hidden" name="initQty" class="initQty" id="initQty-{{product.product.id}}" value="{{ product.quantity }}">
+                                                    <input type="hidden" name="maxQty" class="maxQty" id="maxQty-{{product.product.id}}" value="{{ product.product.stock_qty }}">
+                                                    <input class="form-control form-control-sm qty_input w-50" type="number" name="quantity" value="{{ product.quantity }}" min="1" max="{{ product.product.stock_qty }}" data-item_id="{{ product.product.id }}" id="id_qty_{{ product.product.id }}"> 
+                                                        <button disabled class="update-btn btn btn-sm kor-btn-hover colour-darker uppercase" type="submit">
+                                                            <small>Update</small>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                        </div>
                                     </form>
                                 </td>
                             </tr>
                             <tr>
-                            <td colspan="4" class="border-0">
-                                <form action="{% url 'update_cart' product.product.id %}" method="POST">
-                                    {% csrf_token %}
-                                    <div class="form-row">
-                                        <div class="col-12">
-                                            <div class="form-group form-inline input-sm">
-                                                <input type="hidden" name="initQty" class="initQty" id="initQty-{{product.product.id}}" value="{{ product.quantity }}">
-                                                <input type="hidden" name="maxQty" class="maxQty" id="maxQty-{{product.product.id}}" value="{{ product.product.stock_qty }}">
-                                                <input class="form-control form-control-sm qty_input w-50" type="number" name="quantity" value="{{ product.quantity }}" min="1" max="{{ product.product.stock_qty }}" data-item_id="{{ product.product.id }}" id="id_qty_{{ product.product.id }}"> 
-                                                    <button disabled class="update-btn btn btn-sm kor-btn-hover colour-darker uppercase" type="submit">
-                                                        <small>Update</small>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </form>
-                            </td>
+                                <td class="border-top-0 py-0">
+                                    <form method="POST" action="{% url 'remove_from_cart' product.product.id %}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-sm rounded-0 px-0" type="submit">
+                                        <i class="fas fa-trash text-muted"></i> Remove
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

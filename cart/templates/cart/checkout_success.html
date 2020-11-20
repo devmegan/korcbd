@@ -15,8 +15,9 @@
                         <div class="text-center">
                             <img class="vh10 my-2" src="{{ MEDIA_URL }}logo-purple.png" alt="KOR CBD company logo">
                             <h2 class="text-blue mt-3 ml-2 uppercase d-none d-md-block">Order Confirmation</h2>
-                            <h4 class="text-blue mt-3 ml-2 uppercase d-block d-md-none">Order Confirmation</h4>
-                            <p class="text-muted">{{ order.order_reference }}</p>
+                            <h5 class="text-blue mt-3 ml-2 uppercase d-block d-md-none">Order Confirmation</h5>
+                            <p class="text-muted d-none d-md-block">{{ order.order_reference }}</p>
+                            <p class="text-muted d-block d-md-none"><small>{{ order.order_reference }}</small></p>
                             <p>Your order information is below.</p>
                             {% if not viewing_order_history %}
                             <p>A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
@@ -55,7 +56,7 @@
                                 <p class="uppercase my-0"><small>{{ order.email }}</small></p>
                             </div>
                         </div>
-                        <p class="text-muted mb-0"><small><span class="uppercase">Order Date:</span> {{ order.date }}</small></p>
+                        <p class="text-muted mb-0"><small><span class="uppercase">Order Date:</span><br> {{ order.date }}</small></p>
                         <div class="row no-gutters">
                             <table class="table">
                                 <thead class="bg-blue text-white">
@@ -94,13 +95,13 @@
                         </div>
                         <div class="text-right">
                             <p class="lead font-weight-normal text-blue mb-0">£{{ order.order_total }} <small>total</small></p>
-                            <p class="text-blue mt-0"><small>Delivery is Free!</small></p>
+                            <p class="text-blue mt-0"><small>Free Delivery!</small></p>
                         </div>
                         <hr>
                         {% if not viewing_order_history %}
                         <div class="text-center">
                             <p>
-                                While you're waiting for your order to arrive, why not check out some of the posts on our blog?
+                                Check out our recent blog posts while you wait for your order to arrive!
                             </p>
                             <a href="{% url 'blog' %}" class="btn kor-btn-hover colour-darker px-5 uppercase">Blog</a>
                         </div>

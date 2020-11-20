@@ -15,41 +15,50 @@ Home
                 <div class="bg-white m-2 p-3 card rounded-1 border-purple text-center">
                     <h2 class="text-blue my-3 uppercase">Order summary</h2>
                     <div class="row no-gutters">
-                    <table class="table">
-                        <thead class="bg-blue text-white">
-                            <tr>
-                                <th scope="col"><small>Product</small></th>
-                                <th scope="col"><small>Quantity</small></th>
-                                <th scope="col"><small>Product Price</small></th>
-                                <th scope="col"><small>Subtotal</small></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for product in cart_items %}
-                            <tr>
-                                <td title="{{ product.sku }}" class="text-uppercase">
-                                    <div class="row">
-                                        <div class="col-3"><img class="vh5" src="{{ product.product.image_url }}" alt="product image for {{ product.product.name }}">
-                                        </div>
-                                        <div class="col-9 d-none d-md-block">
-                                            <small>{{ product.product.name }}</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><small>{{ product.quantity }}</small>
-                                </td>
-                                <td>
-                                    <small>{{ product.product.price }}</small>
-                                </td>
-                                <td>
-                                    <small>£{{ product.subtotal }}</small>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>            
-        
+                        <div class="col-12">
+                            <table class="table">
+                                <thead class="bg-blue text-white">
+                                    <tr>
+                                        <th scope="col"><small>Product</small></th>
+                                        <th scope="col"><small>Quantity</small></th>
+                                        <th scope="col" class="d-none d-md-table-cell"><small>Product Price</small></th>
+                                        <th scope="col"><small>Subtotal</small></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for product in cart_items %}
+                                    <tr>
+                                        <td title="{{ product.sku }}" class="text-uppercase">
+                                            <div class="row">
+                                                <div class="col-3"><img class="vh5" src="{{ product.product.image_url }}" alt="product image for {{ product.product.name }}">
+                                                </div>
+                                                <div class="col-9 d-none d-md-block">
+                                                    <small>{{ product.product.name }}</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><small>{{ product.quantity }}</small>
+                                        </td>
+                                        <td class="d-none d-md-table-cell">
+                                            <small>{{ product.product.price }}</small>
+                                        </td>
+                                        <td>
+                                            <small>£{{ product.subtotal }}</small>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                    <tr>
+                                        <td colspan="3" class="text-right d-table-cell d-md-none">  
+                                            <small>Order Total: <strong>£{{ total }}</strong></small>
+                                        </td>
+                                         <td colspan="4" class="text-right d-none d-md-table-cell">  
+                                            <small>Order Total: <strong>£{{ total }}</strong></small>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-lg-6">
