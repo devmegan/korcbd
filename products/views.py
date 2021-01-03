@@ -25,6 +25,7 @@ def products(request):
             if len(category_name) > 1:
                 category_name = category_name.replace(",", " & ")
             categories = request.GET['category'].split(',')
+            categories = categories.lower()
             products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
 
