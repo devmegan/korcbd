@@ -13,28 +13,29 @@
                 <div class="row">
                     <div class="col-10 offset-1">
                         <form class="text-center" method="POST" action="{% url 'edit_product' product.id %}" id="profile-update-form">
-                        {% csrf_token %}
-                        <div class="form-group text-left">
-                        <label for="name" class="mb-0"><small>Product Name:</small></label>
-                        {{ form.name }}
-                        <label for="sku" class="mt-3 mb-0"><small>Product SKU:</small></label>
-                        {{ form.sku }}
-                        <label for="name" class="mb-0"><small>Quantity in Stock:</small></label>
-                        {{ form.stock_qty }}
-                        <input type="hidden" name="sold_qty" id="id_sold_qty" value="{{ product.sold_qty }}">
-                        <label for="category" class="mt-3 mb-0"><small>Product Category:</small></label>
-                        {{ form.category }}
-                        <label for="description" class="mt-3 mb-0"><small>Product Description:</small></label>
-                        {{ form.description}}
-                        <label for="ingredients" class="mt-3 mb-0"><small>Product Ingredients:</small></label>
-                        {{ form.ingredients }}
-                        <label for="price" class="mt-3 mb-0"><small>Product Price to 2 d.p. (e.g. "13.99"):</small></label>
-                        {{ form.price }}
-                        <label for="current_image" class="mt-3 mb-2"><small>Current Image: </small></label>
-                        <img src="{{ product.image_url }}" class="img-thumbnail w-25 d-block" alt="current product image for {{ prodcut.name }}">
-                        <label for="image_url" class="mt-3 mb-0"><small>Product Image URL ("https://..."):</small></label>
-                        {{ form.image_url }}
-                        </div>
+                            {% csrf_token %}
+                            <div class="form-group text-left">
+                                <label for="name" class="mb-0"><small>Product Name:</small></label>
+                                {{ form.name }}
+                                <label for="sku" class="mt-3 mb-0"><small>Product SKU:</small></label>
+                                {{ form.sku }}
+                                <label for="stock_qty" class="mb-0"><small>Quantity in Stock:</small></label>
+                                {{ form.stock_qty }}
+                                <label for="sold_qty" class="mt-3 mb-0"><small>Quantity Sold:</small></label>
+                                {{ form.sold_qty }}
+                                <label for="category" class="mt-3 mb-0"><small>Product Category:</small></label>
+                                {{ form.category }}
+                                <label for="description" class="mt-3 mb-0"><small>Product Description:</small></label>
+                                {{ form.description}}
+                                <label for="ingredients" class="mt-3 mb-0"><small>Product Ingredients:</small></label>
+                                {{ form.ingredients }}
+                                <label for="price" class="mt-3 mb-0"><small>Product Price to 2 d.p. (e.g. "13.99"):</small></label>
+                                {{ form.price }}
+                                <label for="current_image" class="mt-3 mb-2"><small>Current Image: </small></label>
+                                <img src="{{ product.image_url }}" class="img-thumbnail w-25 d-block" alt="current product image for {{ prodcut.name }}">
+                                <label for="image_url" class="mt-3 mb-0"><small>Product Image URL ("https://..."):</small></label>
+                                {{ form.image_url }}
+                            </div>
                             <a href="{% url 'products' %}" class="uppercase btn btn-danger px-5 mb-2">Cancel</a>
                             <button type="submit" class="uppercase btn kor-btn-hover colour-darker px-4 mb-2">Edit Product</button>
                         </form>
