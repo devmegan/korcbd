@@ -44,9 +44,8 @@ The django app is deployed using Amazon Web Services and Heroku and is availabe 
     - [Content](#content)
 6. [Testing](#testing-tools)
 7. [Deployment](#deployment)
-    - [Requirements](#requirements)
-    - [Git Instructions](#git-instructions)
-    - [Heroku Instructions](#heroku-instructions)
+    - [Git Instructions](#running-locally)
+    - [Heroku Instructions](#deploying-to-heroku)
 8. [Credits](#credits)
     - [Content and Code](#content-and-code)
     - [Media](#media)
@@ -71,7 +70,7 @@ The goals that KOR CBD have given for this e-Commerce store are:
 
 Users of the KOR CBD website are most likely looking to buy CBD products. While the company targets itself at martial artists, many of their customers are athletes in other sports. The website needs to still be accessible to them. 
 
-## User Goals 
+### User Goals 
 
 - As a user I want to be able to:
     - Easily navigate the store using a layout that is consitent across all pages. 
@@ -90,7 +89,7 @@ Users of the KOR CBD website are most likely looking to buy CBD products. While 
     - Be able to contact the company if I have any questions or complaints. 
     - Be able to connect with the business on social media. 
 
-## Wireframes 
+### Wireframes 
 
 The wireframes here were made using [Balsamiq](https://balsamiq.com/). 
 
@@ -106,7 +105,7 @@ The wireframes here were made using [Balsamiq](https://balsamiq.com/).
 - [Checkout](README/assets/pdf/Checkout.pdf)
 - [Confirmation](README/assets/pdf/Confirmation.pdf)
 
-## Colour Palette
+### Colour Palette
 
 <img src="README/assets/img/colour-palette.jpg" style="margin: 0; width: 75%">
 
@@ -114,11 +113,11 @@ The colour palette used here has been chosen to work with the company logo. The 
 and contrasts well with the blue and purple colours. The blues and purples provide a contrasting gradient background against the main
 white background and are used accross all headings and buttons. 
 
-# Features 
+## Features 
 
-## Navigation
+### Navigation
 
-### Nav Bar 
+#### Nav Bar 
 
 <img src="README/assets/img/nav-sm.jpg" style="margin: 0; width: 75%">
 <img src="README/assets/img/nav-lg.jpg" style="margin: 0; width: 75%">
@@ -134,7 +133,7 @@ white background and are used accross all headings and buttons.
 - On smaller screens, these links are shown in a dropdown nav that is opened via the toggler icon.
 
 
-### Footer
+#### Footer
 
 <img src="README/assets/img/footer.jpg" style="margin: 0; width: 75%">
 
@@ -143,9 +142,9 @@ white background and are used accross all headings and buttons.
 - The company name acts as a link back to the home page. 
 - Maintains the same structure and order on all screen sizes. 
 
-## Home
+### Home
 
-### Jumbotron Carousel
+#### Jumbotron Carousel
 
 <img src="README/assets/img/home-carousel.jpg" style="margin: 0; width: 75%">
 
@@ -153,21 +152,21 @@ white background and are used accross all headings and buttons.
 - Three dark-ish images were chosen to contrast with the light colour scheme of the site.
 - The carousel occupies the whole width of the viewport. 
 
-### Intro Text 
+#### Intro Text 
 
 <img src="README/assets/img/home-intro-text.jpg" style="margin: 0; width: 75%">
 
 - The text below the carousel dispalys the companies logo, name and tag line. 
 - Below this, a banner displays words related to the company which automatically fade in. The JavaScript used to make this text animated can be found inside the extrajs block at the bottom of the index.html template. 
 
-### Icon Links 
+#### Icon Links 
 
 <img src="README/assets/img/home-icon-links.jpg" style="margin: 0; width: 75%">
 
 - Icons with CTA buttons beneath them link users to the four main parts of the site: About, Products, Blog, Profile, 
 - On large screens, these icons display side-by-side in a row. On smaller screens they are stacked with two in the first row, and two in the second.
 
-### Order Tracking
+#### Order Tracking
 
 <img src="README/assets/img/home-tracking.jpg" style="margin: 0; width: 75%">
 
@@ -178,7 +177,7 @@ go straight to the order confirmation. If they aren't logged in, they will be as
 view the full order confirmation.
 
 
-### Product Category Cards
+#### Product Category Cards
 
 <img src="README/assets/img/home-category-cards.jpg" style="margin: 0; width: 75%">
 
@@ -187,7 +186,7 @@ view the full order confirmation.
 - The whole card acts as an anchor element so that users can click anywhere on it to go to the category page. This is useful on mobile devices where clicking on the small text link proved a matter of ninja-like accuracy.
 - A CTA button takes users to view all the products in the store. 
 
-### Recent Blog Posts 
+#### Recent Blog Posts 
 
 <img src="README/assets/img/home-blog-post-cards.jpg" style="margin: 0; width: 75%">
 
@@ -195,7 +194,7 @@ view the full order confirmation.
 - The post image, title, author, date and a snippet of the post body are displayed. A CTA button in each card links the user to the blog post.
 - A CTA button takes users to view all the blog posts. 
 
-## Allauth
+### Allauth
 
 <img src="README/assets/img/allauth-login.jpg" style="margin: 0; width: 25%">
 <img src="README/assets/img/allauth-signup.jpg" style="margin: 0; width: 25%">
@@ -205,7 +204,7 @@ view the full order confirmation.
 - These templates also provide other templates used for user admin such as email verification, updating email addresses and passwords. 
 - All Allauth templates have been edited to match the rest of the site colour theme and layout.
 
-## About
+### About
 
 <img src="README/assets/img/about.jpg" style="margin: 0; width: 75%">
 
@@ -213,9 +212,9 @@ view the full order confirmation.
 - The about content is contained in a single card. 
 - Currently this content is split into three paragraphs, written by the client. 
 
-## Products 
+### Products 
 
-### All Products 
+#### All Products 
 
 <img src="README/assets/img/products.jpg" style="margin: 0; width: 75%">
 
@@ -230,7 +229,7 @@ view the full order confirmation.
 - On mobile screens, products are stacked on top of each other making it easy for the user to scroll through them.
 - The price ordering and category filtering buttons are removed. Users can easily locate products they are interested in using the search bar. 
 
-### Product detail
+#### Product detail
 
 <img src="README/assets/img/product-detail-lg.jpg" style="margin: 0; width: 75%">
 
@@ -244,7 +243,7 @@ view the full order confirmation.
 
 - On mobile screens, the product detail page is very similar. Instead of being displayed in two columns side-by-side, the page elements are stacked on top of each other.
 
-## Product Admin
+#### Product Admin
 <img src="README/assets/img/product-admin.jpg" style="margin: 0; width: 75%">
 <img src="README/assets/img/product-detail-admin.jpg" style="margin: 0; width: 75%">
 
@@ -253,21 +252,21 @@ view the full order confirmation.
 - For users logged in as staff, the link to add a product can be found in the dropdown menu from the Admin link in the nav bar.
 - All these tasks can also be performed from the Django Administration interface. 
 
-### Add Product
+#### Add Product
 
 <img src="README/assets/img/add-product.jpg" style="margin: 0; width: 75%">
 
 - The add product template renders out a form that creates a new instance of the product model when the form is submitted with valid inputs. 
 - If a user attempts to access the add product url but is not logged in as a member of staff, they are redirected to the login page.
 
-### Edit Product 
+#### Edit Product 
 <img src="README/assets/img/edit-product.jpg" style="margin: 0; width: 75%">
 
 - The edit product template renders out the product model form, pre-populated with the existing product details, including a preview of the current product image.
 - Submitting the edit product form updates the product details in the database, as long as all fields still contain a valid input.
 - If a user attempts to access the edit product url but is not logged in as a member of staff, they are redirected to the login page.
 
-## Cart
+### Cart
 
 <img src="README/assets/img/cart.jpg" style="margin: 0; width: 75%">
 
@@ -288,7 +287,7 @@ view the full order confirmation.
 - When a user changes the value in the quantity input, a little bit of jQuery removes the disabled attribute from its corresponding update button. Clicking the button updates all changes made to cart item quantities. 
 - After updating the item quantity, the cart page reloads and users see the updated quantiies, subtotals and order total. 
 
-## Checkout
+### Checkout
 
 <img src="README/assets/img/cart-checkout.jpg" style="margin: 0;">
 
@@ -304,7 +303,7 @@ form will be prepopulated with them. Users also have the option to update their 
 instance of the django Order model or, if this fails, by Stripe Webook.
 
 
-## Order Confirmation 
+### Order Confirmation 
 <img src="README/assets/img/checkout-success.jpg" style="margin: 0; width: 75%">
 
 - Users are redirected to the order confirmation page after successfully placing the order.
@@ -312,7 +311,7 @@ instance of the django Order model or, if this fails, by Stripe Webook.
 - An order summery including products and order total is included in the page. 
 - At the bottom of the order confiratmion, there is a link that takes users to the site blog.
 
-## Profiles
+### Profiles
 <img src="README/assets/img/profile.jpg" style="margin: 0; width: 75%">
 
 - The products page allows a user to view and update their profile information and view their order history.
@@ -324,7 +323,7 @@ instance of the django Order model or, if this fails, by Stripe Webook.
 - The order references in the table act as links to the confirmation page for that order, so that the user can review all of its details. 
 - If the number of orders exceeds the height of the order history container, a y-scroll bar allows the user to scroll down to see older orders. 
 
-## Blog
+### Blog
 <img src="README/assets/img/blog.jpg" style="margin: 0; width: 75%">
 
 - From the blog page, all blog posts can be accessed.
@@ -333,7 +332,7 @@ instance of the django Order model or, if this fails, by Stripe Webook.
 - Users can also search the blog by query term using the search bar at the top of the blog page. If the search returns no results, or the search is empty, this is fed back to the user. 
 - Each post contains a button which can be clicked to take the user to read the full blog post.
 
-## Blog Post
+### Blog Post
 <img src="README/assets/img/blog-post.jpg" style="margin: 0; width: 75%">
 
 - When a user clicks through to view the full blog post, the post is displayed in a card on the page.
@@ -343,26 +342,26 @@ instance of the django Order model or, if this fails, by Stripe Webook.
 - At the bottom of the blog post are two icons, one for the post comments and one for logged in users to "heart" the post.
 - Logged in users can add comments. Users can also delete any comments made by themselves, and admin users can delete any comments.
 
-## 404
+### 404
 <img src="README/assets/img/404.jpg" style="margin: 0; width: 75%">
 
 - Shows 404 error message to user
 - Button links back to home page
 
-# Information Architecture
+## Information Architecture
 
-## Database
+### Database
 
 The app was developed using the local [sqlite](https://www.sqlite.org/index.html) database that is installed with django.
 For the deployed version of the app, a [PostgreSQL](https://www.postgresql.org/) database is used that is provided by [Heroku](https://dashboard.heroku.com/). 
 
-## Database Models 
+### Database Models 
 
-### User
+#### User
 
 The User model is provided by the ```django.contrib.auth.models``` import.
 
-### Products
+#### Products
 
 The ```Product``` model in the ```Products``` app contains data on each product in the store.
 
@@ -376,11 +375,11 @@ Description | description |  | TextField
 Ingredients | ingredients |  | TextField
 Price | price | max_digits=6, decimal_places=2 | DecimalField
 
-### Orders 
+#### Orders 
 
 The ```Order``` model ```OrderLineItem``` model  in the ```Cart``` app contains data on each order that is made.
 
-#### Order Model
+##### Order Model
 
 | Name | Key in db | Validation | Field Type |
 --- | --- | --- | ---
@@ -412,7 +411,7 @@ Quantity | quantity | | IntgerField
 Line Item Price Per Unit | lineitem_price_per_unit | max_digits=6 | DecimalField
 Line Item Total | lineitem_total |  max_length=20 | DecimalField
 
-### Profiles 
+#### Profiles 
 
 The ```Profile``` in the ```Profiles``` app contains data on user profiles.
 
@@ -427,7 +426,7 @@ County| County | max_length=40| CharField
 Street Address 1 | profile_street_address1 | max_length=80 | CharField
 Street Address 2 | profile_street_address2 | max_length=80 | CharField
 
-### Blog
+#### Blog
 
 The ```Post``` model and ```Comment``` in the ```Blog``` app contains data on blog posts and user comments on them.
 
@@ -505,6 +504,9 @@ For information about the testing of this app and the testing tools used, see th
 
 ### Content
 - [Smart Mockups](https://smartmockups.com/) to create the app mockups used in this readme.
+
+## Testing 
+For information about the testing of this app and the testing tools used, see the separate [testing.md](TESTING.md) file.
 
 ## Deployment
 
@@ -662,4 +664,4 @@ I learnt how to build the e-commerce store using the Boutique Ado example from t
 for the images are the original urls.
 
 ### Acknowledgements
-This project was created an app for submission to the [Code Institute](https://codeinstitute.net/)
+This project was created as a Django app for submission to the [Code Institute](https://codeinstitute.net/)
