@@ -10,8 +10,7 @@ The django app is deployed using Amazon Web Services and Heroku and is availabe 
 
 
 ## Contents
-1. [Client](#client)
-    - [Client Information](#client-information)
+1. [Client Information](#client-information)
 2. [UX](#ux)
     - [Users](#users)
     - [User Goals](#user-goals)
@@ -28,8 +27,6 @@ The django app is deployed using Amazon Web Services and Heroku and is availabe 
      - [Profiles](#profiles)
      - [Blog](#blog)
      - [404](#404)
-     - [Toasts](#toasts)
-     - [Future Features](#future-features)
 4. [Information Architecture](#information-architecture)
     - [Database](#database)
     - [Data Models](#data-models)
@@ -345,6 +342,12 @@ instance of the django Order model or, if this fails, by Stripe Webook.
 - Clicking the tags takes the user back to the blog page, but filters blog posts to ones which have also been tagged with the same tag.
 - At the bottom of the blog post are two icons, one for the post comments and one for logged in users to "heart" the post.
 - Logged in users can add comments. Users can also delete any comments made by themselves, and admin users can delete any comments.
+
+## 404
+<img src="README/assets/img/404.jpg" style="margin: 0; width: 75%">
+
+- Shows 404 error message to user
+- Button links back to home page
 
 # Information Architecture
 
