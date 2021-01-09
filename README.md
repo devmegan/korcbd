@@ -5,7 +5,9 @@ The KOR CBD e-Commerce store is for a company which sells CBD products to athlet
 allow users to shop and checkout either anonymously or as a logged in user using Stripe's Payment appearing. Extra features are available to logged in users, such as persiting their user
 profile information, a saved order history, and the ability to interact with blog posts. The whole app is written in Python using the Django framework. 
 
-The django app is deployed using Amazon Web Services and Heroku and is availabe here (KOR CBD)[https://korcbd.herokuapp.com/].
+The django app is deployed using Amazon Web Services and Heroku and is availabe here [KOR CBD](https://korcbd.herokuapp.com/).
+
+
 
 ## Contents
 1. [Client](#client)
@@ -35,11 +37,15 @@ The django app is deployed using Amazon Web Services and Heroku and is availabe 
     - [Frameworks](#frameworks)
     - [Template Engines](#template-engines)
     - [Databases](#databases)
-    - [Backend Libraries](#backend-libraries)
-    - [Frontend Libraries](#frontend-libraries)
+    - [Hosting](#hosting)
+    - [APIs](#APIs)
+    - [Python Packages](#python-packages)
+    - [Front-End Libraries](#frontend-libraries)
     - [Languages](#languages)
     - [Development Tools](#development-tools)
-6. [Testing](#testing)
+    - [Testing Tools](#testing-tools)
+    - [Content](#content)
+6. [Testing](#testing-tools)
 7. [Deployment](#deployment)
     - [Requirements](#requirements)
     - [Git Instructions](#git-instructions)
