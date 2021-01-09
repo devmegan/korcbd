@@ -29,13 +29,13 @@ The django app is deployed using Amazon Web Services and Heroku and is availabe 
      - [404](#404)
 4. [Information Architecture](#information-architecture)
     - [Database](#database)
-    - [Data Models](#data-models)
+    - [Data Models](#database-models)
 5. [Technologies Used](#technologies-used)
     - [Frameworks](#frameworks)
     - [Template Engines](#template-engines)
     - [Databases](#databases)
     - [Hosting](#hosting)
-    - [APIs](#APIs)
+    - [APIs](#apis)
     - [Python Packages](#python-packages)
     - [Front-End Libraries](#frontend-libraries)
     - [Languages](#languages)
@@ -343,7 +343,7 @@ instance of the django Order model or, if this fails, by Stripe Webook.
 - Logged in users can add comments. Users can also delete any comments made by themselves, and admin users can delete any comments.
 
 ### 404
-<img src="README/assets/img/404.jpg" style="margin: 0; width: 75%">
+<img src="README/assets/img/404.jpg" style="margin: 0; width: 25%">
 
 - Shows 404 error message to user
 - Button links back to home page
